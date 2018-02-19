@@ -1,0 +1,22 @@
+apply plugin: 'com.android.application'
+
+android {
+
+    compileSdkVersion 19
+    buildToolsVersion '21.1.0'
+
+    defaultConfig {
+        applicationId 'hl4a.ide'
+       	minSdkVersion 14
+       	targetSdkVersion 23
+        versionCode 100
+        versionName '1.8.10'
+    }
+    
+}
+
+dependencies {
+    compile project(':基本')
+    compile project(':安卓')
+    compile project(':网络')
+}
