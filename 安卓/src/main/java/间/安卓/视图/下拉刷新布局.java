@@ -15,7 +15,6 @@ public class 下拉刷新布局 extends SwipeRefreshLayout implements 基本布�
     public View 取子元素(Object $标签) {
         return 布局实现.取子元素(this,$标签);
     }
-    
 
     @Override
     public View 取子元素(int $键值) {

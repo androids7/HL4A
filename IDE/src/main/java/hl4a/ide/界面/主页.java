@@ -3,29 +3,30 @@ package hl4a.ide.界面;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
-import hl4a.ide.适配器.应用适配器;
-import hl4a.ide.布局.布局_主页_底层;
 import hl4a.ide.工具.更新;
+import hl4a.ide.布局.布局_主页_底层;
+import hl4a.ide.布局.布局_适配器_发现;
+import hl4a.ide.布局.布局_适配器_应用;
+import hl4a.ide.适配器.发现适配器;
+import hl4a.ide.适配器.应用适配器;
 import 间.安卓.工具.处理;
 import 间.安卓.工具.应用;
 import 间.安卓.工具.提示;
 import 间.安卓.工具.文件;
 import 间.安卓.工具.线程;
 import 间.安卓.弹窗.基本弹窗;
-import 间.安卓.组件.界面;
-import 间.接口.调用;
-import hl4a.ide.布局.布局_适配器_应用;
-import 间.安卓.视图.弹出菜单;
 import 间.安卓.弹窗.询问弹窗;
-import hl4a.ide.适配器.发现适配器;
+import 间.安卓.组件.界面;
+import 间.安卓.视图.弹出菜单;
+import 间.接口.调用;
 
 public class 主页 extends 界面 {
 
     private 布局_主页_底层 布局;
     private 应用适配器 适配器;
     private 基本弹窗 安装;
-    
     private 发现适配器 发现;
+    private 基本弹窗 内容;
     
     @Override
     public void 界面创建事件(Bundle $恢复) {
@@ -43,17 +44,27 @@ public class 主页 extends 界面 {
         安装.置右按钮("安装", 调用.异步配置(this, "安装环境"));
         界面刷新事件();
         检查环境();
-        
         发现 = new 发现适配器(此);
         布局.发现.列表.置适配器(发现);
-        
+        布局.发现.列表.置项目单击事件(调用.代理(this, "发现单击"));
         布局.发现.刷新.置刷新事件(调用.配置(this,"刷新事件"));
-        
+        刷新事件();
     }
     
     public void 刷新事件() {
-        布局.发现.刷新.置刷新状态(true);
-        new 线程(发现,"更新").置回调(调用.配置(处理.class,"主线程",布局.发现.刷新,"置刷新状态",false)).启动();
+        //布局.发现.刷新.置刷新状态(true);
+        new 线程(发现,"更新").置回调(调用.配置(处理.class,"主线程",this,"刷新回调")).启动();
+    }
+    
+    public void 刷新回调() {
+        布局.发现.刷新.置刷新状态(false);
+    }
+    
+    public void 发现单击(AdapterView<?> $适配器视图,View $视图,int $键值,long $ID) {
+        布局_适配器_发现 $布局 = (布局_适配器_发现)$视图;
+        String $包名 = $布局.包名;
+        String $地址 = $布局.地址;
+        
     }
 
     public void 项目单击(AdapterView<?> $适配器视图,View $视图,int $键值,long $ID) {
