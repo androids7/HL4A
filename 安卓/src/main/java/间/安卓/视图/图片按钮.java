@@ -1,14 +1,18 @@
 package 间.安卓.视图;
 
-import android.app.*;
-import android.content.*;
-import android.graphics.drawable.*;
-import android.view.*;
-import android.widget.*;
-import 间.接口.*;
-import 间.安卓.工具.*;
-import 间.安卓.视图.实现.*;
+import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.support.v7.widget.AppCompatImageButton;
+import android.view.ViewGroup;
+import 间.安卓.工具.图片;
+import 间.安卓.工具.文件;
+import 间.安卓.工具.视图;
+import 间.安卓.视图.实现.基本视图;
+import 间.安卓.视图.实现.视图实现;
+import 间.接口.方法;
 
 public class 图片按钮 extends AppCompatImageButton implements 基本视图 {
     
@@ -34,7 +38,16 @@ public class 图片按钮 extends AppCompatImageButton implements 基本视图 {
     }
     
     public void 置图片(Object $图片) {
-        置图片(视图.检查图片($图片));
+        Bitmap $对象 = 视图.检查图片($图片);
+        if ($对象 != null) {
+            setImageBitmap($对象);
+        } else {
+            if ($图片 instanceof String && 文件.是网络文件((String)$图片)) {
+                setImageURI(Uri.parse((String)$图片));
+            } else if ($图片 instanceof Integer) {
+                setImageResource((Integer)$图片);
+            }
+        }
     }
 
     public void 保存到(String $地址) {

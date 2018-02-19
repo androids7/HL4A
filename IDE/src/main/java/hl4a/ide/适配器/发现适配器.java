@@ -81,7 +81,6 @@ public class 发现适配器 extends 基本适配器 {
         //$布局.名称.置文本($包名);
         $布局.包名 = $包名;
         $布局.地址 = $地址;
-        $布局.图标.setImageResource(android.R.drawable.sym_def_app_icon);
         new 线程(this, "加载内容").启动($布局, $包名, $地址);
         return $视图;
     }
@@ -111,7 +110,9 @@ public class 发现适配器 extends 基本适配器 {
         if (文件.是文件($缓存, "图标.png")) {
             处理.主线程($视图.图标, "置图片", 图片.读取($缓存 + "/图标.png"));
         } else if ($断网) {
+            $视图.图标.置图片(android.R.drawable.sym_def_app_icon);
         } else {
+            $视图.图标.置图片(android.R.drawable.sym_def_app_icon);
             资源 $图标 = new 请求($地址 + "/图标.png").默认缓存().同步();
             if ($图标 != null && $图标.是否成功()) {
                 byte[] $字节 = $图标.取字节();
