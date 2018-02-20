@@ -13,14 +13,6 @@
             android:permission="hl4a.permission.RunScript"
             android:exported="true"/>
     </application>
-    <!-- 调整您的壁纸大小 -->
-    <uses-permission android:name="android.permission.SET_WALLPAPER_HINTS" />
-    <!-- 拥有完全的网络访问权限 -->
-    <uses-permission android:name="android.permission.INTERNET" />
-    <!-- 读取您的USB存储设备中的内容 -->
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- 修改或删除您的USB存储设备中的内容 -->
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- 检索正在运行的应用 -->
     <uses-permission android:name="android.permission.GET_TASKS" />
     <!-- 此应用可显示在其他应用上方 -->

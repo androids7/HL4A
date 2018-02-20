@@ -1,15 +1,20 @@
 package 间.安卓.工具;
 
+import android.app.WallpaperManager;
 import android.content.ClipData;
 import android.content.ClipDescription;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Vibrator;
 import android.telephony.TelephonyManager;
 import android.util.DisplayMetrics;
 import java.util.UUID;
+import java.io.IOException;
 
 public class 设备 {
     
@@ -87,6 +92,20 @@ public class 设备 {
     public static String 取IMSI() {
         TelephonyManager tm = (TelephonyManager) 环境.取应用().getSystemService(Context.TELEPHONY_SERVICE);
         return tm.getSubscriberId();
+    }
+    
+    public static void 震动(int $毫秒) {
+        Vibrator $震动 = (Vibrator) 环境.取应用().getSystemService(Context.VIBRATOR_SERVICE);
+        $震动.vibrate($毫秒);
+    }
+    
+    public static boolean 置壁纸(Object $图片) {
+        WallpaperManager $管理器 = WallpaperManager.getInstance(环境.取应用());  
+        try {
+            $管理器.setBitmap(视图.检查图片($图片));
+            return true;
+        } catch (IOException $错误) {}
+        return false;
     }
     
 }

@@ -42,7 +42,7 @@ public class 视图 {
 
 
     public static Integer 检查输入类型(Object $类型) {
-        if ($类型 instanceof Integer) return (Integer)$类型;
+        if ($类型 instanceof Number) return ((Number)$类型).intValue();
         if ($类型 instanceof String)
             switch ((String)$类型) {
                 case "文本":return InputType.TYPE_CLASS_TEXT;
@@ -79,30 +79,49 @@ public class 视图 {
     }
 
     public static Integer 检查颜色(Object $颜色) {
+        if ($颜色 == null) 错误.内容("传入颜色值为空");
         if ($颜色 instanceof Number)
             return ((Number) $颜色).intValue();
         if ($颜色 instanceof String) {
-            if (!字符.以开始((String)$颜色, "#"))
-                switch ((String)$颜色) {
-                    case "透明":case "through":$颜色 =  颜色.透明;break;
-                    case "白色":case "white":$颜色 = 颜色.白色;break;
-                    case "黑色":case "black":$颜色 = 颜色.黑色;break;
-                    case "基本":return 主题.取主题颜色().取基本色();
-                    case "深色":return 主题.取主题颜色().取基本深色();
-                    case "控件":return 主题.取主题颜色().取控件色();
-                    case "淡色":return 主题.取主题颜色().取淡色();
-                    default:错误.内容("没有那样的颜色:"+$颜色);
+            if (字符.以开始((String)$颜色, "#")) {
+                return 颜色.转换((String)$颜色);
+            } else {
+                switch (字符.取出现次数((String)$颜色, "#")) {
+                    case 0:switch ((String)$颜色) {
+                            case "透明":case "through":$颜色 =  颜色.透明;break;
+                            case "白色":case "white":$颜色 = 颜色.白色;break;
+                            case "黑色":case "black":$颜色 = 颜色.黑色;break;
+                            default:return 取指定颜色(主题.取主题颜色(), $颜色);
+                        }
+                        return 颜色.转换((String)$颜色);
+                    case 1:
+                        String $类型 = 字符.截取开始((String)$颜色, null, "#");
+                        颜色 $对象 = (颜色)反射.取变量(颜色.class, $类型);
+                        if ($颜色 == null) 错误.内容("没有那样的颜色 :" + $类型);
+                        return 取指定颜色($对象, 字符.截取开始((String)$颜色, "#", null));
+                    default:错误.内容("这个颜色里不只一个# 所以不是一个颜色");
                 }
-            return 颜色.转换((String)$颜色);
+                return null;
+            }
         }
+        错误.内容("未知的颜色 : " + $颜色);
+        return null;
+    }
+
+    private static Integer 取指定颜色(颜色 $颜色,Object $内容) {
+        switch ((String)$内容) {
+            case "基本":return $颜色.取基本色();
+            case "深色":return $颜色.取基本深色();
+            case "控件":return $颜色.取控件色();
+            case "淡色":return $颜色.取淡色();
+        }
+        错误.内容("没有那样的颜色类型 :" + $内容);
         return null;
     }
 
     public static Integer 检查大小(Object $大小) {
         if ($大小 == null || "".equals($大小)) return null;
-        if ($大小 instanceof Float) return ((Float)$大小).intValue();
-        if ($大小 instanceof Integer) return (Integer) $大小;
-        if ($大小 instanceof Double) return ((Double)$大小).intValue();
+        if ($大小 instanceof Number) return ((Number)$大小).intValue();
         if ($大小 instanceof String) {
             switch ((String)$大小) {
                 case "最大":case "填充":case "-1":return -1;
