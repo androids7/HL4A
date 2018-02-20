@@ -115,6 +115,8 @@ public class 视图 {
             case "控件":return $颜色.取控件色();
             case "淡色":return $颜色.取淡色();
         }
+        颜色 $对象 = (颜色)反射.取变量(颜色.class,(String)$内容);
+        if ($对象 != null) return $对象.取基本色();
         错误.内容("没有那样的颜色类型 :" + $内容);
         return null;
     }
