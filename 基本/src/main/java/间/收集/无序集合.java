@@ -27,7 +27,7 @@ public class 无序集合<类型> extends ArrayList<类型> {
     public static <类型>无序集合<类型> 到集合(类型[] $数组) {
         无序集合<类型> $集合 = new 无序集合<>();
         for (类型 $数据 : $数组) {
-            if ($数据 instanceof 类型[]) {
+            if ($数据 instanceof Object[]) {
                 无序集合<类型> $子表 = 到集合((类型[])$数据);
                 $集合.添加所有($子表);
             } else {
