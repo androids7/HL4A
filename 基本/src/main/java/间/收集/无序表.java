@@ -3,9 +3,9 @@ package 间.收集;
 import java.util.*;
 
 /**
- * 对{@link LinkedHashMap}的封装
+ * 对{@link HashMap}的封装
  */
-public class 无序表<键值, 内容> extends LinkedHashMap<键值, 内容> {
+public class 无序表<键值, 内容> extends HashMap<键值, 内容> {
 
     private static final long serialVersionUID = 3530384865377424460L;
 

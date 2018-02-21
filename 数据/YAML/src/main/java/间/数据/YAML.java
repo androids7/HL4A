@@ -1,18 +1,18 @@
 package 间.数据;
 
+import android.util.Log;
+import java.util.Map;
 import org.yaml.snakeyaml.Yaml;
 import 间.工具.字符;
-import 间.收集.哈希表;
-import android.util.Log;
 import 间.工具.错误;
-import java.util.Map;
+import 间.收集.哈希表;
 
 public class YAML {
 
     private static Yaml 解析器 = new Yaml();
 
     public static String 转换(Object $对象) {
-        return 解析器.dump($对象);
+        return 解析器.dumpAsMap($对象);
     }
 
     public static void 保存(String $地址,Object $对象) {
