@@ -114,7 +114,7 @@ public class 反射 {
         if ($类 == null) return new Constructor[0];
         集合<Constructor> $所有 = new 集合<>();
         $所有.添加所有($类.getDeclaredConstructors());
-        return (Constructor[])$所有.到数组(Constructor.class);
+        return $所有.到数组(Constructor.class);
     }
 
     public static <类型> 类型 实例化(Class<类型> $类,Object... $参数) {
@@ -144,6 +144,7 @@ public class 反射 {
             throw new RuntimeException("没有那样的初始化方法:在类" + $类.getName() + "\n参数:" + 字符.分解(取参数类组($参数), ",") + "\n" + $同名);
         }
         try {
+            $方法.setAccessible(true);
             return (类型)$方法.newInstance($参数组);
         } catch (Exception $错误) {
             错误.抛出($错误);
@@ -158,6 +159,7 @@ public class 反射 {
         集合<Method> $方法 = new 集合<Method>();
         for (Method $单个 : $所有) {
             if ($名称.equals($单个.getName())) {
+                $单个.setAccessible(true);
                 $方法.添加($单个);
             }
         }

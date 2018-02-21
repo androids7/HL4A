@@ -2,7 +2,6 @@ package hl4a.ide.适配器;
 
 import android.content.Context;
 import android.view.View;
-import hl4a.ide.工具.发现;
 import hl4a.ide.工具.应用信息;
 import hl4a.ide.工具.更新;
 import hl4a.ide.布局.布局_适配器_发现;
@@ -16,11 +15,11 @@ import 间.安卓.工具.线程;
 import 间.安卓.网络.请求;
 import 间.安卓.网络.资源;
 import 间.安卓.视图.适配器.基本适配器;
+import 间.工具.字符;
 import 间.工具.字节;
 import 间.收集.哈希表;
 import 间.收集.集合;
 import 间.数据.YAML;
-import 间.工具.字符;
 
 public class 发现适配器 extends 基本适配器 {
 

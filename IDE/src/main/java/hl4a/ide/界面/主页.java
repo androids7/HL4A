@@ -27,8 +27,6 @@ public class 主页 extends 界面 {
     private 应用适配器 适配器;
     private 基本弹窗 安装;
     private 发现适配器 发现;
-    private 基本弹窗 内容;
-    private 加载中弹窗 加载;
 
     @Override
     public void 界面创建事件(Bundle $恢复) {
@@ -51,8 +49,6 @@ public class 主页 extends 界面 {
         布局.发现.列表.置项目单击事件(调用.代理(this, "发现单击"));
         布局.发现.刷新.置刷新事件(调用.配置(this, "刷新事件"));
         刷新事件();
-        加载 = new 加载中弹窗(此);
-        内容 = new 基本弹窗(此);
     }
 
     public void 刷新事件() {
@@ -65,12 +61,10 @@ public class 主页 extends 界面 {
     }
 
     public void 发现单击(AdapterView<?> $适配器视图,View $视图,int $键值,long $ID) {
-        加载.显示();
-        加载.更新("加载中 ~");
         布局_适配器_发现 $布局 = (布局_适配器_发现)$视图;
         String $包名 = $布局.包名;
         String $地址 = $布局.地址;
-        提示.普通($包名);
+        跳转界面(发现.class, $包名, $地址);
     }
 
     public void 项目单击(AdapterView<?> $适配器视图,View $视图,int $键值,long $ID) {
