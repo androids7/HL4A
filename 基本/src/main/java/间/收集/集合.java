@@ -26,14 +26,7 @@ public class 集合<类型> extends LinkedList<类型> {
 
     public static <类型>集合<类型> 到集合(类型[] $数组) {
         集合<类型> $集合 = new 集合<>();
-        for (类型 $数据 : $数组) {
-            if ($数据 instanceof Object[]) {
-                集合<类型> $子表 = 到集合((类型[])$数据);
-                $集合.添加所有($子表);
-            } else {
-                $集合.添加($数据);
-            }
-        }
+        $集合.添加所有($数组);
         return $集合;
     }
 
