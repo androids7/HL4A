@@ -36,7 +36,6 @@ public class 发现 extends 界面 {
         应用信息 $应用 = 发现适配器.解析($缓存, "应用.yml");
         Bitmap $图片 = 图片.读取($缓存+"/图标.png");
         布局.标题.置标题($应用.工程名);
-        布局.名称.置文本($应用.工程名);
         布局.图片.置图片($图片 == null ? new Integer(android.R.drawable.sym_def_app_icon) : $图片);
     }
 

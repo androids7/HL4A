@@ -358,22 +358,21 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
     public void 跳转脚本(Integer $请求码,String $类,Object[] $数据) {
         $请求码 = $请求码 == null ? -1 : $请求码;
         Class<?> $界面 = 反射.取类("hl4a.runtime.ScriptActivity");
-        boolean $有环境 = 应用.已安装("hl4a.runtime");
         if ($界面 != null) {
             Intent $意图 = new Intent(this, $界面);
             $意图.putExtra("脚本", $类);
             if ($数据 != null)
                 $意图.putExtra("参数", (Serializable)$数据);
             startActivityForResult($意图, $请求码);
-        } else if ($有环境) {
+        } else if (应用.已安装("hl4a.ide") && !应用.取包名().equals("hl4a.ide")) {
             Intent $意图 = new Intent();
-            $意图.setClassName("hl4a.runtime","hl4a.runtime.ScriptActivity");
+            $意图.setClassName("hl4a.ide","hl4a.runtime.ScriptActivity");
             $意图.putExtra("脚本", $类);
             if ($数据 != null)
                 $意图.putExtra("参数", (Serializable)$数据);
             startActivityForResult($意图, $请求码);
         } else {
-            错误.内容("没有安装脚本运行时插件 ~");
+            错误.内容("没有脚本运行时 ~");
         }
     }
 

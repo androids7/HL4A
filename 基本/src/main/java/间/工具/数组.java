@@ -1,7 +1,7 @@
 package 间.工具;
 
-import 间.收集.*;
-import java.lang.reflect.*;
+import java.lang.reflect.Array;
+import 间.收集.集合;
 
 public class 数组 {
 
