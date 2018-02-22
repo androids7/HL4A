@@ -19,15 +19,7 @@ public class 集合<类型> extends LinkedList<类型> {
 
     public 集合(类型[] $集合) {
         super();
-        for (类型 $单个 : $集合) {
-            添加($单个);
-        }
-    }
-
-    public static <类型>集合<类型> 到集合(类型[] $数组) {
-        集合<类型> $集合 = new 集合<>();
-        $集合.添加所有($数组);
-        return $集合;
+        添加所有($集合);
     }
 
     public String 分解() {
