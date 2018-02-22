@@ -24,35 +24,37 @@ import 间.数据.YAML;
 public class 发现适配器 extends 基本适配器 {
 
     public Context 上下文;
+    
+    public boolean 是断网 = false;
 
     public 发现适配器(Context $上下文) {
         上下文 = $上下文;
     }
 
     public void 更新() {
-        String $缓存 = 应用配置信息.应用缓存;
-        if (文件.是文件($缓存, "应用.yml")) {
-            推送(YAML.读取($缓存 + "/应用.yml"));
-        }
         if (更新.应用地址 == null) {
             更新.请求();
+        } else {
+            是断网 = false;
         }
         if (更新.应用地址 == null) {
-            提示.警告("网络不给力 ~");
+            是断网 = true;
             return;
         }
+        是断网 = false;
         资源 $返回 = new 请求(更新.应用地址).默认缓存().同步();
         if ($返回 == null || !$返回.是否成功()) {
-            提示.警告("网络不给力 ~");
+            是断网 = true;
             return;
+        } else {
+            是断网 = false;
         }
         String $文本 = $返回.取文本();
-        字符.保存($缓存 + "/应用.yml", $文本);
         哈希表 $列表 = YAML.解析($文本);
         推送($列表);
     }
 
-    public void 推送(哈希表 $列表) {
+    public synchronized void 推送(哈希表 $列表) {
         数据 = new 集合<>();
         for (Map.Entry $单个 : $列表.entrySet()) {
             String $名称 = (String)$单个.getKey();
@@ -84,17 +86,16 @@ public class 发现适配器 extends 基本适配器 {
         return $视图;
     }
 
-    private static 应用信息 解析(String... $文件) {
+    public static 应用信息 解析(String... $文件) {
         return YAML.读取(字符.分解($文件, "/"), 应用信息.class);
     }
 
     public void 加载内容(布局_适配器_发现 $视图,String $包名,String $地址) {
         String $缓存 = 应用配置信息.应用缓存 + "/" + $包名;
-        boolean $断网 = 更新.中心 == null;
         if (文件.是文件($缓存, "应用.yml")) {
             应用信息 $原有 = 解析($缓存, "应用.yml");
             处理.主线程($视图.名称, "置文本", $原有.工程名);
-        } else if ($断网) {
+        } else if (是断网) {
         } else {
             资源 $返回 = new 请求($地址 + "/应用.yml").同步();
             if ($返回 == null || !$返回.是否成功()) {
@@ -108,7 +109,7 @@ public class 发现适配器 extends 基本适配器 {
         }
         if (文件.是文件($缓存, "图标.png")) {
             处理.主线程($视图.图标, "置图片", 图片.读取($缓存 + "/图标.png"));
-        } else if ($断网) {
+        } else if (是断网) {
             处理.主线程($视图.图标, "置图片", android.R.drawable.sym_def_app_icon);
         } else {
             处理.主线程($视图.图标, "置图片", android.R.drawable.sym_def_app_icon);

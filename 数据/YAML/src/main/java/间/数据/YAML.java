@@ -34,7 +34,6 @@ public class YAML {
         try {
             return new 哈希表((Map)解析器.load($内容));
         } catch (Exception $错误) {
-            Log.e("g",错误.取整个错误($错误));
         }
         return null;
     }
