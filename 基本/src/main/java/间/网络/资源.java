@@ -44,14 +44,8 @@ public class 资源 {
     }
 
     public void 保存(String $输出) {
-        try {
-            OutputStream $流 = 流.输出.文件($输出,是断点);
-            byte[] $缓冲 = new byte[1024 * 512];
-            int $长度 = 0;
-            while (($长度 = 输入.read($缓冲)) != -1) {
-                $流.write($缓冲, 0, $长度);
-            }
-        } catch (IOException $错误) {}
+        OutputStream $流 = 流.输出.文件($输出,是断点);
+        流.保存($流,输入);
     }
 
 }
