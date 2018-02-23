@@ -130,6 +130,7 @@ public class 主页 extends 界面 {
         处理.主线程(适配器, "更新");
         提示.普通("安装成功 ~");
         安装.隐藏();
+        处理.主线程(this,"更新回调");
     }
 
     public void 项目单击(AdapterView<?> $适配器视图,View $视图,int $键值,long $ID) {
