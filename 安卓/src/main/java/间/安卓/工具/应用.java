@@ -96,7 +96,7 @@ public class 应用 {
     public static void 错误处理(Thread $线程,Exception $错误) {
         应用.结束脚本();
         跳转错误($线程,$错误);
-        System.exit(0);
+         //System.exit(0);
     }
     
     public static void 跳转错误(Thread $线程,Exception $错误) {

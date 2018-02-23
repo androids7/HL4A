@@ -10,15 +10,7 @@ public class 应用信息 {
     public String 包名 = "hl4a.client";
     public int 版本号 = 1;
     public String 版本名 = "1";
-    public String 作者 = "MikaGuraN";
-    
-    public static 应用信息 解析(String $内容) {
-        return YAML.解析($内容,应用信息.class);
-    }
-    
-    public static 应用信息 读取(String $地址) {
-        return 解析(字符.读取($地址));
-    }
-    
+    public String 作者;
+    public String 更新;
 
 }
