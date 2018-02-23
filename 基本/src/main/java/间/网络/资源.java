@@ -35,7 +35,7 @@ public class 资源 {
 
     public byte[] 字节() {
         if (缓存 == null)
-            缓存 = 流.读取(输入, 1024);
+            缓存 = 流.读取(输入, 1024 * 512);
         return 缓存;
     }
 
@@ -44,8 +44,8 @@ public class 资源 {
     }
 
     public void 保存(String $输出) {
-        OutputStream $流 = 流.输出.文件($输出,是断点);
-        流.保存($流,输入);
+        OutputStream $流 = 流.输出.文件($输出, 是断点);
+        流.保存($流, 输入, 1024 * 512);
     }
 
 }
