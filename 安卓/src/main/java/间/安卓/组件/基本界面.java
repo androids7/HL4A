@@ -37,7 +37,6 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
     public static final int 返回码_成功 = Activity.RESULT_OK;
     public static final int 返回码_失败 = Activity.RESULT_CANCELED;
 
-
     public Object[] 传入参数;
 
     public 集合<界面插件> 所有插件 = new 集合<>();
@@ -67,7 +66,12 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
         mHelper = new SwipeBackActivityHelper(this);
         mHelper.onActivityCreate();
         置滑动返回(false);
-        界面创建事件($恢复);
+        try {
+            界面创建事件($恢复);
+        } catch (Exception $错误) {
+            应用.跳转错误(线程.取当前线程(), $错误);
+            结束界面();
+        }
     }
 
     @Override
@@ -265,10 +269,6 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
             }).启动();
     }
 
-    public void 结束界面(Exception $错误) {
-        finish();
-    }
-
     public View 当前视图;
 
     public void 打开布局(View $视图) {
@@ -308,6 +308,7 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
 
         if (反射.是子类(界面.class, $类)) {
             Intent $意图 = new Intent(this, ProxyActivity.class);
+            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             $意图.putExtra("类", (Serializable)$类);
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);
@@ -318,6 +319,7 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
             return;
         }
         Intent $意图 = new Intent(this, $类);
+        $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if ($数据 != null)
             $意图.putExtra("参数", (Serializable)$数据);
         if ($请求码 == null)
@@ -326,26 +328,6 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
             startActivityForResult($意图, $请求码);
 
     }
-
-    public void 跳转界面(String $类) {
-        跳转界面(null, $类, null);
-    }
-
-    public void 跳转界面(String $类,Object... $数据) {
-        跳转界面(null, $类 , $数据);
-    }
-
-    public void 跳转界面(Integer $请求码,String $类,Object... $数据) {
-        Intent $意图 = new Intent(this, 反射.取类($类));
-        if ($数据 != null)
-            $意图.putExtra("参数", (Serializable)$数据);
-        if ($请求码 == null)
-            startActivity($意图);
-        else
-            startActivityForResult($意图, $请求码);
-
-    }
-
 
     public void 跳转脚本(String $类) {
         跳转脚本(null, $类, null);
@@ -356,21 +338,20 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
     }
 
     public void 跳转脚本(Integer $请求码,String $类,Object[] $数据) {
+        new 线程(this, "跳转脚本实现").启动($请求码, $类, $数据);
+    }
+
+    public void 跳转脚本实现(Integer $请求码,String $类,Object[] $数据) {
         $请求码 = $请求码 == null ? -1 : $请求码;
         Class<?> $界面 = 反射.取类("hl4a.runtime.ScriptActivity");
         if ($界面 != null) {
             Intent $意图 = new Intent(this, $界面);
+            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             $意图.putExtra("脚本", $类);
             if ($数据 != null)
                 $意图.putExtra("参数", (Serializable)$数据);
             startActivityForResult($意图, $请求码);
-        } else if (应用.已安装("hl4a.ide") && !应用.取包名().equals("hl4a.ide")) {
-            Intent $意图 = new Intent();
-            $意图.setClassName("hl4a.ide","hl4a.runtime.ScriptActivity");
-            $意图.putExtra("脚本", $类);
-            if ($数据 != null)
-                $意图.putExtra("参数", (Serializable)$数据);
-            startActivityForResult($意图, $请求码);
+
         } else {
             错误.内容("没有脚本运行时 ~");
         }

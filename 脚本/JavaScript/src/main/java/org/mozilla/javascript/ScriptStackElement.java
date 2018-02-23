@@ -5,6 +5,7 @@
 package org.mozilla.javascript;
 
 import java.io.Serializable;
+import 间.工具.文件;
 
 /**
  * This class represents an element on the script execution stack.
@@ -20,17 +21,15 @@ public final class ScriptStackElement implements Serializable {
     public final String functionName;
     public final int lineNumber;
 
-    public ScriptStackElement(String fileName, String functionName, int lineNumber) {
-        this.fileName = fileName;
+    public ScriptStackElement(String fileName,String functionName,int lineNumber) {
+        this.fileName = 文件.取名称(fileName);
         this.functionName = functionName;
         this.lineNumber = lineNumber;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
-        renderMozillaStyle(sb);
-        return sb.toString();
+        return "在: " + (functionName == null ? "JavaScript主程序" : "JavaScript方法: " + functionName) + "(" + fileName + ":" + lineNumber + ")";
     }
 
     /**

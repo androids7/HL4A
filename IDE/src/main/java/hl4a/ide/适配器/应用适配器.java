@@ -37,7 +37,7 @@ public class 应用适配器 extends 基本适配器 {
 
     @Override
     public View 创建() {
-        return new 布局_适配器_发现(上下文);
+        return new 布局_适配器_应用(上下文);
     }
 
     @Override

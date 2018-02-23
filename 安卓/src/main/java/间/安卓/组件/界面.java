@@ -21,10 +21,6 @@ public class 界面 {
         此.打开布局($地址);
     }
 
-    public void 结束界面(Exception $错误) {
-        此.结束界面($错误);
-    }
-
     public void 注册插件(界面插件 $插件) {
         此.注册插件($插件);
     }
@@ -72,10 +68,6 @@ public class 界面 {
         此.跳转界面($请求码, $类, $数据);
     }
 
-    public void 跳转界面(String $类) {
-        此.跳转界面($类);
-    }
-
     public void 跳转界面(Class<?> $类) {
         此.跳转界面($类);
     }
@@ -87,17 +79,9 @@ public class 界面 {
     public void 跳转脚本(Integer $请求码,String $类,Object... $数据) {
         此.跳转脚本($请求码, $类, $数据);
     }
-
-    public void 跳转界面(String $类,Object... $数据) {
-        此.跳转界面($类, $数据);
-    }
-
+    
     public void 跳转脚本(String $类) {
         此.跳转脚本($类);
-    }
-
-    public void 跳转界面(Integer $请求码,String $类,Object... $数据) {
-        此.跳转界面($请求码, $类, $数据);
     }
 
     public void 跳转界面(Class<?> $类,Object... $数据) {

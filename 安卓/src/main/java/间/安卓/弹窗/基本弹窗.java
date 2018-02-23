@@ -9,6 +9,7 @@ import 间.安卓.视图.事件.*;
 import 间.安卓.视图.扩展.*;
 import 间.安卓.资源.布局.*;
 import 间.工具.*;
+import 间.安卓.工具.处理;
 
 public class 基本弹窗 extends AlertDialog {
     
@@ -61,25 +62,12 @@ public class 基本弹窗 extends AlertDialog {
     public void 置隐藏事件(方法 $事件) {
         setOnDismissListener(new 弹窗隐藏($事件));
     }
-    
-    public 方法 显示 = new 方法() {
-        @Override
-        public Object 调用(Object[] $参数) {
-            显示();
-            return null;
-        }
-    };
-    
-    public 方法 隐藏 = new 方法() {
-        @Override
-        public Object 调用(Object[] $参数) {
-            隐藏();
-            return null;
-        }
-    };
-    
-    
+
     public void 显示() {
+        处理.主线程(this,"直接显示");
+    }
+    
+    public void 直接显示() {
         show();
         Window $窗口 = getWindow();
         LayoutParams $设置 = $窗口.getAttributes();
@@ -95,7 +83,7 @@ public class 基本弹窗 extends AlertDialog {
     }
 
     public void 隐藏() {
-        dismiss();
+        处理.主线程(this,"dismiss");
     }
     
     public static class 弹窗按钮单击 implements 方法 {

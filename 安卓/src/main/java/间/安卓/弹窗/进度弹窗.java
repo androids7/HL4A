@@ -6,12 +6,12 @@ import 间.安卓.视图.*;
 import 间.安卓.工具.*;
 import 间.接口.*;
 
-public class 加载中弹窗 extends 基本弹窗 {
+public class 进度弹窗 extends 基本弹窗 {
     
     public 布局_加载中 布局;
     public 文本视图 文本;
     
-    public 加载中弹窗(Activity $界面) {
+    public 进度弹窗(Activity $界面) {
         super($界面);
         布局 = new 布局_加载中($界面);
         文本 = 布局.文本对象;

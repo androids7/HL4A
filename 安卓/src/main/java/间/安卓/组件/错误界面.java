@@ -15,10 +15,9 @@ public class 错误界面 extends 基本界面 {
     @Override
     public void onCreate(Bundle $数据) {
         super.onCreate($数据);
-
+        置滑动返回(true);
         线性布局 $底层 = new 线性布局(this);
         $底层.打开(this);
-
         标题栏 $标题 = new 标题栏(this);
         $标题.置标题("崩溃了(ノДＴ)");
         $标题.加入到($底层);

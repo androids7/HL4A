@@ -13,9 +13,9 @@ var 扩类 = JavaImporter;
 android.os,android.content,android.util,
 android.view,android.widget);
 
-导入包(h.工具,h.收集,h.接口);
+导入包(h.工具,h.收集,h.接口,h.网络);
 导入包(ha.资源,ha.资源.布局);
-导入包(ha.网络,ha.插件,ha.工具,ha.弹窗,ha.组件,ha.绘画);
+导入包(ha.插件,ha.工具,ha.弹窗,ha.组件,ha.绘画);
 导入包(ha.视图,ha.视图.扩展,ha.视图.适配器,ha.视图.实现);
 
 // 不手动导入就会报混淆错

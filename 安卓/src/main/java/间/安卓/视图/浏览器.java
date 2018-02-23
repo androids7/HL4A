@@ -149,7 +149,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             基本弹窗 $弹窗 = new 基本弹窗(getContext());
             $弹窗.置标题("来自网页的提示");
             $弹窗.置内容($信息);
-            $弹窗.置右按钮("确定", $弹窗.隐藏);
+            $弹窗.置右按钮("确定", 调用.配置($弹窗,"隐藏"));
             $弹窗.setOnDismissListener(new DialogInterface.OnDismissListener(){
                     @Override
                     public void onDismiss(DialogInterface $弹窗) {

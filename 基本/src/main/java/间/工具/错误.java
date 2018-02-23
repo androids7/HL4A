@@ -1,6 +1,7 @@
 package 间.工具;
 
 import java.lang.reflect.InvocationTargetException;
+import 间.收集.集合;
 
 public class 错误 {
 
@@ -110,6 +111,15 @@ public class 错误 {
         }
         return 取错误类型($错误) + "\n" + 取错误信息($错误) + "\n" + 取错误位置($错误);
     }
+    
+    public static boolean 是否经过(Throwable $错误,String $方法) {
+        集合<StackTraceElement> $所有 = new 集合<StackTraceElement>($错误.getStackTrace());
+        for (StackTraceElement $单个 : $所有) {
+            if (($单个.getClassName() + "." + $单个.getMethodName()).equals($方法)) return true;
+        }
+        return false;
+    }
+    
 
     public static void 抛出(Exception $错误) {
         throw new RuntimeException(取整个错误($错误));

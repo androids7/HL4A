@@ -71,7 +71,7 @@ public class 应用 {
     }
 
     private static void 设置主题(Context $上下文) {
-        $上下文.setTheme(android.support.v7.appcompat.R.style.Theme_AppCompat_Light_NoActionBar);
+        $上下文.setTheme(hl4a.runtime.R.style.Theme_AppCompat_Light_NoActionBar);
     }
 
     public static void 新建界面(Activity $界面) {
@@ -80,31 +80,36 @@ public class 应用 {
 
     public static void 结束界面() {
         for (Activity $单个 : 所有界面) {
+            if ($单个 != null)
             $单个.finish();
         }
     }
 
-    public static void 结束界面(Exception $错误) {
+    public static void 结束脚本() {
         for (Activity $单个 : 所有界面) {
-            if ($单个 instanceof 基本界面)
-                ((基本界面)$单个).结束界面($错误);
-            else $单个.finish();
+            if ($单个 != null)
+            if ($单个.getClass().getSimpleName().equals("ScriptActivity"))
+                $单个.finish();
         }
     }
 
     public static void 错误处理(Thread $线程,Exception $错误) {
-        字符.保存("%HL4A/错误日志/"+时间.格式() + ".log", 错误.取整个错误($错误));
+        应用.结束脚本();
+        跳转错误($线程,$错误);
+        System.exit(0);
+    }
+    
+    public static void 跳转错误(Thread $线程,Exception $错误) {
+        字符.保存("%HL4A/错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
         Application $应用 = 环境.取应用();
         if ($应用 instanceof 基本应用)
             for (应用插件 $单个 : ((基本应用)$应用).所有插件) {
                 $单个.应用出错($线程, $错误);
             }
-        应用.结束界面($错误);
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
         $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         $意图.putExtra("错误", "当前应用版本 :" + 应用.取版本名() + "\n" + 错误.取整个错误($错误));
         环境.取应用().startActivity($意图);
-        System.exit(0);
     }
 
     public static void 初始化应用(Application $应用) {
@@ -187,7 +192,7 @@ public class 应用 {
     public static String 取包名() {
         return 环境.取应用().getPackageName();
     }
-    
+
     public static String 取应用名() {
         return 取应用名(取包名());
     }
@@ -198,7 +203,7 @@ public class 应用 {
         } catch (Exception $错误) {}
         return null;
     }
-    
+
     public static String 取版本名() {
         return 取版本名(取包名());
     }
@@ -209,7 +214,7 @@ public class 应用 {
         } catch (Exception $错误) {}
         return null;
     }
-    
+
     public static Integer 取版本号() {
         return 取版本号(取包名());
     }
@@ -220,7 +225,7 @@ public class 应用 {
         } catch (Exception $错误) {}
         return null;
     }
-    
+
     public static String 取MD5签名() {
         return 取MD5签名(取包名());
     }
@@ -231,7 +236,7 @@ public class 应用 {
         } catch (Exception $错误) {}
         return null;
     }
-    
+
     public static String 取SHA1签名() {
         return 取SHA1签名(取包名());
     }

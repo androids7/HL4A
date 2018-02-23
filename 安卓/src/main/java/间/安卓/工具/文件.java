@@ -16,7 +16,6 @@ public class 文件 extends 间.工具.文件 {
         文件.替换地址("%", 取存储目录(""));
         文件.替换地址("$", 取数据目录(""));
         文件.替换地址("#", 取自身目录(""));
-        文件.替换地址("@", 取自身目录("assets"));
     }
 
     public static String 取URI路径(Uri $链接) {
@@ -86,14 +85,6 @@ public class 文件 extends 间.工具.文件 {
 
     public static String 取数据目录(String... $地址) {
         return 取数据目录() + "/" + 字符.分解($地址, "/");
-    }
-
-    public static String 取下载缓存目录() {
-        return Environment.getDownloadCacheDirectory().getPath();
-    }
-
-    public static String 取下载缓存目录(String... $地址) {
-        return 取下载缓存目录() + "/" + 字符.分解($地址, "/");
     }
 
     public static String 取缓存目录() {

@@ -13,6 +13,9 @@ import 间.工具.错误;
 import 间.接口.方法;
 import 间.接口.调用;
 import 间.收集.哈希表;
+import 间.安卓.工具.提示;
+import 间.安卓.工具.应用;
+import 间.安卓.工具.线程;
 
 public class 脚本界面 extends 基本界面 {
 
@@ -49,8 +52,8 @@ public class 脚本界面 extends 基本界面 {
             文件.替换地址("./", 当前目录 + "/");
             当前环境 = new JavaScript();
             当前环境.压入变量("当前界面", this);
-            当前环境.运行文件(当前脚本);
             new 脚本界面插件().注册(this);
+            当前环境.运行文件(当前脚本);
         } else {
             错误.内容("找不到脚本 : " + $脚本地址);
         }

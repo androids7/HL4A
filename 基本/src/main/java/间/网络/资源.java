@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import 间.工具.字符;
 import 间.工具.流;
+import android.util.Log;
+import 间.工具.错误;
 
 public class 资源 {
 
@@ -44,7 +46,10 @@ public class 资源 {
     }
 
     public void 保存(String $输出) {
-        OutputStream $流 = 流.输出.文件($输出, 是断点);
+        OutputStream $流 = 流.输出.文件($输出,是断点);
+        if ($流 == null) {
+            错误.内容("无法保存: "+$输出);
+        }
         流.保存($流, 输入, 1024 * 512);
     }
 

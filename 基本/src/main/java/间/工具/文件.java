@@ -175,13 +175,10 @@ public class 文件 {
         return $目录;
     }
 
-    private static 集合<哈希表> 前缀替换 = new 集合<哈希表>();;
+    private static 哈希表<String,String> 前缀替换 = new 哈希表<>();
 
     public static void 替换地址(String $前缀,String $目标) {
-        哈希表 $替换 = new 哈希表();
-        $替换.设置("前缀", $前缀);
-        $替换.设置("目标", $目标);
-        前缀替换.添加($替换);
+        前缀替换.设置($前缀,$目标);
     }
 
     public static String 检查地址(String $目录) {
@@ -194,10 +191,10 @@ public class 文件 {
             $目录 = "$自身/"+$目录;
         }
 
-        for (哈希表 $替换 : 前缀替换) {
-            String $前缀 = (String) $替换.读取("前缀");
+        for (Map.Entry<String,String> $替换 : 前缀替换.entrySet()) {
+            String $前缀 = $替换.getKey();
             if (字符.以开始($目录, $前缀)) {
-                String $结果 = (String) $替换.读取("目标");
+                String $结果 = $替换.getValue();
                 $目录 = $结果 + $目录.substring($前缀.length());
             }
         }
