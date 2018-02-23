@@ -19,7 +19,6 @@ public class 布局_主页_发现 extends 线性布局 {
         
         列表 = new 列表视图(this);
         提示 = new 文本视图(this);
-        提示.置文本("加载失败 单击重试 ~");
         进度 = new 进度圈(this);
     }
     
