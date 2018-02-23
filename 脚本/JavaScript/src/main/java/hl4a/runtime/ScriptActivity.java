@@ -7,18 +7,4 @@ import 间.工具.字符;
 
 public class ScriptActivity extends 脚本界面 {
 
-    private Bundle 恢复;
-    
-    @Override
-    public void 界面创建事件(Bundle $恢复) {
-        恢复 = $恢复;
-        请求权限();
-    }
-
-    @Override
-    public void 权限回调事件() {
-        super.界面创建事件(恢复);
-    }
-    
-    
 }

@@ -32,17 +32,17 @@ public class 发现适配器 extends 基本适配器 {
     }
 
     public void 更新() {
-        if (更新.应用地址 == null) {
+        if (更新.设置 == null) {
             更新.请求();
         } else {
             是断网 = false;
         }
-        if (更新.应用地址 == null) {
+        if (更新.设置 == null) {
             是断网 = true;
             return;
         }
         是断网 = false;
-        资源 $返回 = new 请求(更新.应用地址).默认缓存().同步();
+        资源 $返回 = new 请求(更新.设置.应用).默认缓存().同步();
         if ($返回 == null || !$返回.是否成功()) {
             是断网 = true;
             return;
@@ -59,8 +59,8 @@ public class 发现适配器 extends 基本适配器 {
         for (Map.Entry $单个 : $列表.entrySet()) {
             String $名称 = (String)$单个.getKey();
             String $地址 = (String)$单个.getValue();
-            if (更新.中心 != null)
-                $地址 = $地址.replace("<中心>", 更新.中心);
+            if (更新.设置 != null)
+                $地址 = $地址.replace("<中心>", 更新.设置.中心);
             哈希表 $表 = new 哈希表();
             $表.设置("包名", $名称);
             $表.设置("地址", $地址);

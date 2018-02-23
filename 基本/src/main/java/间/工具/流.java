@@ -2,6 +2,10 @@ package 间.工具;
 
 import java.io.*;
 import java.nio.channels.*;
+import android.graphics.drawable.Drawable;
+import android.view.View;
+import android.widget.ImageView;
+import 间.接口.方法;
 
 public class 流 {
 
@@ -53,13 +57,20 @@ public class 流 {
     }
 
     public static byte[] 读取(InputStream $流) {
+        try {
+            return 读取($流, $流.available());
+        } catch (IOException $错误) {}
+        return null;
+    }
+
+    public static byte[] 读取(InputStream $流,int $缓存) {
         if ($流 == null)
             return null;
         try {
             ByteArrayOutputStream $输出 = 流.输出.字节();
             int $长度 = 0;
-            byte[] $缓冲 = new byte[$流.available()];
-            while (($长度 = $流.read($缓冲)) > 0) {
+            byte[] $缓冲 = new byte[$缓存];
+            while (($长度 = $流.read($缓冲)) != -1) {
                 $输出.write($缓冲, 0, $长度);
             }
             return $输出.toByteArray();
@@ -68,7 +79,7 @@ public class 流 {
         return null;
     }
 
-    public static void 保存(OutputStream $流, byte[] $内容) {
+    public static void 保存(OutputStream $流,byte[] $内容) {
         if ($流 == null)
             return;
         if ($内容 == null)
@@ -80,16 +91,28 @@ public class 流 {
         }
     }
     
-    public static void 保存(OutputStream $流, InputStream $内容) {
-        保存($流,读取($内容));
+    public static void 保存(OutputStream $流,InputStream $内容) {
+        try {
+            保存($流, $内容, $内容.available());
+        } catch (IOException $错误) {}
+    }
+
+    public static void 保存(OutputStream $流,InputStream $内容,int $缓存) {
+        try {
+            byte[] $缓冲 = new byte[$缓存];
+            int $长度 = 0;
+            while (($长度 = $内容.read($缓冲)) != -1) {
+                $流.write($缓冲, 0, $长度);
+            }
+        } catch (IOException e) {}
     }
 
     public static class 输入 {
 
         public static InputStream 自身(String... $相对) {
-            return 输入.class.getClassLoader().getResourceAsStream(字符.分解($相对,"/"));
+            return 输入.class.getClassLoader().getResourceAsStream(字符.分解($相对, "/"));
         }
-        
+
         public static ByteArrayInputStream 字节(byte[] $字节) {
             return new ByteArrayInputStream($字节);
         }
@@ -117,7 +140,7 @@ public class 流 {
             return 文件($地址, false);
         }
 
-        public static FileOutputStream 文件(String $地址, boolean $追加) {
+        public static FileOutputStream 文件(String $地址,boolean $追加) {
             文件.创建文件($地址);
             try {
                 return new FileOutputStream(文件.检查地址($地址), $追加);

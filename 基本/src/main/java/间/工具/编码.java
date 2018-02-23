@@ -1,6 +1,20 @@
 package 间.工具;
+import java.net.URLEncoder;
+import java.net.URLDecoder;
 
 public class 编码 {
+
+    public static class 链接 {
+
+        public static String 编码(String $内容) {
+            return URLEncoder.encode($内容);
+        }
+
+        public static String 解码(String $字符) {
+            return URLDecoder.decode($字符);
+        }
+
+    }
 
     public static class 二进制 {
 
@@ -59,36 +73,36 @@ public class 编码 {
                         for (int i = 0; i < 4; i++) {
                             aChar = $内容.charAt(x++);
                             switch (aChar) {
-                            case '0':
-                            case '1':
-                            case '2':
-                            case '3':
-                            case '4':
-                            case '5':
-                            case '6':
-                            case '7':
-                            case '8':
-                            case '9':
-                                value = (value << 4) + aChar - '0';
-                                break;
-                            case 'a':
-                            case 'b':
-                            case 'c':
-                            case 'd':
-                            case 'e':
-                            case 'f':
-                                value = (value << 4) + 10 + aChar - 'a';
-                                break;
-                            case 'A':
-                            case 'B':
-                            case 'C':
-                            case 'D':
-                            case 'E':
-                            case 'F':
-                                value = (value << 4) + 10 + aChar - 'A';
-                                break;
-                            default:
-                                return null;
+                                case '0':
+                                case '1':
+                                case '2':
+                                case '3':
+                                case '4':
+                                case '5':
+                                case '6':
+                                case '7':
+                                case '8':
+                                case '9':
+                                    value = (value << 4) + aChar - '0';
+                                    break;
+                                case 'a':
+                                case 'b':
+                                case 'c':
+                                case 'd':
+                                case 'e':
+                                case 'f':
+                                    value = (value << 4) + 10 + aChar - 'a';
+                                    break;
+                                case 'A':
+                                case 'B':
+                                case 'C':
+                                case 'D':
+                                case 'E':
+                                case 'F':
+                                    value = (value << 4) + 10 + aChar - 'A';
+                                    break;
+                                default:
+                                    return null;
                             }
 
                         }
@@ -140,14 +154,14 @@ public class 编码 {
                 byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx] >>> 2) & 077);
                 byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx + 1] >>> 4) & 017 | (byteData[iSrcIdx] << 4) & 077);
                 byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx + 2] >>> 6) & 003
-                        | (byteData[iSrcIdx + 1] << 2) & 077);
+                    | (byteData[iSrcIdx + 1] << 2) & 077);
                 byteDest[iDestIdx++] = (byte) (byteData[iSrcIdx + 2] & 077);
             }
             if (iSrcIdx < byteData.length) {
                 byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx] >>> 2) & 077);
                 if (iSrcIdx < byteData.length - 1) {
                     byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx + 1] >>> 4) & 017
-                            | (byteData[iSrcIdx] << 4) & 077);
+                        | (byteData[iSrcIdx] << 4) & 077);
                     byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx + 1] << 2) & 077);
                 } else
                     byteDest[iDestIdx++] = (byte) ((byteData[iSrcIdx] << 4) & 077);
@@ -202,23 +216,23 @@ public class 编码 {
                     byteTemp[iSrcIdx] = (byte) (byteData[iSrcIdx] + 26 - 'a');
             }
             for (iSrcIdx = 0, iDestIdx = 0; iSrcIdx < reviSrcIdx
-                    && iDestIdx < ((byteDest.length / 3) * 3); iSrcIdx += 4) {
+                 && iDestIdx < ((byteDest.length / 3) * 3); iSrcIdx += 4) {
                 byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx] << 2) & 0xFC | (byteTemp[iSrcIdx + 1] >>> 4) & 0x03);
                 byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx + 1] << 4) & 0xF0
-                        | (byteTemp[iSrcIdx + 2] >>> 2) & 0x0F);
+                    | (byteTemp[iSrcIdx + 2] >>> 2) & 0x0F);
                 byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx + 2] << 6) & 0xC0 | byteTemp[iSrcIdx + 3] & 0x3F);
             }
             if (iSrcIdx < reviSrcIdx) {
                 if (iSrcIdx < reviSrcIdx - 2) {
 
                     byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx] << 2) & 0xFC
-                            | (byteTemp[iSrcIdx + 1] >>> 4) & 0x03);
+                        | (byteTemp[iSrcIdx + 1] >>> 4) & 0x03);
                     byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx + 1] << 4) & 0xF0
-                            | (byteTemp[iSrcIdx + 2] >>> 2) & 0x0F);
+                        | (byteTemp[iSrcIdx + 2] >>> 2) & 0x0F);
                 } else if (iSrcIdx < reviSrcIdx - 1) {
 
                     byteDest[iDestIdx++] = (byte) ((byteTemp[iSrcIdx] << 2) & 0xFC
-                            | (byteTemp[iSrcIdx + 1] >>> 4) & 0x03);
+                        | (byteTemp[iSrcIdx + 1] >>> 4) & 0x03);
                 } else {
                     return null;
                     // throw new IllegalArgumentException("Warning: 1 input bytes left to process.
