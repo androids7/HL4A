@@ -37,6 +37,7 @@ public class 连接 {
         模式 = $模式;
         连接.setUseCaches(true);
     }
+    
 
     public static 连接 创建(String $地址,String $模式) {
         try {

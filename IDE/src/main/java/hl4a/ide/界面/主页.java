@@ -21,6 +21,7 @@ import 间.安卓.视图.弹出菜单;
 import 间.接口.调用;
 import 间.安卓.弹窗.加载中弹窗;
 import 间.网络.连接;
+import 间.网络.资源;
 
 public class 主页 extends 界面 {
 
@@ -49,10 +50,13 @@ public class 主页 extends 界面 {
         布局.发现.列表.置项目单击事件(调用.代理(this, "发现单击"));
         布局.发现.置单击事件(调用.配置(this,"断网重试"));
         断网重试();
+
+        连接.创建("https://baidu.com","GET").异步(调用.代理(this,"xx"));
         
-        
-        连接.创建("https://baidu.com","GET").异步(调用.代理(提示.class,"普通"));
-        
+    }
+    
+    public void xx(资源 $) {
+        提示.普通($.文本());
     }
     
     public void 更新回调() {
