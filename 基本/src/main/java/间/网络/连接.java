@@ -15,6 +15,8 @@ import java.util.UUID;
 import java.io.File;
 import 间.工具.流;
 import java.math.BigInteger;
+import 间.接口.方法;
+import 间.工具.线程;
 
 public class 连接 {
 
@@ -33,6 +35,7 @@ public class 连接 {
         标识 = UUID.randomUUID().toString();
         请求头("Content-Type", "multipart/form-data;boundary=" + 标识);
         模式 = $模式;
+        连接.setUseCaches(true);
     }
 
     public static 连接 创建(String $地址,String $模式) {
@@ -75,6 +78,12 @@ public class 连接 {
         if (!文件.是文件($文件)) 错误.内容("文件不存在:" + $文件);
         文件表.设置($名称, 文件.取文件对象($文件));
         return this;
+    }
+    
+    public void 异步(方法 $回调) {
+        
+        new 线程(this,"同步").置回调($回调).启动();
+        
     }
 
     public 资源 同步() {
