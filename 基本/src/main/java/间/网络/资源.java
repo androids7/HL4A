@@ -5,8 +5,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import 间.工具.字符;
 import 间.工具.流;
-import android.util.Log;
 import 间.工具.错误;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.core.io.StreamProgress;
+import 间.接口.方法;
+import 间.接口.流进度;
 
 public class 资源 {
 
@@ -37,20 +40,28 @@ public class 资源 {
 
     public byte[] 字节() {
         if (缓存 == null)
-            缓存 = 流.读取(输入, 长度 == -1 ? 1024 * 512 : 长度);
+            缓存 = 流.读取(输入);
         return 缓存;
     }
 
     public String 文本() {
         return 字符.转换(字节());
     }
-
+    
     public void 保存(String $输出) {
-        OutputStream $流 = 流.输出.文件($输出,是断点);
+        保存($输出,null);
+    }
+    
+    public void 保存(String $输出,方法 $进度) {
+        保存($输出,$进度,null,null);
+    }
+
+    public void 保存(String $输出,方法 $进度,方法 $开始,方法 $结束) {
+        OutputStream $流 = 流.输出.文件($输出);
         if ($流 == null) {
             错误.内容("无法保存: "+$输出);
         }
-        流.保存($流, 输入, 1024 * 512);
+        流.非阻塞保存($流,输入,$进度,$开始,$结束);
     }
 
 }

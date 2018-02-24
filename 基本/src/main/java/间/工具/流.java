@@ -1,30 +1,28 @@
 package 间.工具;
 
-import java.io.*;
-import java.nio.channels.*;
-import android.graphics.drawable.Drawable;
-import android.view.View;
-import android.widget.ImageView;
+import cn.hutool.core.io.IoUtil;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.Closeable;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.channels.FileLock;
 import 间.接口.方法;
+import 间.接口.流进度;
 
 public class 流 {
 
-    public static void 关闭(InputStream $流) {
-        if ($流 == null)
-            return;
-        try {
-            $流.close();
-        } catch (IOException $错误) {
-        }
+    public static void 关闭(Closeable $流) {
+        IoUtil.close($流);
     }
 
-    public static void 关闭(OutputStream $流) {
-        if ($流 == null)
-            return;
-        try {
-            $流.close();
-        } catch (IOException $错误) {
-        }
+    public static void 关闭(AutoCloseable $流) {
+        IoUtil.close($流);
     }
 
     public static FileLock 锁定(FileInputStream $流) {
@@ -57,54 +55,73 @@ public class 流 {
     }
 
     public static byte[] 读取(InputStream $流) {
-        try {
-            return 读取($流, $流.available());
-        } catch (IOException $错误) {}
-        return null;
+        return IoUtil.readBytes($流);
     }
 
-    public static byte[] 读取(InputStream $流,int $缓存) {
-        if ($流 == null)
-            return null;
-        try {
-            ByteArrayOutputStream $输出 = 流.输出.字节();
-            int $长度 = 0;
-            byte[] $缓冲 = new byte[$缓存];
-            while (($长度 = $流.read($缓冲)) != -1) {
-                $输出.write($缓冲, 0, $长度);
-            }
-            return $输出.toByteArray();
-        } catch (IOException $错误) {
-        }
-        return null;
+    public static byte[] 读取(InputStream $流,int $长度) {
+        return IoUtil.readBytes($流, $长度);
+    }
+
+    public static String 读取文本(InputStream $流) {
+        return 读取文本($流, "UTF-8");
+    }
+
+    public static String 读取文本(InputStream $流,String $格式) {
+        return IoUtil.read($流, $格式);
     }
 
     public static void 保存(OutputStream $流,byte[] $内容) {
-        if ($流 == null)
-            return;
-        if ($内容 == null)
-            return;
-        try {
-            $流.write($内容);
-            $流.flush();
-        } catch (IOException $错误) {
-        }
+        IoUtil.write($流, false, $内容);
     }
     
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容) {
+        非阻塞保存($流,$内容,null);
+    }
+    
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容,方法 $进度) {
+        非阻塞保存($流,$内容,$进度,null,null);
+    }
+
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容,方法 $进度,方法 $开始,方法 $结束) {
+        非阻塞保存($流,$内容,IoUtil.DEFAULT_LARGE_BUFFER_SIZE,$进度,$开始,$结束);
+    }
+
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容,int $缓存) {
+        非阻塞保存($流, $内容, $缓存, null);
+    }
+
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容,int $缓存,方法 $进度) {
+        非阻塞保存($流, $内容, $缓存, $进度, null, null);
+    }
+
+    public static void 非阻塞保存(OutputStream $流,InputStream $内容,int $缓存,方法 $进度,方法 $开始,方法 $结束) {
+        if ($流 == null || $内容 == null) return;
+        IoUtil.copyByNIO($内容, $流, $缓存, 创建进度($进度, $开始, $结束));
+    }
+
     public static void 保存(OutputStream $流,InputStream $内容) {
-        try {
-            保存($流, $内容, $内容.available());
-        } catch (IOException $错误) {}
+        if ($流 == null || $内容 == null) return;
+        if ($流 instanceof FileOutputStream && $内容 instanceof FileInputStream) {
+            IoUtil.copy((FileInputStream)$内容, (FileOutputStream)$流);
+        } else {
+            IoUtil.copy($内容, $流);
+        }
     }
 
     public static void 保存(OutputStream $流,InputStream $内容,int $缓存) {
-        try {
-            byte[] $缓冲 = new byte[$缓存];
-            int $长度 = 0;
-            while (($长度 = $内容.read($缓冲)) != -1) {
-                $流.write($缓冲, 0, $长度);
-            }
-        } catch (IOException e) {}
+        if ($流 == null || $内容 == null) return;
+        if ($流 instanceof FileOutputStream && $内容 instanceof FileInputStream) {
+            IoUtil.copy((FileInputStream)$内容, (FileOutputStream)$流, $缓存);
+        } else {
+            IoUtil.copy($内容, $流, $缓存);
+        }
+    }
+
+    protected static 流进度 创建进度(方法 $事件,方法 $开始,方法 $结束) {
+        if ($事件 == null && $开始 == null && $结束 == null) {
+            return null;
+        }
+        return new 流进度($事件, $开始, $结束);
     }
 
     public static class 输入 {

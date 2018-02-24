@@ -11,7 +11,7 @@ public class 动态接口 implements InvocationHandler {
     public 哈希表<String,方法> 方法表;
 
     public 动态接口(Map<String,方法> $列表) {
-        方法表 = new 哈希表<>($列表);
+        方法表 = new 哈希表<String,方法>($列表);
     }
     
     public 动态接口(方法 $方法) {
