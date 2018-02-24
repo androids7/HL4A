@@ -91,6 +91,8 @@ public class 连接 {
 
         try {
 
+            
+            
             if (!Cookie表.isEmpty()) {
                 请求头("Cookie", 转换Cookie(Cookie表));
             }
@@ -133,6 +135,7 @@ public class 连接 {
                 $输出.write("--".getBytes());
                 $输出.flush();
             }
+            连接.connect();
             int $状态码 = 连接.getResponseCode();
             int $长度 = 连接.getContentLength();
             return new 资源($状态码, $长度, 连接.getInputStream());
