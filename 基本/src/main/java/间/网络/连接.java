@@ -25,6 +25,8 @@ import 间.收集.哈希表;
 import java.security.SecureRandom;
 import 间.工具.反射;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 
 public class 连接 {
 
@@ -55,6 +57,13 @@ public class 连接 {
             }
         }
     };
+    
+    private static HostnameVerifier 信任所有 = new HostnameVerifier() {
+        @Override
+        public boolean verify(String $地址,SSLSession $连接) {
+            return true;
+        }
+    };
 
     static {
         HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
@@ -65,6 +74,7 @@ public class 连接 {
             $上下文.init(null, 所有规则, new SecureRandom());
             工厂 = $上下文.getSocketFactory();
             HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
+            HttpsURLConnection.setDefaultHostnameVerifier(信任所有);
         } catch (Exception $错误) {}
     }
 
@@ -164,7 +174,7 @@ public class 连接 {
                         $输出.write(("name=\"" + 编码($单个.getKey()) + "\";").getBytes());
                         $输出.write(("filename=\"" + 编码($文件.getName()) + "\";").getBytes());
                         $输出.write($换行);
-                        流.保存($输出, 流.输入.文件($文件.getPath()), 1024 * 512);
+                        流.保存($输出, 流.输入.文件($文件.getPath()));
                     }
                 }
                 $输出.write($换行);
