@@ -84,7 +84,9 @@ public class 连接 {
     private 连接(String $地址,String $模式) throws IOException {
         连接 = (HttpURLConnection) new URL($地址).openConnection();
         标识 = UUID.randomUUID().toString();
-        请求头("Content-Type", "multipart/form-data;boundary=" + 标识);
+        请求头("Content-Type", "multipart/form-datap;boundary=" + 标识);
+        请求头("Content-Type", "application/x-www-form-urlencoded");
+        
         模式 = $模式;
         连接.setDefaultUseCaches(false);
     }
