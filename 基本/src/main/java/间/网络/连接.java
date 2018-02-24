@@ -85,8 +85,6 @@ public class 连接 {
         连接 = (HttpURLConnection) new URL($地址).openConnection();
         标识 = UUID.randomUUID().toString();
         请求头("Content-Type", "multipart/form-datap;boundary=" + 标识);
-        请求头("Content-Type", "application/x-www-form-urlencoded");
-        
         模式 = $模式;
         连接.setDefaultUseCaches(false);
     }
@@ -149,42 +147,7 @@ public class 连接 {
 
             if (模式 == null ? true : 模式.toLowerCase().equals("get") || (参数表.isEmpty() && 文件表.isEmpty())) {
                 连接.setRequestMethod("GET");
-            } else {
-                连接.setUseCaches(false);
-                连接.setRequestMethod(模式);
-                OutputStream $输出 = 连接.getOutputStream();
-                byte[] $分隔 = ("--" + 标识).getBytes();
-                byte[] $换行 = "\r\n".getBytes();
-                if (!参数表.isEmpty()) {
-                    for (Map.Entry<String,String> $单个: 参数表.entrySet()) {
-                        $输出.write($换行);
-                        $输出.write($分隔);
-                        $输出.write($换行);
-                        $输出.write("Content-Disposition: form-data;".getBytes());
-                        $输出.write(("name=\"" + 编码($单个.getKey()) + "\"").getBytes());
-                        $输出.write($换行);
-                        $输出.write(编码($单个.getValue()).getBytes());
-                    }
-
-                }
-                if (!文件表.isEmpty()) {
-                    for (Map.Entry<String,File> $单个: 文件表.entrySet()) {
-                        File $文件 = $单个.getValue();
-                        $输出.write($换行);
-                        $输出.write($分隔);
-                        $输出.write($换行);
-                        $输出.write("Content-Disposition: form-data;".getBytes());
-                        $输出.write(("name=\"" + 编码($单个.getKey()) + "\";").getBytes());
-                        $输出.write(("filename=\"" + 编码($文件.getName()) + "\";").getBytes());
-                        $输出.write($换行);
-                        流.保存($输出, 流.输入.文件($文件.getPath()));
-                    }
-                }
-                $输出.write($换行);
-                $输出.write($分隔);
-                $输出.write("--".getBytes());
-                $输出.close();
-            }
+            } 
             //连接.connect();
             return new 资源(连接);
         } catch (IOException $错误) {
