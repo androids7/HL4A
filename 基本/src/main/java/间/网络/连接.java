@@ -146,7 +146,9 @@ public class 连接 {
 
             if (模式 == null ? true : 模式.toLowerCase().equals("get") || (参数表.isEmpty() && 文件表.isEmpty())) {
                 连接.setRequestMethod("GET");
+                连接.setDoOutput(false);
             } else {
+                连接.setDoOutput(true);
                 连接.setUseCaches(false);
                 连接.setRequestMethod(模式);
                 OutputStream $输出 = 连接.getOutputStream();
@@ -181,6 +183,7 @@ public class 连接 {
                 $输出.write($分隔);
                 $输出.write("--".getBytes());
                 $输出.flush();
+                连接.setDoOutput(false);
             }
             连接.connect();
             return new 资源(连接);
