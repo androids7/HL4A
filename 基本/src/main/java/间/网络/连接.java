@@ -139,7 +139,9 @@ public class 连接 {
             int $状态码 = 连接.getResponseCode();
             int $长度 = 连接.getContentLength();
             return new 资源($状态码, $长度, 连接.getInputStream());
-        } catch (IOException e) {}
+        } catch (IOException $错误) {
+            错误.抛出($错误);
+        }
 
         return new 资源(-1, 0, null);
 
