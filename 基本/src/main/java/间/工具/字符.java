@@ -1,7 +1,10 @@
 package 间.工具;
 
-import java.io.*;
-import java.util.regex.*;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import 间.收集.集合;
 
 public class 字符 {
 
@@ -191,6 +194,21 @@ public class 字符 {
         if (是否为空($文本, $旧文本, $新文本))
             return null;
         return $文本.replace($旧文本, $新文本);
+    }
+    
+    public static String[] 替换(String[] $文本,String $旧文本,String $新文本) {
+        集合<String> $返回 = new 集合<>();
+        for (String $单个 : $文本) {
+            $返回.添加(替换($单个,$旧文本,$新文本));
+        }
+        return $返回.到数组(String.class);
+    }
+    
+    public static String 替换(String $文本,String $分隔,String $旧文本,String $新文本) {
+        if (是否为空($文本,$分隔, $旧文本, $新文本))
+            return null;
+        String[] $内容 = 到数组($文本,$分隔);
+        return 字符.分解(替换($内容,$旧文本,$新文本),$分隔);
     }
 
     public static String 正则匹配(String $文本,String $正则表达式) {

@@ -125,8 +125,8 @@ public class 错误 {
         throw new RuntimeException(取整个错误($错误));
     }
 
-    public static void 内容(String $错误内容) {
-        throw new RuntimeException($错误内容);
+    public static void 内容(Object $错误内容) {
+        throw new RuntimeException($错误内容 == null ? "null" : $错误内容.toString());
     }
 
 }

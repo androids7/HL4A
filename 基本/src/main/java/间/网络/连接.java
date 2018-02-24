@@ -27,6 +27,7 @@ import 间.工具.反射;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
+import 间.工具.字符;
 
 public class 连接 {
 
@@ -88,6 +89,9 @@ public class 连接 {
 
     public static 连接 创建(String $地址,String $模式) {
         try {
+            $地址 = 编码($地址);
+            $地址 = 解码($地址,":");
+            $地址 = 解码($地址,"/");
             连接 $连接 = new 连接($地址, $模式);
             return $连接;
         } catch (IOException $错误) {}
@@ -137,9 +141,7 @@ public class 连接 {
     public 资源 同步() {
 
         try {
-
-
-
+            
             if (!Cookie表.isEmpty()) {
                 请求头("Cookie", 转换Cookie(Cookie表));
             }
@@ -211,10 +213,14 @@ public class 连接 {
         }
     }
 
-    private String 编码(String $内容) {
+    private static String 编码(String $内容) {
 
         return 编码.链接.编码($内容);
 
+    }
+    
+    private static String 解码(String $内容,String $单个) {
+        return $内容.replace(编码($单个),$单个);
     }
 
 }
