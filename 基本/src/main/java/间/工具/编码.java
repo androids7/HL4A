@@ -9,9 +9,6 @@ public class 编码 {
     public static class 链接 {
 
         public static String 编码(String $内容) {
-            try {
-                return URLEncoder.encode($内容, "GBK");
-            } catch (UnsupportedEncodingException e) {}
             return URLEncoder.encode($内容);
         }
 

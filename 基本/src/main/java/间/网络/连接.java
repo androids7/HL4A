@@ -76,8 +76,8 @@ public class 连接 {
             SSLContext $上下文 = SSLContext.getInstance("SSL");
             $上下文.init(null, 所有规则, new SecureRandom());
             工厂 = $上下文.getSocketFactory();
-            //HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
-            //HttpsURLConnection.setDefaultHostnameVerifier(信任所有);
+            HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
+            HttpsURLConnection.setDefaultHostnameVerifier(信任所有);
         } catch (Exception $错误) {}
     }
 
@@ -91,6 +91,7 @@ public class 连接 {
 
     public static 连接 创建(String $地址,String $模式) {
         try {
+            $地址 = 解码(解码(编码($地址),":"),"/");
             连接 $连接 = new 连接($地址, $模式);
             return $连接;
         } catch (IOException $错误) {}
@@ -214,6 +215,10 @@ public class 连接 {
 
     private static String 编码(String $内容) {
         return 编码.链接.编码($内容);
+    }
+    
+    private static String 解码(String $内容,String $文本) {
+        return $内容.replace(编码($文本),$文本);
     }
 
 }
