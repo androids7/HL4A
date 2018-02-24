@@ -68,6 +68,7 @@ public class 连接 {
 
     static {
         HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
+        HttpURLConnection.setDefaultRequestProperty("Accept","*/*");
         HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
         HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
         HttpURLConnection.setFollowRedirects(false);
