@@ -27,13 +27,6 @@ import java.nio.channels.ReadableByteChannel;
 import java.nio.channels.WritableByteChannel;
 import java.nio.charset.Charset;
 
-/**
- * IO工具类<br>
- * IO工具类只是辅助流的读写，并不负责关闭流。原因是流可能被多次读写，读写关闭后容易造成问题。
- * 
- * @author xiaoleilu
- *
- */
 public class IoUtil {
 
 	/** 默认缓存大小 */
@@ -45,76 +38,6 @@ public class IoUtil {
 	
 	/** 数据流末尾 */
 	public static final int EOF = -1;
-
-	// -------------------------------------------------------------------------------------- Copy start
-	/**
-	 * 将Reader中的内容复制到Writer中 使用默认缓存大小
-	 * 
-	 * @param reader Reader
-	 * @param writer Writer
-	 * @return 拷贝的字节数
-	 * @throws IORuntimeException IO异常
-	 */
-	public static long copy(Reader reader, Writer writer) {
-		return copy(reader, writer, DEFAULT_BUFFER_SIZE);
-	}
-
-	/**
-	 * 将Reader中的内容复制到Writer中
-	 * 
-	 * @param reader Reader
-	 * @param writer Writer
-	 * @param bufferSize 缓存大小
-	 * @return 传输的byte数
-	 * @throws IORuntimeException IO异常
-	 */
-	public static long copy(Reader reader, Writer writer, int bufferSize) {
-		return copy(reader, writer, bufferSize, null);
-	}
-
-	/**
-	 * 将Reader中的内容复制到Writer中
-	 * 
-	 * @param reader Reader
-	 * @param writer Writer
-	 * @param bufferSize 缓存大小
-	 * @param streamProgress 进度处理器
-	 * @return 传输的byte数
-	 * @throws IORuntimeException IO异常
-	 */
-	public static long copy(Reader reader, Writer writer, int bufferSize, StreamProgress streamProgress) {
-		char[] buffer = new char[bufferSize];
-		long size = 0;
-		int readSize;
-		if (null != streamProgress) {
-			streamProgress.start();
-		}
-		try {
-			while ((readSize = reader.read(buffer, 0, bufferSize)) != EOF) {
-				writer.write(buffer, 0, readSize);
-				size += readSize;
-				writer.flush();
-				if (null != streamProgress) {
-					streamProgress.progress(size);
-				}
-			}
-		} catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		if (null != streamProgress) {
-			streamProgress.finish();
-		}
-		return size;
-	}
-
-	/**
-	 * 拷贝流，使用默认Buffer大小
-	 * 
-	 * @param in 输入流
-	 * @param out 输出流
-	 * @return 传输的byte数
-	 * @throws IORuntimeException IO异常
-	 */
 	public static long copy(InputStream in, OutputStream out) {
 		return copy(in, out, DEFAULT_BUFFER_SIZE);
 	}
@@ -243,111 +166,7 @@ public class IoUtil {
 
 		return size;
 	}
-	// -------------------------------------------------------------------------------------- Copy end
 
-	// -------------------------------------------------------------------------------------- getReader and getWriter start
-	/**
-	 * 获得一个文件读取器
-	 * 
-	 * @param in 输入流
-	 * @param charsetName 字符集名称
-	 * @return BufferedReader对象
-	 */
-	public static BufferedReader getReader(InputStream in, String charsetName) {
-		return getReader(in, Charset.forName(charsetName));
-	}
-
-	/**
-	 * 获得一个Reader
-	 * 
-	 * @param in 输入流
-	 * @param charset 字符集
-	 * @return BufferedReader对象
-	 */
-	public static BufferedReader getReader(InputStream in, Charset charset) {
-		if (null == in) {
-			return null;
-		}
-
-		InputStreamReader reader = null;
-		if (null == charset) {
-			reader = new InputStreamReader(in);
-		} else {
-			reader = new InputStreamReader(in, charset);
-		}
-
-		return new BufferedReader(reader);
-	}
-
-	/**
-	 * 获得{@link BufferedReader}<br>
-	 * 如果是{@link BufferedReader}强转返回，否则新建。如果提供的Reader为null返回null
-	 * 
-	 * @param reader 普通Reader，如果为null返回null
-	 * @return {@link BufferedReader} or null
-	 * @since 3.0.9
-	 */
-	public static BufferedReader getReader(Reader reader) {
-		if(null == reader) {
-			return null;
-		}
-		
-		return (reader instanceof BufferedReader) ? (BufferedReader) reader : new BufferedReader(reader);
-	}
-	
-	/**
-	 * 获得{@link PushbackReader}<br>
-	 * 如果是{@link PushbackReader}强转返回，否则新建
-	 * 
-	 * @param reader 普通Reader
-	 * @param pushBackSize 推后的byte数 
-	 * @return {@link PushbackReader}
-	 * @since 3.1.0
-	 */
-	public static PushbackReader getPushBackReader(Reader reader, int pushBackSize) {
-		return (reader instanceof PushbackReader) ? (PushbackReader) reader : new PushbackReader(reader, pushBackSize);
-	}
-
-	/**
-	 * 获得一个Writer
-	 * 
-	 * @param out 输入流
-	 * @param charsetName 字符集
-	 * @return OutputStreamWriter对象
-	 */
-	public static OutputStreamWriter getWriter(OutputStream out, String charsetName) {
-		return getWriter(out, Charset.forName(charsetName));
-	}
-
-	/**
-	 * 获得一个Writer
-	 * 
-	 * @param out 输入流
-	 * @param charset 字符集
-	 * @return OutputStreamWriter对象
-	 */
-	public static OutputStreamWriter getWriter(OutputStream out, Charset charset) {
-		if (null == out) {
-			return null;
-		}
-
-		if (null == charset) {
-			return new OutputStreamWriter(out);
-		} else {
-			return new OutputStreamWriter(out, charset);
-		}
-	}
-	// -------------------------------------------------------------------------------------- getReader and getWriter end
-
-	// -------------------------------------------------------------------------------------- read start
-	/**
-	 * 从流中读取内容
-	 * 
-	 * @param in 输入流
-	 * @param charsetName 字符集
-	 * @return 内容
-	 * @throws IORuntimeException IO异常
-	 */
 	public static String read(InputStream in, String charsetName) {
 		FastByteArrayOutputStream out = read(in);
 		return (charsetName == null|| "".equals(charsetName)) ? out.toString() : out.toString(charsetName);
@@ -427,33 +246,6 @@ public class IoUtil {
 
 	
 	/**
-	 * 文件转为流
-	 * 
-	 * @param file 文件
-	 * @return {@link FileInputStream}
-	 */
-	public static FileInputStream toStream(File file) {
-		try {
-			return new FileInputStream(file);
-		} catch (FileNotFoundException e) {
-			throw new RuntimeException(e);
-		}
-	}
-	
-	/**
-	 * 转换为{@link PushbackInputStream}<br>
-	 * 如果传入的输入流已经是{@link PushbackInputStream}，强转返回，否则新建一个
-	 * 
-	 * @param in {@link InputStream}
-	 * @param pushBackSize 推后的byte数
-	 * @return {@link PushbackInputStream}
-	 * @since 3.1.0
-	 */
-	public static PushbackInputStream toPushbackStream(InputStream in, int pushBackSize) {
-		return (in instanceof PushbackInputStream) ? (PushbackInputStream)in : new PushbackInputStream(in, pushBackSize);
-	}
-	
-	/**
 	 * 将byte[]写到流中
 	 * 
 	 * @param out 输出流
@@ -465,7 +257,6 @@ public class IoUtil {
 		try {
 			out.write(content);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
 		} finally {
 			if (isCloseOut) {
 				close(out);

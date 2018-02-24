@@ -18,11 +18,17 @@ import 间.接口.流进度;
 public class 流 {
 
     public static void 关闭(Closeable $流) {
-        IoUtil.close($流);
+        if ($流 == null) return;
+        try {
+            $流.close();
+        } catch (IOException $错误) {}
     }
 
     public static void 关闭(AutoCloseable $流) {
-        IoUtil.close($流);
+        if ($流 == null) return;
+        try {
+            $流.close();
+        } catch (Exception $错误) {}
     }
 
     public static FileLock 锁定(FileInputStream $流) {
@@ -55,10 +61,12 @@ public class 流 {
     }
 
     public static byte[] 读取(InputStream $流) {
+        if ($流 == null)return null;
         return IoUtil.readBytes($流);
     }
 
     public static byte[] 读取(InputStream $流,int $长度) {
+        if ($流 == null)return null;
         return IoUtil.readBytes($流, $长度);
     }
 
@@ -67,23 +75,27 @@ public class 流 {
     }
 
     public static String 读取文本(InputStream $流,String $格式) {
+        if ($流 == null)return null;
         return IoUtil.read($流, $格式);
     }
 
     public static void 保存(OutputStream $流,byte[] $内容) {
-        IoUtil.write($流, false, $内容);
+        if ($流 == null)return;
+        try {
+            $流.write($内容);
+        } catch (IOException $错误) {}
     }
-    
+
     public static void 非阻塞保存(OutputStream $流,InputStream $内容) {
-        非阻塞保存($流,$内容,null);
+        非阻塞保存($流, $内容, null);
     }
-    
+
     public static void 非阻塞保存(OutputStream $流,InputStream $内容,方法 $进度) {
-        非阻塞保存($流,$内容,$进度,null,null);
+        非阻塞保存($流, $内容, $进度, null, null);
     }
 
     public static void 非阻塞保存(OutputStream $流,InputStream $内容,方法 $进度,方法 $开始,方法 $结束) {
-        非阻塞保存($流,$内容,IoUtil.DEFAULT_LARGE_BUFFER_SIZE,$进度,$开始,$结束);
+        非阻塞保存($流, $内容, IoUtil.DEFAULT_LARGE_BUFFER_SIZE, $进度, $开始, $结束);
     }
 
     public static void 非阻塞保存(OutputStream $流,InputStream $内容,int $缓存) {
