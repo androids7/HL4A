@@ -1,22 +1,30 @@
 package 间.网络;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.math.BigInteger;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.io.IOException;
-import 间.收集.哈希表;
-import 间.工具.文件;
-import 间.工具.错误;
-import java.util.Map;
-import 间.工具.编码;
-import java.util.Set;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Iterator;
-import java.io.OutputStream;
+import java.util.Map;
 import java.util.UUID;
-import java.io.File;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
+import 间.工具.文件;
 import 间.工具.流;
-import java.math.BigInteger;
-import 间.接口.方法;
 import 间.工具.线程;
+import 间.工具.编码;
+import 间.工具.错误;
+import 间.接口.方法;
+import 间.收集.哈希表;
+import java.security.SecureRandom;
+import 间.工具.反射;
+import javax.net.ssl.HttpsURLConnection;
 
 public class 连接 {
 
@@ -26,18 +34,47 @@ public class 连接 {
     private 哈希表<String,File> 文件表 = new 哈希表<>();
     private String 模式;
     private String 标识;
+    
+    private static SSLSocketFactory 工厂;
+
+    // 信任所有规则 避免无法连接
+
+    private static final TrustManager[] 所有规则 = new TrustManager[] {
+        new X509TrustManager() {
+            @Override
+            public void checkClientTrusted(X509Certificate[] chain,String authType) throws CertificateException {
+            }
+
+            @Override
+            public void checkServerTrusted(X509Certificate[] chain,String authType) throws CertificateException {
+            }
+
+            @Override
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[]{};
+            }
+        }
+    };
+
+    static {
+        HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
+        HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
+        HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
+        try {
+            SSLContext $上下文 = SSLContext.getInstance("SSL");
+            $上下文.init(null, 所有规则, new SecureRandom());
+            工厂 = $上下文.getSocketFactory();
+            HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
+        } catch (Exception $错误) {}
+    }
 
     private 连接(String $地址,String $模式) throws IOException {
         连接 = (HttpURLConnection) new URL($地址).openConnection();
-        请求头("Charset", "UTF-8");
-        请求头("Accept-Language", "zh-cn,zh;q=0.5");
-        请求头("Accept-Charset", "UTF-8");
         标识 = UUID.randomUUID().toString();
         请求头("Content-Type", "multipart/form-data;boundary=" + 标识);
         模式 = $模式;
-        连接.setUseCaches(true);
+        连接.setDefaultUseCaches(false);
     }
-    
 
     public static 连接 创建(String $地址,String $模式) {
         try {
@@ -80,19 +117,19 @@ public class 连接 {
         文件表.设置($名称, 文件.取文件对象($文件));
         return this;
     }
-    
+
     public void 异步(方法 $回调) {
-        
-        new 线程(this,"同步").置回调($回调).启动();
-        
+
+        new 线程(this, "同步").置回调($回调).启动();
+
     }
 
     public 资源 同步() {
 
         try {
 
-            
-            
+
+
             if (!Cookie表.isEmpty()) {
                 请求头("Cookie", 转换Cookie(Cookie表));
             }
