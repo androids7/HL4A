@@ -71,7 +71,7 @@ public class 连接 {
         HttpURLConnection.setDefaultRequestProperty("Accept","*/*");
         HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
         HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
-        HttpURLConnection.setFollowRedirects(false);
+        //HttpURLConnection.setFollowRedirects(false);
         try {
             SSLContext $上下文 = SSLContext.getInstance("SSL");
             $上下文.init(null, 所有规则, new SecureRandom());
@@ -147,9 +147,7 @@ public class 连接 {
 
             if (模式 == null ? true : 模式.toLowerCase().equals("get") || (参数表.isEmpty() && 文件表.isEmpty())) {
                 连接.setRequestMethod("GET");
-                连接.setDoOutput(false);
             } else {
-                连接.setDoOutput(true);
                 连接.setUseCaches(false);
                 连接.setRequestMethod(模式);
                 OutputStream $输出 = 连接.getOutputStream();
@@ -183,10 +181,9 @@ public class 连接 {
                 $输出.write($换行);
                 $输出.write($分隔);
                 $输出.write("--".getBytes());
-                $输出.flush();
-                连接.setDoOutput(false);
+                //$输出.flush();
             }
-            连接.connect();
+            //连接.connect();
             return new 资源(连接);
         } catch (IOException $错误) {
             错误.抛出($错误);
