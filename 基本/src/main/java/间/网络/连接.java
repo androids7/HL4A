@@ -70,6 +70,7 @@ public class 连接 {
         HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
         HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
         HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
+        HttpURLConnection.setFollowRedirects(false);
         try {
             SSLContext $上下文 = SSLContext.getInstance("SSL");
             $上下文.init(null, 所有规则, new SecureRandom());
@@ -89,9 +90,6 @@ public class 连接 {
 
     public static 连接 创建(String $地址,String $模式) {
         try {
-            $地址 = 编码($地址);
-            $地址 = 解码($地址,":");
-            $地址 = 解码($地址,"/");
             连接 $连接 = new 连接($地址, $模式);
             return $连接;
         } catch (IOException $错误) {}
