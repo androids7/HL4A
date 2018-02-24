@@ -59,7 +59,6 @@ public class 主页 extends 界面 {
 
     public void 检查更新() {
         if (!更新.检查()) {
-            提示.普通("err");
             return;
         }
         if (更新.设置.最新 > 应用.取版本号()) {
