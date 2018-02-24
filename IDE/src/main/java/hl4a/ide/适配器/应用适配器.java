@@ -2,16 +2,15 @@ package hl4a.ide.适配器;
 
 import android.content.Context;
 import android.view.View;
+import hl4a.ide.工具.应用;
+import hl4a.ide.布局.布局_适配器_应用;
+import hl4a.ide.应用配置信息;
+import java.io.File;
+import 间.安卓.工具.处理;
+import 间.安卓.工具.文件;
 import 间.安卓.视图.适配器.基本适配器;
 import 间.收集.哈希表;
-import hl4a.ide.布局.布局_适配器_发现;
-import 间.安卓.工具.布局;
-import 间.安卓.工具.文件;
-import java.io.File;
-import hl4a.ide.应用配置信息;
-import hl4a.ide.工具.应用;
-import 间.安卓.工具.提示;
-import hl4a.ide.布局.布局_适配器_应用;
+import 间.收集.集合;
 
 public class 应用适配器 extends 基本适配器 {
 
@@ -22,7 +21,7 @@ public class 应用适配器 extends 基本适配器 {
     }
 
     public void 更新() {
-        清空();
+        数据 = new 集合<>();
         File[] $列表 = 文件.取文件列表(应用配置信息.应用保存);
         for (File $单个 : $列表) {
             if (!$单个.isDirectory() || !文件.是文件($单个.getPath() + "/应用.yml")) continue;
@@ -32,7 +31,7 @@ public class 应用适配器 extends 基本适配器 {
             $参数.设置("应用", $应用);
             数据.添加($参数);
         }
-        发送更新事件();
+        处理.主线程(this,"发送更新事件");
     }
 
     @Override
