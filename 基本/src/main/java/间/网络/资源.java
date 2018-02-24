@@ -10,20 +10,28 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.core.io.StreamProgress;
 import 间.接口.方法;
 import 间.接口.流进度;
+import java.net.HttpURLConnection;
 
 public class 资源 {
 
+    private HttpURLConnection 连接;
+    
     private int 状态码;
     private int 长度;
     private InputStream 输入;
-    private boolean 是断点;
     private byte[] 缓存;
 
-    public 资源(int $状态码,int $长度,InputStream $输入) {
-        状态码 = $状态码;
-        长度 = $长度;
-        输入 = $输入;
-        是断点 = 状态码 == 206;
+    public 资源(HttpURLConnection $连接) {
+        连接 = $连接;
+        try {
+            状态码 = 连接.getResponseCode();
+            长度 = 连接.getContentLength();
+        } catch (IOException $错误) {}
+        try {
+            输入 = 连接.getInputStream();
+        } catch (IOException $错误) {
+            输入 = 连接.getErrorStream();
+        }
     }
 
     public boolean 已成功() {

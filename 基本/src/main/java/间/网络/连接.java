@@ -173,14 +173,12 @@ public class 连接 {
                 $输出.flush();
             }
             连接.connect();
-            int $状态码 = 连接.getResponseCode();
-            int $长度 = 连接.getContentLength();
-            return new 资源($状态码, $长度, 连接.getInputStream());
+            return new 资源(连接);
         } catch (IOException $错误) {
             错误.抛出($错误);
         }
 
-        return new 资源(-1, 0, null);
+        return new 资源(null);
 
     }
 
