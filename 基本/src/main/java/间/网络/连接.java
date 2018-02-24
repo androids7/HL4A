@@ -67,26 +67,26 @@ public class 连接 {
     };
 
     static {
-        //HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
-        //HttpURLConnection.setDefaultRequestProperty("Accept","*/*");
-        //HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
-        //HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
-        //HttpURLConnection.setFollowRedirects(false);
+        HttpURLConnection.setDefaultRequestProperty("Charset","UTF-8");
+        HttpURLConnection.setDefaultRequestProperty("Accept","*/*");
+        HttpURLConnection.setDefaultRequestProperty("Accept-Language", "zh-cn,zh;q=0.5");
+        HttpURLConnection.setDefaultRequestProperty("Accept-Charset", "UTF-8");
+        HttpURLConnection.setFollowRedirects(false);
         try {
             SSLContext $上下文 = SSLContext.getInstance("SSL");
             $上下文.init(null, 所有规则, new SecureRandom());
             工厂 = $上下文.getSocketFactory();
-            HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
-            HttpsURLConnection.setDefaultHostnameVerifier(信任所有);
+            //HttpsURLConnection.setDefaultSSLSocketFactory(工厂);
+            //HttpsURLConnection.setDefaultHostnameVerifier(信任所有);
         } catch (Exception $错误) {}
     }
 
     private 连接(String $地址,String $模式) throws IOException {
         连接 = (HttpURLConnection) new URL($地址).openConnection();
-        //标识 = UUID.randomUUID().toString();
-        //请求头("Content-Type", "multipart/form-datap;boundary=" + 标识);
+        标识 = UUID.randomUUID().toString();
+        请求头("Content-Type", "multipart/form-datap;boundary=" + 标识);
         模式 = $模式;
-        //连接.setDefaultUseCaches(false);
+        连接.setDefaultUseCaches(false);
     }
 
     public static 连接 创建(String $地址,String $模式) {
