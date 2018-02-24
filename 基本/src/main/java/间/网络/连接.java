@@ -181,7 +181,7 @@ public class 连接 {
                 $输出.write($换行);
                 $输出.write($分隔);
                 $输出.write("--".getBytes());
-                //$输出.flush();
+                $输出.close();
             }
             //连接.connect();
             return new 资源(连接);
