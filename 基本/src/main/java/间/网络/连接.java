@@ -315,7 +315,6 @@ public class 连接 {
         }
         
         private void 重置策略(SSLSocket $连接) {
-            错误.内容(字符.分解($连接.getEnabledProtocols(),"\n"));
             $连接.setEnabledProtocols(开启策略);
         }
 
