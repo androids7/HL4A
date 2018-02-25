@@ -36,6 +36,8 @@ import java.security.SecureRandom;
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;
 import 间.工具.字符;
+import okhttp3.Cache;
+import okhttp3.CacheControl;
 
 public class 连接 {
 
@@ -149,6 +151,8 @@ public class 连接 {
 
             请求.headers(请求头.build());
 
+            请求.cacheControl(new CacheControl.Builder().noCache().build());
+            
             ByteArrayOutputStream $输出 = 流.输出.字节();
             byte[] $分隔 = ("--" + 标识).getBytes();
             byte[] $换行 = "\r\n".getBytes();
