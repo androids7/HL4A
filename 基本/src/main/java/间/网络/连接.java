@@ -47,6 +47,8 @@ public class 连接 {
     
     private MediaType 类型;
     
+    private boolean 不可用 = false;
+    
     // 信任所有规则 避免无法连接
 
     private static final TrustManager[] 所有规则 = new TrustManager[] {
@@ -96,15 +98,24 @@ public class 连接 {
     
     public 连接(String $地址,String $模式) {
         请求模式($模式);
-        请求.url($地址);
+        地址($地址);
         标识 = UUID.randomUUID().toString();
         类型 = MediaType.parse("multipart/form-datap;boundary=" + 标识);
+    }
+
+    public 连接 地址(String $地址) {
+        if ($地址 == null || (!$地址.startsWith("http://") && !$地址.startsWith("https://"))) {
+            不可用 = true;
+        } else {
+            请求.url($地址);
+        }
+        return this;
     }
 
     public 连接 请求模式(String $模式) {
         $模式 = $模式.toUpperCase();
         if (!所有模式.检查($模式)) {
-            模式 = "GET";
+            不可用 = true;
         } else {
             模式 = $模式;
         }
@@ -153,6 +164,10 @@ public class 连接 {
 
     public 资源 同步() {
 
+        if (不可用) {
+            return new 资源(null);
+        }
+        
         try {
             
             if (!Cookie表.isEmpty()) {
@@ -224,6 +239,10 @@ public class 连接 {
 
     private static String 编码(String $内容) {
         return 编码.链接.编码($内容);
+    }
+    
+    public static String 取源(String $地址) {
+        return new 连接($地址).同步().文本();
     }
 
 }

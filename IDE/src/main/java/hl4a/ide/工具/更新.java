@@ -13,7 +13,7 @@ public class 更新 {
 
     public synchronized static void 请求() {
         String $地址 = 应用配置信息.更新地址;
-        资源 $返回 = 连接.创建($地址, "GET").同步();
+        资源 $返回 = new 连接($地址).同步();
         if (!$返回.成功()) return;
         设置 = YAML.解析($返回.文本(), 应用设置. class);
         if (设置 == null)return;
