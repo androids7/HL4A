@@ -1,18 +1,12 @@
 package 间.网络;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import okhttp3.Response;
-import okhttp3.internal.huc.OkHttpURLConnection;
-import okhttp3.internal.huc.OkHttpsURLConnection;
-import 间.工具.反射;
 import 间.工具.字符;
 import 间.工具.流;
 import 间.工具.错误;
 import 间.接口.方法;
-import 间.网络.连接;
 
 public class 资源 {
 

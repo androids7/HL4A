@@ -2,7 +2,6 @@ apply plugin: 'java'
 
 dependencies {
     compile 'com.squareup.okhttp3:okhttp:+'
-    compile 'com.squareup.okhttp3:okhttp-urlconnection:+'
     testCompile 'junit:junit:4.12'
     testCompile 'com.github.program_in_chinese:junit4_in_chinese:0.0.1'
 }
