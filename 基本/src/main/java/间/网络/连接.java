@@ -183,9 +183,7 @@ public class 连接 {
             请求.method(模式, ("GET".equals(模式) || "HEAD".equals(模式)) ? null : RequestBody.create(类型, $输出.toByteArray()));
             Request $请求 = 请求.build();
             return new 资源(网络实例.newCall($请求).execute());
-        } catch (IOException $错误) {
-            错误.抛出($错误);
-        }
+        } catch (Exception $错误) {}
 
         return new 资源(null);
 

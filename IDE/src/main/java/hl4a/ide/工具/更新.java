@@ -10,7 +10,7 @@ import 间.工具.字符;
 public class 更新 {
 
     public static 应用设置 设置;
-
+    
     public synchronized static void 请求() {
         String $地址 = 应用配置信息.更新地址;
         资源 $返回 = new 连接($地址).同步();

@@ -40,7 +40,6 @@ public abstract class 基本适配器 extends BaseAdapter {
         if ($视图 != null) {
             ViewGroup.LayoutParams $设置 = $视图.getLayoutParams();
             if ($设置 != null) {
-
                 AbsListView.LayoutParams $列表设置 = new AbsListView.LayoutParams($设置);
                 $视图.setLayoutParams($列表设置);
             }
