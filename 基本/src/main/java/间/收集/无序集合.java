@@ -17,7 +17,7 @@ public class 无序集合<类型> extends ArrayList<类型> {
         super($集合);
     }
 
-    public 无序集合(类型[] $集合) {
+    public 无序集合(类型... $集合) {
         super();
         添加所有($集合);
     }
