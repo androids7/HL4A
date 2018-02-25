@@ -90,35 +90,36 @@ public class 连接 {
     private String 模式;
     private String 标识;
     
-    private 连接(String $地址,String $模式) {
+    public 连接(String $地址) {
+        this($地址,"GET");
+    }
+    
+    public 连接(String $地址,String $模式) {
+        请求模式($模式);
+        请求.url($地址);
+        标识 = UUID.randomUUID().toString();
+        类型 = MediaType.parse("multipart/form-datap;boundary=" + 标识);
+    }
+
+    public 连接 请求模式(String $模式) {
         $模式 = $模式.toUpperCase();
         if (!所有模式.检查($模式)) {
             模式 = "GET";
         } else {
             模式 = $模式;
         }
-        请求.url($地址);
-        标识 = UUID.randomUUID().toString();
-        类型 = MediaType.parse("multipart/form-datap;boundary=" + 标识);
+        return this;
     }
-
-    public static 连接 创建(String $地址,String $模式) {
-        try {
-            连接 $连接 = new 连接($地址, $模式);
-            return $连接;
-        } catch (Exception $错误) {}
-        return null;
-    }
-
-    public 连接 置断点(long $开始) {
+    
+    public 连接 断点(long $开始) {
         请求头("RANGE", BigInteger.valueOf($开始).toString() + "-");
         return this;
     }
 
-    public 连接 置断点(String $文件) {
+    public 连接 断点(String $文件) {
         long $大小 = 文件.取大小($文件);
         if ($大小 != 0) {
-            置断点($大小);
+            断点($大小);
         }
         return this;
     }
