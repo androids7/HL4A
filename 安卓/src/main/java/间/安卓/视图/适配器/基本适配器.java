@@ -40,15 +40,9 @@ public abstract class 基本适配器 extends BaseAdapter {
         if ($视图 != null) {
             ViewGroup.LayoutParams $设置 = $视图.getLayoutParams();
             if ($设置 != null) {
-                if ($设置 instanceof MarginLayoutParams) {
-                    错误.内容("异常 : \n不要对Adapater顶层视图使用 置边距 等涉及Margin设置的内容");
-                    /*
-                    // 不使用兼容方法
-                    线性布局 $底层 = new 线性布局($视图.getContext());
-                    $底层.加入子元素($视图);
-                    $视图 = $底层;
-                    */
-                }
+
+                AbsListView.LayoutParams $列表设置 = new AbsListView.LayoutParams($设置);
+                $视图.setLayoutParams($列表设置);
             }
             $视图.setTag(数据.读取($键值));
         }
