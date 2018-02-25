@@ -338,10 +338,10 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
     }
 
     public void 跳转脚本(Integer $请求码,String $类,Object[] $数据) {
-        new 线程(this, "跳转脚本实现").启动($请求码, $类, $数据);
+        new 线程(this, "直接跳转脚本").启动($请求码, $类, $数据);
     }
 
-    public void 跳转脚本实现(Integer $请求码,String $类,Object[] $数据) {
+    public void 直接跳转脚本(Integer $请求码,String $类,Object[] $数据) {
         $请求码 = $请求码 == null ? -1 : $请求码;
         Class<?> $界面 = 反射.取类("hl4a.runtime.ScriptActivity");
         if ($界面 != null) {
@@ -351,7 +351,6 @@ public class 基本界面 extends AppCompatActivity implements SwipeBackActivity
             if ($数据 != null)
                 $意图.putExtra("参数", (Serializable)$数据);
             startActivityForResult($意图, $请求码);
-
         } else {
             错误.内容("没有脚本运行时 ~");
         }

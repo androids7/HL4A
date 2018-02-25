@@ -19,7 +19,7 @@ public class 按钮 extends AppCompatButton implements 基本文本 {
     public 按钮(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
-        置宽度("自动");
+        置宽度("最大");
         置高度("自动");
         置背景(绘画.主题());
         置文本颜色(颜色.白色);

@@ -35,7 +35,7 @@ public class 应用 {
     private static 集合<Activity> 所有界面 = new 集合<Activity>();
 
     public static void 新图标(String $名称,Class<?> $启动类,int $图标资源) {
-        Application $应用 = 环境.取应用();
+        基本应用 $应用 = 环境.取应用();
         Intent $意图 = new Intent("com.android.launcher.action.INSTALL_SHORTCUT");
         $意图.putExtra("android.intent.extra.shortcut.NAME", $名称);
         $意图.putExtra("duplicate", false);
@@ -101,9 +101,8 @@ public class 应用 {
     
     public static void 跳转错误(Thread $线程,Exception $错误) {
         字符.保存("%HL4A/错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
-        Application $应用 = 环境.取应用();
-        if ($应用 instanceof 基本应用)
-            for (应用插件 $单个 : ((基本应用)$应用).所有插件) {
+   
+            for (应用插件 $单个 : 环境.取应用().所有插件) {
                 $单个.应用出错($线程, $错误);
             }
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
