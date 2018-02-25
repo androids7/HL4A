@@ -54,7 +54,7 @@ public class 发现适配器 extends 基本适配器 {
             String $包名 = (String)$单个.getKey();
             String $地址 = (String)$单个.getValue();
             String $检查 = 应用配置信息.应用保存 + "/" + $包名 + "/应用.yml";
-            if (!文件.是目录($检查)) {
+            if (!文件.是文件($检查)) {
                 if (更新.设置 != null)
                     $地址 = $地址.replace("<中心>", 更新.设置.中心);
                 哈希表 $表 = new 哈希表();
