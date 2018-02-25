@@ -24,18 +24,30 @@ public class 资源 {
     }
 
     public boolean 成功() {
+        if (资源 == null) {
+            return false;
+        }
         return 资源.isSuccessful();
     }
 
     public boolean 重定向() {
+        if (资源 == null) {
+            return false;
+        }
         return 资源.isRedirect();
     }
 
     public int 状态码() {
+        if (资源 == null) {
+            return -1;
+        }
         return 资源.code();
     }
 
     public byte[] 字节() {
+        if (资源 == null) {
+            return null;
+        }
         try {
             if (内容 == null)
                 内容 = 资源.body().bytes();
@@ -45,6 +57,9 @@ public class 资源 {
     }
 
     public String 文本() {
+        if (资源 == null) {
+            return null;
+        }
         return 字符.转换(字节());
     }
 
@@ -57,6 +72,9 @@ public class 资源 {
     }
 
     public void 保存(String $输出,方法 $进度,方法 $开始,方法 $结束) {
+        if (资源 == null) {
+            return;
+        }
         OutputStream $流 = 流.输出.文件($输出);
         if ($流 == null) {
             错误.内容("无法保存: " + $输出);
