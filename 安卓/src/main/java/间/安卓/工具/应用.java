@@ -81,30 +81,31 @@ public class 应用 {
     public static void 结束界面() {
         for (Activity $单个 : 所有界面) {
             if ($单个 != null)
-            $单个.finish();
+                $单个.finish();
         }
     }
 
     public static void 结束脚本() {
         for (Activity $单个 : 所有界面) {
             if ($单个 != null)
-            if ($单个.getClass().getSimpleName().equals("ScriptActivity"))
-                $单个.finish();
+                if ($单个.getClass().getSimpleName().equals("ScriptActivity"))
+                    $单个.finish();
         }
     }
 
     public static void 错误处理(Thread $线程,Exception $错误) {
         应用.结束脚本();
-        跳转错误($线程,$错误);
-         //System.exit(0);
+        跳转错误($线程, $错误);
+        if (!($线程 instanceof 间.工具.线程))
+            System.exit(0);
     }
-    
+
     public static void 跳转错误(Thread $线程,Exception $错误) {
         字符.保存("%HL4A/错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
-   
-            for (应用插件 $单个 : 环境.取应用().所有插件) {
-                $单个.应用出错($线程, $错误);
-            }
+
+        for (应用插件 $单个 : 环境.取应用().所有插件) {
+            $单个.应用出错($线程, $错误);
+        }
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
         $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         $意图.putExtra("错误", "当前应用版本 :" + 应用.取版本名() + "\n" + 错误.取整个错误($错误));

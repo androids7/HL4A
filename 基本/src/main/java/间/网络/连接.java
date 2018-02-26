@@ -231,6 +231,7 @@ public class 连接 {
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
+            
             return new X509Certificate[]{};
         }
     };
@@ -256,7 +257,7 @@ public class 连接 {
         public static String TLSv12 = "TLSv1.2";
 
         private static String[] 开启策略 = {SSLv3,TLSv1,TLSv11,TLSv12};
-        // Android 7.1 默认开启
+        // Android低版本不重置的话某些SSL访问就会失败
         
         private SSLSocketFactory 工厂;
 

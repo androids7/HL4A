@@ -21,8 +21,8 @@ public class 加密 {
             SecretKey $秘钥 = $创建.generateKey();
             byte[] $格式 = $秘钥.getEncoded();
             SecretKeySpec $秘钥格式 = new SecretKeySpec($格式, $方法);
-            Cipher $密码器 = Cipher.getInstance("AES");// 创建密码器
-            $密码器.init(Cipher.ENCRYPT_MODE, $秘钥格式);// 初始化
+            Cipher $密码器 = Cipher.getInstance($方法);// 创建密码器
+            $密码器.init(Cipher.ENCRYPT_MODE, $秘钥格式);// 加密模式
             byte[] $返回 = $密码器.doFinal($内容);
             return $返回; // 加密
         } catch (Exception $错误) {}
@@ -36,10 +36,10 @@ public class 加密 {
             SecretKey $秘钥 = $创建.generateKey();
             byte[] $格式 = $秘钥.getEncoded();
             SecretKeySpec $秘钥格式 = new SecretKeySpec($格式, $方法);
-            Cipher $密码器 = Cipher.getInstance("AES");// 创建密码器
-            $密码器.init(Cipher.DECRYPT_MODE, $秘钥格式);// 初始化
+            Cipher $密码器 = Cipher.getInstance($方法);// 创建密码器
+            $密码器.init(Cipher.DECRYPT_MODE, $秘钥格式);// 解密模式
             byte[] $返回 = $密码器.doFinal($内容);
-            return $返回; // 加密
+            return $返回; // 解密
         } catch (Exception $错误) {}
         return null;
     }

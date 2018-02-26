@@ -10,9 +10,9 @@ import 间.安卓.工具.*;
 
 public class 弹出菜单 extends ListPopupWindow {
     
-    数组适配器 适配器;
+    private 数组适配器 适配器;
     
-    哈希表 单击 = new 哈希表();
+    private 哈希表 单击 = new 哈希表();
 
     public 弹出菜单(View $视图) {
         super($视图.getContext());
