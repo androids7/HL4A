@@ -16,6 +16,14 @@ public class 资源 {
     public 资源(Response $资源) {
         资源 = $资源;
     }
+    
+    public int 进度(long $当前) {
+        return new Float(new Float((float)$当前 / (float)大小()).floatValue() * 100).intValue();
+    }
+    
+    public long 大小() {
+        return 资源.body().contentLength();
+    }
 
     public boolean 成功() {
         if (资源 == null) {
@@ -71,7 +79,7 @@ public class 资源 {
         }
         OutputStream $流 = 流.输出.文件($输出);
         if ($流 == null) {
-            错误.内容("无法保存: " + $输出);
+            错误.内容("无法保存到: " + $输出);
         }
         流.非阻塞保存($流, 内容 == null ? 资源.body().byteStream() : 流.输入.字节(内容), $进度, $开始, $结束);
     }
