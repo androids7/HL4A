@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:label="乐园之土"
-        android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar"
 		android:icon="@drawable/icon"
         android:name=".Application">
 		<activity android:name=".LaunchPad">
@@ -12,5 +12,4 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="hl4a.permission.RunScript"/>
 </manifest>
