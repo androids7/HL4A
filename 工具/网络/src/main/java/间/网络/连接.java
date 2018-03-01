@@ -67,6 +67,10 @@ public class 连接 {
     private String 模式;
     private String 标识;
 
+    public 连接 () {
+        this(null);
+    }
+    
     public 连接(String $地址) {
         this($地址, "GET");
     }
