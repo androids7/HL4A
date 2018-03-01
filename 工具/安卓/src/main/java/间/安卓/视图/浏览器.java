@@ -104,7 +104,7 @@ public class 浏览器 extends WebView implements 基本视图 {
 
         @Override
         public void 界面销毁事件() {
-            浏览器.this.置网址("about:blank");
+            浏览器.this.置链接("about:blank");
             浏览器.this.removeAllViews();
             ((ViewGroup)浏览器.this.getParent()).removeView(浏览器.this);
             浏览器.this.destroy();
@@ -136,11 +136,11 @@ public class 浏览器 extends WebView implements 基本视图 {
         视图实现.置布局权重(this, $权重);
     }
 
-    public void 置网址(String $地址) {
+    public void 置链接(String $地址) {
         loadUrl($地址);
     }
 
-    public String 取网址() {
+    public String 取链接() {
         return getUrl();
     }
 
