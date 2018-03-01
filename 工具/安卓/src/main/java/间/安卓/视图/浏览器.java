@@ -106,7 +106,9 @@ public class 浏览器 extends WebView implements 基本视图 {
         public void 界面销毁事件() {
             浏览器.this.置链接("about:blank");
             浏览器.this.removeAllViews();
-            ((ViewGroup)浏览器.this.getParent()).removeView(浏览器.this);
+            ViewGroup $父视图 = (ViewGroup)getParent();
+            if ($父视图 != null)
+            $父视图.removeView(浏览器.this);
             浏览器.this.destroy();
         }
 

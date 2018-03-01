@@ -9,6 +9,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import 间.安卓.视图.浏览器;
 import 间.工具.字符;
+import 间.安卓.工具.提示;
 
 public class 隐藏浏览器 extends 浏览器 {
 
@@ -25,7 +26,8 @@ public class 隐藏浏览器 extends 浏览器 {
         @Override
         public boolean shouldOverrideUrlLoading(WebView $视图,String $链接) {
             if (字符.以开始($链接, "http")) {
-                $视图.loadUrl($链接);
+                //$视图.loadUrl($链接);
+                new 隐藏浏览器(getContext()).置链接($链接);
                 return true;
             } else {
                 return false;

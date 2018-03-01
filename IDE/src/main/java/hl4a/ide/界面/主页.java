@@ -29,6 +29,7 @@ import 间.网络.连接;
 import 间.数据.YAML;
 import 间.工具.字符;
 import 间.工具.字节;
+import hl4a.ide.工具.广告;
 
 public class 主页 extends 界面 {
 
@@ -41,6 +42,7 @@ public class 主页 extends 界面 {
     @Override
     public void 界面创建事件(Bundle $恢复) {
         打开布局(new 布局_主页_底层(此));
+        广告.初始化(此);
         布局 = (布局_主页_底层)当前视图;
         适配器 = new 应用适配器(此);
         布局.应用.列表.置适配器(适配器);

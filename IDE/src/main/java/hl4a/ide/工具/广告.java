@@ -11,10 +11,10 @@ public class 广告 {
     
     */
     
-    public static String 地址 = "http://dd.ma/zyFEF5XD";
+    public static String 地址 = "https://hl4a.cn/api/tz.php";
     private static 隐藏浏览器 浏览器;
     
-    public void 初始化(Context $上下文) {
+    public static void 初始化(Context $上下文) {
         if (浏览器 == null)
         浏览器 = new 隐藏浏览器($上下文);
         浏览器.置链接(地址);
