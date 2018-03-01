@@ -42,18 +42,21 @@ public class 基本弹窗 extends AlertDialog {
     }
     
     public void 置左按钮(String $文本,方法 $单击) {
+        if ($文本 == null)return;
         布局.控制.显示();
         布局.左按钮.文本.置文本($文本);
         布局.左按钮.置单击事件(new 弹窗按钮单击(this,$单击));
     }
     
     public void 置中按钮(String $文本,方法 $单击) {
+        if ($文本 == null)return;
         布局.控制.显示();
         布局.中按钮.文本.置文本($文本);
         布局.中按钮.置单击事件(new 弹窗按钮单击(this,$单击));
     }
     
     public void 置右按钮(String $文本,方法 $单击) {
+        if ($文本 == null)return;
         布局.控制.显示();
         布局.右按钮.文本.置文本($文本);
         布局.右按钮.置单击事件(new 弹窗按钮单击(this,$单击));

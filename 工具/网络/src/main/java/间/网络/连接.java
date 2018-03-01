@@ -67,10 +67,10 @@ public class 连接 {
     private String 模式;
     private String 标识;
 
-    public 连接 () {
+    public 连接() {
         this(null);
     }
-    
+
     public 连接(String $地址) {
         this($地址, "GET");
     }
@@ -100,16 +100,18 @@ public class 连接 {
         }
         return this;
     }
-
+    
     public 连接 断点(long $开始) {
         请求头("RANGE", BigInteger.valueOf($开始).toString() + "-");
         return this;
     }
 
     public 连接 断点(String $文件) {
-        long $大小 = 文件.取大小($文件);
-        if ($大小 != 0) {
-            断点($大小);
+        if (文件.是文件($文件)) {
+            long $大小 = 文件.取大小($文件);
+            if ($大小 != 0) {
+                断点($大小);
+            }
         }
         return this;
     }
@@ -156,7 +158,7 @@ public class 连接 {
             请求.headers(请求头.build());
 
             请求.cacheControl(new CacheControl.Builder().noCache().build());
-            
+
             ByteArrayOutputStream $输出 = 流.输出.字节();
             byte[] $分隔 = ("--" + 标识).getBytes();
             byte[] $换行 = "\r\n".getBytes();
@@ -235,7 +237,7 @@ public class 连接 {
 
         @Override
         public X509Certificate[] getAcceptedIssuers() {
-            
+
             return new X509Certificate[]{};
         }
     };
@@ -262,7 +264,7 @@ public class 连接 {
 
         private static String[] 开启策略 = {SSLv3,TLSv1,TLSv11,TLSv12};
         // Android低版本不重置的话某些SSL访问就会失败
-        
+
         private SSLSocketFactory 工厂;
 
         public 连接工厂() {
@@ -320,7 +322,7 @@ public class 连接 {
             重置策略($连接);
             return $连接;
         }
-        
+
         private void 重置策略(SSLSocket $连接) {
             $连接.setEnabledProtocols(开启策略);
         }

@@ -17,9 +17,9 @@ import 间.接口.流进度;
 
 public class 流 {
 
-    public static final int 小 = 1024; // 1k
-    public static final int 中 = 1024 * 100; // 100k
-    public static final int 大 = 1024 * 512; // 512k
+    public static final int 小 = 1024 * 512; // 1k
+    public static final int 中 = 1024 * 1024; // 1m
+    public static final int 大 = 1024 * 10240; // 10m
 	
     
     public static void 关闭(Closeable $流) {

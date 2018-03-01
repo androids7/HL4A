@@ -10,6 +10,7 @@ import 间.接口.方法;
 import 间.安卓.弹窗.基本弹窗;
 import 间.接口.调用;
 import 间.工具.回调;
+import android.view.View;
 
 public class 提示 {
 
@@ -60,14 +61,42 @@ public class 提示 {
     public static void 警告(final Object $内容) {
         指定($内容, 颜色.红色.取控件色());
     }
+    
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容) {
+        return 弹窗($上下文, $标题, $内容, null,null);
+    }
+    
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $右按钮,方法 $右方法) {
+        return 弹窗($上下文, $标题, $内容, null,null, $右按钮, $右方法);
+    }
 
-    public static void 弹窗(Context $上下文,String $标题,String $内容,方法 $回调) {
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
+        return 弹窗($上下文, $标题, $内容, null, null, $中按钮, $中方法, $右按钮, $右方法);
+    }
+
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {
+        return 弹窗($上下文, $标题, $内容, $左按钮, $左方法, $中按钮, $中方法, $右按钮, $右方法, true);
+    }
+
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭) {
+        return 弹窗($上下文, $标题, $内容, $左按钮, $左方法, $中按钮, $中方法, $右按钮, $右方法, $可关闭, null);
+    }
+
+    public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $左按钮,方法 $左方法,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法,boolean $可关闭,方法 $关闭事件) {
         基本弹窗 $弹窗 = new 基本弹窗($上下文);
         $弹窗.置标题($标题);
-        $弹窗.置内容($内容);
-        $弹窗.置右按钮("了解", 调用.配置($弹窗,"隐藏"));
-        $弹窗.置隐藏事件($回调);
+        if ($内容 instanceof View) {
+            $弹窗.置内容((View)$内容);
+        } else {
+            $弹窗.置内容($内容 == null ? "null" : $内容.toString());
+        }
+        $弹窗.置左按钮($左按钮, $左方法);
+        $弹窗.置中按钮($中按钮, $中方法);
+        $弹窗.置右按钮($右按钮, $右方法);
+        $弹窗.置可关闭($可关闭);
+        $弹窗.置隐藏事件($关闭事件);
         $弹窗.显示();
+        return $弹窗;
     }
 
 }

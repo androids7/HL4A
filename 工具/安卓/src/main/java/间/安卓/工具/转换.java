@@ -32,16 +32,16 @@ public class 转换 {
         return 转换大小(TypedValue.COMPLEX_UNIT_IN, $值);
     }
     
-    public static Float kb(int $字节) {
-        return ((float)$字节) / 1024;
+    public static Float kb(float $字节) {
+        return $字节 / 1024;
     }
     
-    public static Float mb(int $字节) {
-        return ((float)$字节) / (1024 * 1024);
+    public static Float mb(float $字节) {
+        return $字节 / (1024 * 1024);
     }
     
-    public static Float gb(int $字节) {
-        return ((float)$字节) / (1024 * 1024 * 1024);
+    public static Float gb(float $字节) {
+        return $字节 / (1024 * 1024 * 1024);
     }
 
     public static int 数字(String $值) {
