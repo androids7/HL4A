@@ -10,12 +10,14 @@ import 间.工具.字符;
 import 间.安卓.工具.环境;
 import hl4a.ide.界面.更新界面;
 import 间.安卓.工具.设置;
+import 间.安卓.工具.网络;
 
 public class 更新 {
 
     public static 应用设置 信息;
 
     public synchronized static void 请求() {
+        if (!网络.网络可用()) return;
         String $地址 = 应用配置信息.更新地址;
         资源 $返回 = new 连接($地址).同步();
         if (!$返回.成功()) return;

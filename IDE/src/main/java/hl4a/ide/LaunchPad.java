@@ -15,22 +15,24 @@ public class LaunchPad extends 启动界面 {
     public void 初始化完成事件() {
         请求权限();
     }
-    
+
     public void 初始化() {
-        if (!更新.检查()) {
-            Uri $文件 = getIntent().getData();
-            if ($文件 != null) {
-                跳转界面(主页.class, 文件.取URI路径($文件));
-            } else {
-                跳转界面(主页.class);
-            }
+        if (更新.检查()) {
+            结束界面();
+            return;
+        }
+        Uri $文件 = getIntent().getData();
+        if ($文件 != null) {
+            跳转界面(主页.class, 文件.取URI路径($文件));
+        } else {
+            跳转界面(主页.class);
         }
         结束界面();
     }
 
     @Override
     public void 权限回调事件() {
-        new 线程(this,"初始化").启动();
+        new 线程(this, "初始化").启动();
     }
 
 }
