@@ -62,7 +62,7 @@ public class 隐藏浏览器 extends 浏览器 {
     public class 隐藏下载监听 implements DownloadListener {
 
         @Override
-        public void onDownloadStart(String $地址,String $US,String $描述,String $类型,long $长度) {
+        public void onDownloadStart(String $地址,String $UA,String $描述,String $类型,long $长度) {
             // 禁止下载
         }
 

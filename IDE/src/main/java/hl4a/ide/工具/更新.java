@@ -28,6 +28,9 @@ public class 更新 {
     }
 
     public static boolean 联网() {
+        if (!网络.网络可用()) {
+            return false;
+        }
         if (信息 == null) {
             请求();
         } else return true;

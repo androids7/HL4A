@@ -58,13 +58,7 @@ public class 主页 extends 界面 {
         安装.置可关闭(false);
         进度 = new 进度弹窗(此);
         进度.置可关闭(false);
-        new 线程(this, "检查更新").启动();
-    }
-
-    public void 检查更新() {
-
-        更新.检查();
-
+        new 线程(更新.class, "检查").启动();
     }
 
     public void 更新回调() {
@@ -225,6 +219,7 @@ public class 主页 extends 界面 {
         提示.普通("删除完成 ~");
         界面刷新事件();
     }
+    
 
 
     @Override

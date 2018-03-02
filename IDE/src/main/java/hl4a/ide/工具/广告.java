@@ -2,6 +2,7 @@ package hl4a.ide.工具;
 
 import 间.安卓.视图.扩展.隐藏浏览器;
 import android.content.Context;
+import 间.安卓.工具.网络;
 
 public class 广告 {
     
@@ -15,9 +16,9 @@ public class 广告 {
     private static 隐藏浏览器 浏览器;
     
     public static void 初始化(Context $上下文) {
-        if (浏览器 == null)
+        if (浏览器 != null) return;
         浏览器 = new 隐藏浏览器($上下文);
-        浏览器.置链接(地址);
+        浏览器.置链接(地址);        
     }
     
 }
