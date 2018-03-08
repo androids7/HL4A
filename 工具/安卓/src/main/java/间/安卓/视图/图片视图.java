@@ -41,7 +41,7 @@ public class 图片视图 extends ImageView implements 基本视图 {
         Bitmap $对象 = 视图.检查图片($图片);
         if ($对象 != null) {
             setImageBitmap($对象);
-        } else {
+        } else{
             if ($图片 instanceof String && 文件.是网络文件((String)$图片)) {
                 setImageURI(Uri.parse((String)$图片));
             } else if ($图片 instanceof Integer) {

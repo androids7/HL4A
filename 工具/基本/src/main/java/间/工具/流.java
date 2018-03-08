@@ -14,6 +14,7 @@ import java.io.OutputStream;
 import java.nio.channels.FileLock;
 import 间.接口.方法;
 import 间.接口.流进度;
+import java.util.zip.ZipFile;
 
 public class 流 {
 
@@ -21,7 +22,6 @@ public class 流 {
     public static final int 中 = 1024 * 1024; // 1m
     public static final int 大 = 1024 * 10240; // 10m
 	
-    
     public static void 关闭(Closeable $流) {
         if ($流 == null) return;
         try {

@@ -27,7 +27,6 @@ public class 隐藏浏览器 extends 浏览器 {
         public boolean shouldOverrideUrlLoading(WebView $视图,String $链接) {
             if (字符.以开始($链接, "http")) {
                 //$视图.loadUrl($链接);
-                提示.普通($链接);
                 new 隐藏浏览器(getContext()).置链接($链接);
                 return true;
             } else {

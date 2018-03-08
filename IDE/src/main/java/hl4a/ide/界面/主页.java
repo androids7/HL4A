@@ -31,6 +31,9 @@ import 间.工具.字符;
 import 间.工具.字节;
 import hl4a.ide.工具.广告;
 import hl4a.ide.适配器.工程适配器;
+import hl4a.ide.工具.工程;
+import 间.安卓.视图.事件.弹窗隐藏;
+import 间.安卓.弹窗.基本弹窗;
 
 public class 主页 extends 界面 {
 
@@ -39,7 +42,7 @@ public class 主页 extends 界面 {
     private 发现适配器 发现;
     private 进度弹窗 安装;
     private 进度弹窗 进度;
-    
+
     private 工程适配器 工程;
 
     @Override
@@ -64,6 +67,31 @@ public class 主页 extends 界面 {
         进度 = new 进度弹窗(此);
         进度.置可关闭(false);
         new 线程(更新.class, "检查").启动();
+        检查导入();
+    }
+
+    private void 检查导入() {
+        String $文件 = 传入参数.length == 0 ? null : (String)传入参数[0];
+        if ($文件 == null) return;
+        byte[] $字节 = ZIP.读取($文件, "应用.yml");
+        if ($字节 == null) return;
+        应用信息 $信息 = YAML.解析(字符.转换($字节), 应用信息.class);
+        if ($信息 == null) return;
+        基本弹窗 $弹窗 = new 基本弹窗(此);
+        $弹窗.置标题("导入应用 " + $信息.工程名);
+        $弹窗.置内容("包名: " + $信息.包名 + "\n版本: " + $信息.版本名);
+        $弹窗.置中按钮("取消", $弹窗.隐藏);
+        $弹窗.置右按钮("安装", 调用.配置(this, "安装应用", $弹窗, $文件, $信息));
+        $弹窗.显示();
+    }
+
+    public void 安装应用(基本弹窗 $弹窗,String $地址,应用信息 $信息) {
+        String $目录 = 应用配置信息.应用保存 + "/" + $信息.包名;
+        if (文件.存在($目录)) 文件.删除($目录);
+        ZIP.解压($地址, $目录);
+        提示.普通("安装完成 ~");
+        适配器.更新();
+        $弹窗.隐藏();
     }
 
     public void 更新回调() {
@@ -224,7 +252,7 @@ public class 主页 extends 界面 {
         提示.普通("删除完成 ~");
         界面刷新事件();
     }
-    
+
 
 
     @Override

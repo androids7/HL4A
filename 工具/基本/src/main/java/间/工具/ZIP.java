@@ -101,6 +101,23 @@ public class ZIP {
         return crc.getValue();
     }
 
+    public static byte[] 读取(String $文件,String $地址) {
+        ZipFile $压缩 = null;
+        try {
+            $压缩 = new ZipFile(文件.取文件对象($文件));
+            ZipEntry $进入 = $压缩.getEntry($地址);
+            if ($进入.isDirectory()) {
+                return null;
+            } else {
+                return 字节.读取($压缩.getInputStream($进入));
+            }
+        } catch (IOException $错误) {
+            return null;
+        } finally {
+            流.关闭($压缩);
+        }
+    }
+    
     public static boolean 解压(String $文件,String $地址,String $输出) {
         try {
             ZipFile $压缩 = new ZipFile(文件.取文件对象($文件));

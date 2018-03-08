@@ -9,6 +9,7 @@ import 间.工具.字符;
 import 间.工具.字节;
 import 间.工具.编码;
 import 间.数据.YAML;
+import hl4a.ide.应用配置信息;
 
 public class 工程 {
 
@@ -52,20 +53,6 @@ public class 工程 {
             }
         }
         return true;
-    }
-
-
-    public static String 导入(String $文件) {
-        if (!"hpk".equals(文件.取后缀($文件))) return "导入失败 不是HPK！";
-        String $目录 = 文件.取缓存目录("导入", "目录", 文件.取名称($文件));
-        ZIP.解压($文件, $目录);
-        if (!文件.是文件($目录, 配置文件))return "导入失败 HPK损坏 ！";
-        应用信息 $信息 = (应用信息)YAML.读取($目录 + "/" + 配置文件, 应用信息.class);
-        if (工程.检查($信息.包名)) {
-            return "导入失败 包名已占用~";
-        }
-        文件.复制($目录, 工程.工程目录 + "/" + $信息.包名);
-        return "导入成功 ~";
     }
 
     public static 工程 读取(String $地址) {

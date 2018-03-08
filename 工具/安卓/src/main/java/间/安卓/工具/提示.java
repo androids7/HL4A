@@ -11,6 +11,10 @@ import 间.安卓.弹窗.基本弹窗;
 import 间.接口.调用;
 import 间.工具.回调;
 import android.view.View;
+import hl4a.runtime.BuildConfig;
+import 间.工具.反射;
+import android.util.Log;
+import 间.工具.错误;
 
 public class 提示 {
 
@@ -26,6 +30,14 @@ public class 提示 {
         上次提示 = 时间.时间戳();
     }
 
+    private static boolean 调试 = 反射.取变量(应用.取应用信息().包名 + ".BuildConfig", "DEBUG");
+
+    public static void 日志(Object $日志,Object... $模板) {
+        if (调试) {
+            Log.e(字符.截取结束(new Exception().getStackTrace()[1].getClassName(), ".", null), $日志 == null ? "null" : $日志 instanceof String ? String.format((String)$日志, $模板) : $日志.toString());
+        }
+    }
+    
     public static void 指定(final Object $内容,final Object $颜色) {
         处理.主线程(new 方法(){
                 @Override
@@ -61,13 +73,13 @@ public class 提示 {
     public static void 警告(final Object $内容) {
         指定($内容, 颜色.红色.取控件色());
     }
-    
+
     public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容) {
-        return 弹窗($上下文, $标题, $内容, null,null);
+        return 弹窗($上下文, $标题, $内容, null, null);
     }
-    
+
     public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $右按钮,方法 $右方法) {
-        return 弹窗($上下文, $标题, $内容, null,null, $右按钮, $右方法);
+        return 弹窗($上下文, $标题, $内容, null, null, $右按钮, $右方法);
     }
 
     public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容,String $中按钮,方法 $中方法,String $右按钮,方法 $右方法) {

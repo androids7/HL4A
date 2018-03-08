@@ -49,7 +49,8 @@ public class 发现适配器 extends 基本适配器 {
     }
 
     public synchronized void 推送(哈希表 $列表) {
-        数据 = new 集合<>();
+        if ($列表 != null) {
+            数据 = new 集合<>();
         for (Map.Entry $单个 : $列表.entrySet()) {
             String $包名 = (String)$单个.getKey();
             String $地址 = (String)$单个.getValue();
@@ -63,6 +64,7 @@ public class 发现适配器 extends 基本适配器 {
                 数据.添加($表);
                 处理.主线程(this, "发送更新事件");
             }
+        }
         }
     }
 
