@@ -8,27 +8,27 @@ public class 转换 {
 
     public static DisplayMetrics rdm = 环境.取应用().getResources().getDisplayMetrics();
 
-    public static Float px(int $值) {
+    public static Float px(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_PX, $值);
     }
 
-    public static Float dp(int $值) {
+    public static Float dp(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_DIP, $值);
     }
 
-    public static Float sp(int $值) {
+    public static Float sp(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_SP, $值) * 倍数;
     }
 
-    public static Float pt(int $值) {
+    public static Float pt(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_PT, $值);
     }
 
-    public static Float mm(int $值) {
+    public static Float mm(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_MM, $值);
     }
 
-    public static Float in(int $值) {
+    public static Float in(float $值) {
         return 转换大小(TypedValue.COMPLEX_UNIT_IN, $值);
     }
     
@@ -45,12 +45,20 @@ public class 转换 {
     }
 
     public static int 数字(String $值) {
-        return new Integer($值);
+        return Integer.parseInt($值);
+    }
+    
+    public static float 单精(String $值) {
+        return Float.parseFloat($值);
+    }
+    
+    public static Double 双精(String $值) {
+        return Double.parseDouble($值);
     }
     
     private static float 倍数 = 3 / 设备.取屏幕密度();
     
-    private static Float 转换大小(int $类型,int $值) {
+    private static Float 转换大小(int $类型,float $值) {
         return TypedValue.applyDimension($类型, $值, rdm);
     }
 

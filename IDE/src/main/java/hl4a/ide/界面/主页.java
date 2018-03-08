@@ -30,6 +30,7 @@ import 间.数据.YAML;
 import 间.工具.字符;
 import 间.工具.字节;
 import hl4a.ide.工具.广告;
+import hl4a.ide.适配器.工程适配器;
 
 public class 主页 extends 界面 {
 
@@ -38,12 +39,16 @@ public class 主页 extends 界面 {
     private 发现适配器 发现;
     private 进度弹窗 安装;
     private 进度弹窗 进度;
+    
+    private 工程适配器 工程;
 
     @Override
     public void 界面创建事件(Bundle $恢复) {
         打开布局(new 布局_主页_底层(此));
         广告.初始化(此);
         布局 = (布局_主页_底层)当前视图;
+        工程 = new 工程适配器(布局.工程);
+        工程.更新工程();
         适配器 = new 应用适配器(此);
         布局.应用.列表.置适配器(适配器);
         布局.应用.列表.置项目单击事件(调用.代理(this, "项目单击"));
@@ -224,6 +229,7 @@ public class 主页 extends 界面 {
 
     @Override
     public void 界面刷新事件() {
+        工程.更新工程();
         适配器.更新();
         if (适配器.getCount() == 0) {
             布局.应用.底层.隐藏();

@@ -14,6 +14,10 @@ public class 反射 {
     public static Class<?> 取类(String $类名) {
         return 取类($类名,反射.class.getClassLoader());
     }
+    
+    public static Class<?> 取系统类(String $类名) {
+        return 取类($类名,ClassLoader.getSystemClassLoader());
+    }
 
     public static Class<?> 取类(String $类名,ClassLoader $类加载器) {
         try {
@@ -244,8 +248,11 @@ public class 反射 {
 
     private static Object[] 适配参数(Method $单个,Object[] $参数) {
         Class[] $类组 = $单个.getParameterTypes();
-        if ($类组.length == 0 && $参数.length == 0) {
-            return $参数;
+        if ($类组.length == 0) {
+            return $参数.length == 0 ? $参数 : null;
+        }
+        if ($类组.length > 1 && $参数.length == 0) {
+            return null;
         }
         if ($类组.length != $参数.length && !是数组($类组[$类组.length - 1])) {
             return null;
@@ -273,9 +280,10 @@ public class 反射 {
 
     private static Object[] 适配参数(Constructor $单个,Object[] $参数) {
         Class[] $类组 = $单个.getParameterTypes();
-        if ($类组.length == 0 && $参数.length == 0) {
-            return $参数;
-        } else if ($参数.length == 0) {
+        if ($类组.length == 0) {
+            return $参数.length == 0 ? $参数 : null;
+        }
+        if ($类组.length > 1 && $参数.length == 0) {
             return null;
         }
         if ($类组.length != $参数.length && !是数组($类组[$类组.length - 1])) {

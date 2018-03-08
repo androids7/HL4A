@@ -5,13 +5,15 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import 间.安卓.组件.基本界面;
 import android.view.View;
+import android.app.Activity;
 
 public class 界面插件 {
     
     public 基本界面 界面;
     
-    public void 注册(基本界面 $界面) {
-        $界面.注册插件(this);
+    public void 注册(Activity $界面) {
+        if ($界面 instanceof 基本界面)
+            ((基本界面)$界面).注册插件(this);
     }
 
     public void 请求权限事件() {}

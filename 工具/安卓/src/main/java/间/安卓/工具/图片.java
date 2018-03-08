@@ -34,17 +34,18 @@ import 间.安卓.组件.基本界面;
 import 间.工具.流;
 import 间.接口.方法;
 import 间.接口.调用;
+import android.app.Application;
 
 public class 图片 {
 
-    protected static void 初始化(基本应用 $应用) {
+    protected static void 初始化(Application $应用) {
         new 图片插件().注册($应用);
     }
 
     public static class 图片插件 extends 应用插件 {
 
         @Override
-        public void 界面新建(基本界面 $界面) {
+        public void 界面新建(Activity $界面) {
             new 界面选图().注册($界面);
         }
     }

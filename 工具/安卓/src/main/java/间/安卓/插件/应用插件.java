@@ -10,13 +10,14 @@ public class 应用插件 {
 
     public 基本应用 应用;
     
-    public void 注册(基本应用 $应用) {
-        $应用.注册插件(this);
+    public void 注册(Application $应用) {
+        if ($应用 instanceof 基本应用)
+        ((基本应用)$应用).注册插件(this);
     }
     
     public void 初始化() {}
-    public void 界面新建(基本界面 $界面) {}
-    public void 界面结束(基本界面 $结束) {}
+    public void 界面新建(Activity $界面) {}
+    public void 界面结束(Activity $结束) {}
     public void 应用出错(Thread $线程,Exception $错误) {}
     public void 应用事件(String $事件,Object[] $参数) {}
     public void 处理环境(Context $环境) {}

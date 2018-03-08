@@ -137,7 +137,7 @@ public class 视图 {
                 return new Integer((String)$大小);
             }
             String $结束 = 字符.小写(字符.取结束后((String)$大小, 2));
-            Integer $数量 = new Integer(字符.取结束前((String)$大小, 2));
+            Float $数量 = 转换.单精(字符.取结束前((String)$大小, 2));
             switch ($结束) {
                 case "px":return 转换.px($数量).intValue();
                 case "dp":return 转换.dp($数量).intValue();

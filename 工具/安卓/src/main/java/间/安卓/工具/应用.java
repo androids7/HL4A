@@ -96,8 +96,8 @@ public class 应用 {
 
     public static void 跳转错误(Thread $线程,Exception $错误) {
         字符.保存("%HL4A/错误日志/" + 时间.格式() + ".log", $线程.getClass() + "\n" + 错误.取整个错误($错误));
-
-        for (应用插件 $单个 : 环境.取应用().所有插件) {
+        if (环境.取应用() instanceof 基本应用)
+        for (应用插件 $单个 : ((基本应用)环境.取应用()).所有插件) {
             $单个.应用出错($线程, $错误);
         }
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
@@ -106,7 +106,7 @@ public class 应用 {
         环境.取应用().startActivity($意图);
     }
 
-    public static void 初始化应用(基本应用 $应用) {
+    public static void 初始化应用(Application $应用) {
         包管理 = $应用.getPackageManager();
         //System.setOut(new 打印处理(调用.代理(提示.class,"普通")));
         环境.置应用($应用);
@@ -126,7 +126,7 @@ public class 应用 {
         提示.初始化($应用);
         图片.初始化($应用);
     }
-
+    
     public static void 启动(String $包名) {
         环境.取应用().startActivity(包管理.getLaunchIntentForPackage($包名));
     }

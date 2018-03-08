@@ -15,8 +15,8 @@ public class 基本弹窗 extends AlertDialog {
     
     public Context 上下文;
     public 布局_基本弹窗 布局;
-    
-    
+    public 方法 隐藏 = 调用.配置(this,"隐藏");
+    public 方法 显示 = 调用.配置(this,"显示");
     
     public 基本弹窗(Context $上下文) {
         super($上下文);

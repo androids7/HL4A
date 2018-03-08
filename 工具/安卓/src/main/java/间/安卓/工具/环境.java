@@ -66,8 +66,8 @@ public class 环境 {
     }
 
 
-    public static 基本应用 取应用() {
-        return (基本应用)读取("应用");
+    public static Application 取应用() {
+        return (Application)读取("应用");
     }
 
 }

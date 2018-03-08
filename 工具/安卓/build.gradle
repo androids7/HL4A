@@ -14,6 +14,8 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:24.1.1'
+    //compile 'com.nineoldandroids:library:2.4.0'
+    
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':基本')
     compile project(':数据/YAML')
