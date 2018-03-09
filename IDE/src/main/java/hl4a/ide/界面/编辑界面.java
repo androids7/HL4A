@@ -57,7 +57,6 @@ public class 编辑界面 extends 界面 {
 
     @Override
     public void 界面创建事件(Bundle $数据) {
-        置滑动返回(true);
         String $名称 = (String)传入参数[0];
         if (!工程.检查($名称)) {
             提示.警告("没有那样的工程 :" + $名称);

@@ -7,14 +7,20 @@ import java.math.BigInteger;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
+import javax.net.ssl.X509TrustManager;
+import okhttp3.CacheControl;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -29,15 +35,6 @@ import 间.接口.方法;
 import 间.收集.哈希表;
 import 间.收集.集合;
 import 间.网络.连接;
-import java.security.cert.X509Certificate;
-import javax.net.ssl.SSLContext;
-import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import javax.net.ssl.X509TrustManager;
-import java.security.cert.CertificateException;
-import 间.工具.字符;
-import okhttp3.Cache;
-import okhttp3.CacheControl;
 
 public class 连接 {
 
@@ -59,7 +56,7 @@ public class 连接 {
             $构建.sslSocketFactory(new 连接工厂());
             $构建.hostnameVerifier(new 信任域名());
         } catch (Exception $错误) {}
-        $构建.connectTimeout(5000, TimeUnit.MILLISECONDS);
+        $构建.connectTimeout(2333, TimeUnit.MILLISECONDS);
         网络实例 = $构建.build();
     }
 
@@ -254,7 +251,7 @@ public class 连接 {
 
         public static String SSL = "SSL";
         public static String SSLv2 = "SSLv2";
-        public static String SSLv23 = "SSLv23";
+        public static String SSLv23 = "SSLv2.3";
         public static String SSLv3 = "SSLv3";
 
         public static String TLS = "TLS";
@@ -262,7 +259,7 @@ public class 连接 {
         public static String TLSv11 = "TLSv1.1";
         public static String TLSv12 = "TLSv1.2";
 
-        private static String[] 开启策略 = {SSLv3,TLSv1,TLSv11,TLSv12};
+        private static String[] 开启策略 = {SSLv23,SSLv3,TLSv1,TLSv11,TLSv12};
         // Android低版本不重置的话某些SSL访问就会失败
 
         private SSLSocketFactory 工厂;

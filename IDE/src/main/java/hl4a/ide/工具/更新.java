@@ -17,7 +17,7 @@ public class 更新 {
 
     public static 应用设置 信息;
 
-    public synchronized static void 请求() {
+    public static void 请求() {
         if (!网络.网络可用()) return;
         String $地址 = 应用配置信息.更新地址;
         资源 $返回 = new 连接($地址).同步();

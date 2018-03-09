@@ -14,12 +14,10 @@ public class 应用 {
 
     public 应用信息 信息;
     public String 地址;
-    public Bitmap 图标;
-
+    
     private 应用(应用信息 $信息,String $地址) {
         信息 = $信息;
         地址 = $地址;
-        图标 = 图片.读取(地址 + "/图标.png");
     }
 
     public String 取地址(String... $地址) {
