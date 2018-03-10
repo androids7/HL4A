@@ -11,7 +11,7 @@ public class 用户 extends BmobUser {
     
     public Integer ae = 0;
     public String sg = "还没有签名 ~";
-    
+
     public String 取用户名() {
         return getUsername();
     }
@@ -22,6 +22,18 @@ public class 用户 extends BmobUser {
     
     public void 置密码(String $密码) {
         setPassword($密码);
+    }
+    
+    public String 取密码() {
+        return (String)取键值("password");
+    }
+    
+    public void 置键值(String $键值,Object $对象) {
+        setValue($键值,$对象);
+    }
+
+    public Object 取键值(String $键值) {
+        return getObjectByKey(环境.取应用(),$键值);
     }
     
     public String 取邮箱() {
@@ -78,6 +90,10 @@ public class 用户 extends BmobUser {
     
     public void 登出() {
         logOut(环境.取应用());
+    }
+    
+    public void 取用户(String $用户名) {
+        
     }
     
 }

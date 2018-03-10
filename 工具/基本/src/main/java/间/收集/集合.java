@@ -1,7 +1,11 @@
 package 间.收集;
 
-import java.util.*;
-import 间.工具.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Set;
+import 间.工具.字符;
+import 间.工具.数组;
 
 public class 集合<类型> extends LinkedList<类型> {
 
