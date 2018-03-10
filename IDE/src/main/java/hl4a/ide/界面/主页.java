@@ -34,6 +34,8 @@ import hl4a.ide.适配器.工程适配器;
 import hl4a.ide.工具.工程;
 import 间.安卓.视图.事件.弹窗隐藏;
 import 间.安卓.弹窗.基本弹窗;
+import 间.安卓.后端.用户;
+import cn.bmob.v3.exception.BmobException;
 
 public class 主页 extends 界面 {
 
@@ -70,6 +72,18 @@ public class 主页 extends 界面 {
         进度.置可关闭(false);
         new 线程(更新.class, "检查").启动();
         检查导入();
+        测试注册();
+    }
+
+    private void 测试注册() {
+        用户 $用户 = new 用户();
+        $用户.置用户名("MikaGuraN");
+        $用户.置密码("xn-p7r///");
+        $用户.登录(调用.代理(this,"回调"));
+    }
+    
+    public void 回调(BmobException $错误) {
+        提示.普通($错误);
     }
 
     private void 检查导入() {

@@ -17,9 +17,5 @@ android {
 
 dependencies {
     compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
-    compile project (':工具/安卓')
-    compile project (':工具/网络')
-    compile project (':工具/脚本')
-    compile project(':编辑器')
-    compile project (':工具/Bmob')
+    compile project(':安卓')
 }

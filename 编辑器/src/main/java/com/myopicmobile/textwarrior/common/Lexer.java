@@ -31,6 +31,7 @@ public class Lexer {
         "间.安卓.视图.扩展","间.安卓.视图.适配器",
         "间.安卓.视图.实现",
         "间.工具","间.数据","间.收集","间.接口",
+        "间.安卓.资源","间.安卓.资源.布局",
         "java.lang","java.io","java.util",
         "android.os","android.util","android.content",
         "android.view","android.widget"
@@ -115,7 +116,7 @@ public class Lexer {
     public final static int SINGLE_SYMBOL_DELIMITED_A = 50;
     public final static int SINGLE_SYMBOL_DELIMITED_B = 51;
 
-    private static Language _globalLanguage = LanguageNonProg.getInstance();
+    private static Language _globalLanguage = LanguageJavascript.getInstance();
     synchronized public static void setLanguage(Language lang) {
         _globalLanguage = lang;
     }
