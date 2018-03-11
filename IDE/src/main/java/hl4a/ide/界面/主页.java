@@ -40,6 +40,15 @@ import 间.安卓.后端.接口.回调错误;
 import 间.安卓.后端.查询;
 import 间.收集.集合;
 import cn.bmob.v3.BmobObject;
+import cn.bmob.v3.BmobUser;
+import cn.bmob.v3.BmobQuery;
+import 间.安卓.工具.环境;
+import 间.安卓.后端.接口.数据查询回调;
+import java.util.ArrayList;
+import cn.bmob.v3.listener.SQLQueryListener;
+import cn.bmob.v3.datatype.BmobQueryResult;
+import cn.bmob.v3.listener.FindListener;
+import java.util.List;
 
 public class 主页 extends 界面 {
 
@@ -83,10 +92,10 @@ public class 主页 extends 界面 {
 
     public void 测试() {
         x = new 查询("_User").等于("username","MikaGuraN");
-        x.查询(调用.代理(this, "回调"));
+        x.查询(调用.代理(this,"回调"));
     }
 
-    public void 回调(回调错误 $错误,集合<BmobObject> $结果) {
+    public void 回调(回调错误 $错误,集合<用户> $结果) {
         提示.普通($错误);
         提示.普通($结果);
     }

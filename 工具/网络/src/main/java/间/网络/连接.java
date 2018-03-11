@@ -65,15 +65,15 @@ public class 连接 {
     private String 标识;
 
     public 连接() {
-        this(null);
+        this((String)null);
     }
 
     public 连接(String $地址) {
         this($地址, "GET");
     }
-
+    
     public 连接(String $地址,String $模式) {
-        请求模式($模式);
+        模式($模式);
         地址($地址);
         标识 = UUID.randomUUID().toString();
         类型 = MediaType.parse("multipart/form-datap;boundary=" + 标识);
@@ -88,7 +88,7 @@ public class 连接 {
         return this;
     }
 
-    public 连接 请求模式(String $模式) {
+    public 连接 模式(String $模式) {
         $模式 = $模式.toUpperCase();
         if (!所有模式.检查($模式)) {
             不可用 = true;

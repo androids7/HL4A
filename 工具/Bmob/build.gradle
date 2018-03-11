@@ -1,21 +1,7 @@
-apply plugin: 'com.android.application'
+apply plugin: 'java'
 
-android {
-
-    compileSdkVersion 19
-    buildToolsVersion '21.1.0'
-
-    defaultConfig {
-        applicationId 'hl4a.ide'
-       	minSdkVersion 14
-       	targetSdkVersion 23
-        versionCode 107
-        versionName '1.8.15'
-    }
-    
-}
 
 dependencies {
-    compile 'cn.bmob.android:bmob-sdk:3.4.7-aar'
-    compile project(':安卓')
+    compile project(':基本')
+    compile project(':网络')
 }
