@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    
+}
+
+dependencies {
+    compile project(':../安卓')
+    compile project(':../网络')
+    compile 'com.alibaba:fastjson:1.2.37'
+}

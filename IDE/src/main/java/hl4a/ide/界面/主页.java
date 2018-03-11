@@ -3,6 +3,9 @@ package hl4a.ide.界面;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.AVRole;
+import hl4a.ide.工具.广告;
 import hl4a.ide.工具.应用信息;
 import hl4a.ide.工具.更新;
 import hl4a.ide.布局.布局_主页_底层;
@@ -10,45 +13,28 @@ import hl4a.ide.布局.布局_适配器_发现;
 import hl4a.ide.布局.布局_适配器_应用;
 import hl4a.ide.应用配置信息;
 import hl4a.ide.适配器.发现适配器;
+import hl4a.ide.适配器.工程适配器;
 import hl4a.ide.适配器.应用适配器;
-import java.io.File;
+import 间.安卓.后端.权限组;
+import 间.安卓.后端.查询;
+import 间.安卓.后端.用户;
 import 间.安卓.工具.处理;
-import 间.安卓.工具.应用;
 import 间.安卓.工具.提示;
 import 间.安卓.工具.文件;
 import 间.安卓.工具.线程;
+import 间.安卓.弹窗.基本弹窗;
 import 间.安卓.弹窗.询问弹窗;
 import 间.安卓.弹窗.进度弹窗;
 import 间.安卓.组件.界面;
-import 间.安卓.视图.弹出菜单;
 import 间.工具.ZIP;
-import 间.接口.调用;
-import 间.收集.哈希表;
-import 间.网络.资源;
-import 间.网络.连接;
-import 间.数据.YAML;
 import 间.工具.字符;
 import 间.工具.字节;
-import hl4a.ide.工具.广告;
-import hl4a.ide.适配器.工程适配器;
-import hl4a.ide.工具.工程;
-import 间.安卓.视图.事件.弹窗隐藏;
-import 间.安卓.弹窗.基本弹窗;
-import 间.安卓.后端.用户;
-import cn.bmob.v3.exception.BmobException;
-import 间.安卓.后端.接口.回调错误;
-import 间.安卓.后端.查询;
-import 间.收集.集合;
-import cn.bmob.v3.BmobObject;
-import cn.bmob.v3.BmobUser;
-import cn.bmob.v3.BmobQuery;
-import 间.安卓.工具.环境;
-import 间.安卓.后端.接口.数据查询回调;
-import java.util.ArrayList;
-import cn.bmob.v3.listener.SQLQueryListener;
-import cn.bmob.v3.datatype.BmobQueryResult;
-import cn.bmob.v3.listener.FindListener;
-import java.util.List;
+import 间.工具.时间;
+import 间.接口.调用;
+import 间.收集.无序集合;
+import 间.数据.YAML;
+import 间.网络.资源;
+import 间.网络.连接;
 
 public class 主页 extends 界面 {
 
@@ -85,19 +71,11 @@ public class 主页 extends 界面 {
         进度.置可关闭(false);
         new 线程(更新.class, "检查").启动();
         检查导入();
-        new 线程(this,"测试").启动();
+        new 线程(this, "测试").启动();
     }
 
-    private 查询 x;
-
-    public void 测试() {
-        x = new 查询("_User").等于("username","MikaGuraN");
-        x.查询(调用.代理(this,"回调"));
-    }
-
-    public void 回调(回调错误 $错误,集合<用户> $结果) {
-        提示.普通($错误);
-        提示.普通($结果);
+    public void 测试() throws AVException {
+        提示.普通(权限组.读取("Owner").存在("MikaGuraN"));
     }
 
     private void 检查导入() {

@@ -2,7 +2,7 @@ package 间.收集;
 
 import java.util.*;
 
-public class 无序表<键值, 内容> extends HashMap<键值, 内容> {
+public class 无序表<键值 extends Object,内容 extends Object> extends HashMap<键值, 内容> {
 
     private static final long serialVersionUID = 3530384865377424460L;
 

@@ -1,7 +1,0 @@
-apply plugin: 'java'
-
-
-dependencies {
-    compile project(':基本')
-    compile project(':网络')
-}
