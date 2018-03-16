@@ -77,7 +77,7 @@ public class 权限组 {
         return 存在($用户.取用户名());
     }
 
-    public 返回值<Void,AVException> 保存() {
+    public 返回值<Void,AVException> 同步保存() {
         try {
             权限组.save();
         } catch (AVException $错误) {
@@ -86,11 +86,11 @@ public class 权限组 {
         return null;
     }
 
-    public void 异步保存() {
+    public void 保存() {
         权限组.saveInBackground();
     }
 
-    public void 异步保存(final 方法 $回调) {
+    public void 保存(final 方法 $回调) {
         权限组.saveInBackground(new SaveCallback() {
                 @Override
                 public void done(AVException $错误) {

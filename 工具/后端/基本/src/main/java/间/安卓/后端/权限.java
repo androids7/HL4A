@@ -6,7 +6,11 @@ public class 权限 extends AVACL {
 
     public 权限() {
         所有人可读(true);
-        所有人可写(false);
+    }
+    
+    public 权限(用户 $用户) {
+        this();
+        用户可写($用户,true);
     }
 
     public void 所有人可读(boolean $是否) {
