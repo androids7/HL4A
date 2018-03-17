@@ -7,31 +7,32 @@ import android.view.*;
 import android.widget.*;
 import 间.接口.*;
 import 间.安卓.视图.实现.*;
+import 间.安卓.工具.提示;
+import 间.安卓.工具.视图;
+import android.content.res.Resources;
 
 public class 开关视图 extends Switch implements 基本视图 {
 
-    
     public 开关视图(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
     }
-    
+
     public 开关视图(ViewGroup $父视图) {
         this($父视图.getContext());
         加入到($父视图);
     }
-    
 
     @Override
     public void 置布局重力(String $重力) {
-        视图实现.置布局重力(this,$重力);
+        视图实现.置布局重力(this, $重力);
     }
 
     @Override
     public void 置布局权重(float $权重) {
-        视图实现.置布局权重(this,$权重);
+        视图实现.置布局权重(this, $权重);
     }
-    
+
     public void 置打开状态(boolean $是否打开) {
         setSelected($是否打开);
     }
@@ -294,27 +295,27 @@ public class 开关视图 extends Switch implements 基本视图 {
     public void 置背景颜色(Object $颜色) {
         视图实现.置背景颜色(this, $颜色);
     }
-    
+
     @Override
     public void 置上下边距(Object $边距) {
-        视图实现.置上下边距(this,$边距);
+        视图实现.置上下边距(this, $边距);
     }
 
     @Override
     public void 置左右边距(Object $边距) {
-        视图实现.置左右边距(this,$边距);
+        视图实现.置左右边距(this, $边距);
     }
 
     @Override
     public void 置上下填充(Object $填充) {
-        视图实现.置上下填充(this,$填充);
+        视图实现.置上下填充(this, $填充);
     }
 
     @Override
     public void 置左右填充(Object $填充) {
-        视图实现.置左右填充(this,$填充);
+        视图实现.置左右填充(this, $填充);
     }
-    
+
     @Override
     public void 置阴影(Object $阴影) {
         视图实现.置阴影(this, $阴影);

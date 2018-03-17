@@ -25,7 +25,7 @@ public class 布局 {
         if (可直接) {
             $窗口.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
             $窗口.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            $窗口.setStatusBarColor(视图.检查颜色(主题.取主题颜色().取基本深色()));
+            $窗口.setStatusBarColor(视图.检查颜色(主题.取颜色().取基本深色()));
             $界面.setContentView($视图);
             return;
         }
@@ -41,7 +41,7 @@ public class 布局 {
 
     public static View 加入沉浸状态栏(Activity $上下文,View $视图) {
         线性布局 $内容 = new 线性布局($上下文);
-        $内容.置背景颜色(主题.取主题颜色().取基本深色());
+        $内容.置背景颜色(主题.取颜色().取基本深色());
         $内容.置宽度("最大");
         $内容.置高度(应用.取状态栏高度($上下文));
         线性布局 $状态栏 = new 线性布局($上下文);

@@ -29,7 +29,7 @@ public class 绘画 {
     }
 
     public static Drawable 主题() {
-        return 生成背景(主题.取主题颜色().取控件色(), 主题.取主题颜色().取基本色(),主题.取默认圆角());
+        return 生成背景(主题.取颜色().取控件色(), 主题.取颜色().取基本色(),主题.取默认圆角());
     }
 
     public static Drawable 生成背景(Object $普通,Object $按下,Object $圆角) {
@@ -47,7 +47,7 @@ public class 绘画 {
             $内容.setShape($内容形状);
             $内容.getPaint().setColor(视图.检查颜色($普通));
             $内容.getPaint().setStyle(Paint.Style.FILL);
-            RippleDrawable $涟漪 = new RippleDrawable(ColorStateList.valueOf(主题.取主题颜色().取淡色()), $内容, $绘画);
+            RippleDrawable $涟漪 = new RippleDrawable(ColorStateList.valueOf(主题.取颜色().取淡色()), $内容, $绘画);
             return $涟漪;
         } else {
             return new 按下变色绘画($普通, $按下);

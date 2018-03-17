@@ -10,10 +10,10 @@ import 间.安卓.视图.实现.*;
 
 public class 开关按钮 extends ToggleButton implements 基本文本 {
     
-    
     public 开关按钮(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
+        置背景颜色("控件");
     }
     
     public 开关按钮(ViewGroup $父视图) {

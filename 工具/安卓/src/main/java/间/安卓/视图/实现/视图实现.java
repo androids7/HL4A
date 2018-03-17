@@ -20,6 +20,8 @@ import 间.工具.反射;
 import 间.接口.方法;
 import android.widget.Button;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.widget.CompoundButton;
+import android.support.v4.widget.CompoundButtonCompat;
 
 public final class 视图实现 {
 
@@ -180,16 +182,14 @@ public final class 视图实现 {
     }
 
     public static void 置状态实现(View $视图,String $状态) {
-        try {
-            int $状态i = 0;
-            switch ($状态) {
-                case "占位":case "invisible":case "4":
-                    $状态i = 4;break;
-                case "隐藏":case "gone":case "8":
-                    $状态i = 8;break;
-            }
-            $视图.setVisibility($状态i);
-        } catch (Exception $错误) {}
+        int $状态i = 0;
+        switch ($状态) {
+            case "占位":case "invisible":case "4":
+                $状态i = 4;break;
+            case "隐藏":case "gone":case "8":
+                $状态i = 8;break;
+        }
+        $视图.setVisibility($状态i);
     }
 
     public static void 显示(View $视图) {
@@ -205,47 +205,47 @@ public final class 视图实现 {
     }
 
     public static String 取状态(View $视图) {
-        try {
-            int $状态 = $视图.getVisibility();
-            switch ($状态) {
-                case 0:return "显示";
-                case 4:return "占位";
-                case 8:return "隐藏";
-            }
-        } catch (Exception $错误) {}
+        int $状态 = $视图.getVisibility();
+        switch ($状态) {
+            case 0:return "显示";
+            case 4:return "占位";
+            case 8:return "隐藏";
+        }
         return "未知";
     }
 
     // Background
 
     public static void 置背景(View $视图,Object $背景) {
-        try {
-            if ($背景 instanceof Drawable)
-                $视图.setBackground((Drawable)$背景);
-            else if ($背景 instanceof Integer)
-                置背景颜色($视图, (Integer)$背景);
-            else if ($背景 instanceof String)
-                switch ((String)$背景) {
-                    case "透明":case "through":置背景($视图, 绘画.透明());break;
-                    case "白色":case "white":置背景($视图, 绘画.白色());break;
-                    case "黑色":case "black":置背景($视图, 绘画.黑色());break;
-                    case "主题":置背景($视图, 绘画.主题());break;
-                    default:置背景颜色($视图, (String)$背景);
-                }
-        } catch (Exception $错误) {}
+        if ($背景 instanceof Drawable)
+            $视图.setBackground((Drawable)$背景);
+        else if ($背景 instanceof Integer)
+            置背景颜色($视图, (Integer)$背景);
+        else if ($背景 instanceof String)
+            switch ((String)$背景) {
+                case "透明":case "through":置背景($视图, 绘画.透明());break;
+                case "白色":case "white":置背景($视图, 绘画.白色());break;
+                case "黑色":case "black":置背景($视图, 绘画.黑色());break;
+                case "主题":置背景($视图, 绘画.主题());break;
+                default:置背景颜色($视图, (String)$背景);
+            }
     }
 
 
     // BackgroundColor
 
     public static void 置背景颜色(View $视图,Object $颜色) {
-        try {
-            if ($视图 instanceof Button) {
-                DrawableCompat.setTint(((Button)$视图).getBackground(), 视图.检查颜色($颜色));
+        if ($视图 instanceof CompoundButton) {
+            Drawable $背景 = CompoundButtonCompat.getButtonDrawable((CompoundButton)$视图);
+            if ($背景 != null) {
+                DrawableCompat.setTint($背景, 视图.检查颜色($颜色));
                 return;
             }
-            $视图.setBackgroundColor(视图.检查颜色($颜色));
-        } catch (Exception $错误) {}
+        } else if ($视图 instanceof Button) {
+            DrawableCompat.setTint(((Button)$视图).getBackground(), 视图.检查颜色($颜色));
+            return;
+        }
+        $视图.setBackgroundColor(视图.检查颜色($颜色));
     }
 
     public static void 置填充(View $视图,Object $全局) {

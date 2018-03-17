@@ -91,7 +91,7 @@ public class 视图 {
                             case "透明":case "through":$颜色 =  颜色.透明;break;
                             case "白色":case "white":$颜色 = 颜色.白色;break;
                             case "黑色":case "black":$颜色 = 颜色.黑色;break;
-                            default:return 取指定颜色(主题.取主题颜色(), $颜色);
+                            default:return 取指定颜色(主题.取颜色(), $颜色);
                         }
                         return 颜色.转换((String)$颜色);
                     case 1:

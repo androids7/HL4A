@@ -87,7 +87,7 @@ public class 颜色 {
     }
     
     public int 取控件色() {
-        return 颜色组[4];
+        return 颜色组[12];
     }
     
     public int 取基本色() {

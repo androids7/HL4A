@@ -9,7 +9,6 @@ import android.widget.CardView;
 
 public class 卡片视图 extends CardView {
 
-    
     public 卡片视图(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);

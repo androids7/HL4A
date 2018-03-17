@@ -3,18 +3,14 @@ package 间.安卓.视图;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import 间.安卓.工具.图片;
-import 间.安卓.工具.文件;
-import 间.安卓.工具.视图;
-import 间.安卓.视图.实现.基本视图;
+import 间.安卓.视图.实现.图片实现;
+import 间.安卓.视图.实现.基本图片;
 import 间.安卓.视图.实现.视图实现;
 import 间.接口.方法;
 
-public class 图片视图 extends ImageView implements 基本视图 {
+public class 图片视图 extends ImageView implements 基本图片 {
 
 
     public 图片视图(Context $上下文) {
@@ -37,22 +33,14 @@ public class 图片视图 extends ImageView implements 基本视图 {
         视图实现.置布局权重(this, $权重);
     }
 
+    @Override
     public void 置图片(Object $图片) {
-        Bitmap $对象 = 视图.检查图片($图片);
-        if ($对象 != null) {
-            setImageBitmap($对象);
-        } else{
-            if ($图片 instanceof String && 文件.是网络文件((String)$图片)) {
-                setImageURI(Uri.parse((String)$图片));
-            } else if ($图片 instanceof Integer) {
-                setImageResource((Integer)$图片);
-            }
-        }
+        图片实现.置图片(this,$图片);
     }
 
-
-    public void 保存到(String $地址) {
-        图片.保存(图片.读取((BitmapDrawable)getDrawable()), $地址);
+    @Override
+    public Bitmap 取图片() {
+        return 图片实现.取图片(this);
     }
 
     @Override

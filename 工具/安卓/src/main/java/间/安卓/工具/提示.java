@@ -67,11 +67,11 @@ public class 提示 {
     }
 
     public static void 普通(final Object $内容) {
-        指定($内容, 主题.取主题颜色().取控件色());
+        指定($内容, 主题.取颜色().取基本色());
     }
 
     public static void 警告(final Object $内容) {
-        指定($内容, 颜色.红色.取控件色());
+        指定($内容, 颜色.红色.取基本色());
     }
 
     public static 基本弹窗 弹窗(Context $上下文,String $标题,Object $内容) {

@@ -12,11 +12,10 @@ import 间.接口.方法;
 
 public class 复选框 extends CheckBox implements 基本视图 {
 
-
     public 复选框(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
-        
+        置背景颜色("控件");
     }
 
     public 复选框(ViewGroup $父视图) {

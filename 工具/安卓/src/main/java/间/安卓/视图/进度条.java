@@ -28,7 +28,7 @@ public class 进度条 extends ProgressBar implements 基本视图 {
     public 进度条(Context $上下文,int $主题) {
         super($上下文, null, $主题);
         视图实现.初始化控件(this);
-        置颜色(主题.取主题颜色().取控件色());
+        置颜色(主题.取颜色().取控件色());
     }
 
     public void 置自动(boolean $状态) {

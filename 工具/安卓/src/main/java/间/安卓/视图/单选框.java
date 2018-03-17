@@ -12,10 +12,10 @@ import 间.接口.方法;
 
 public class 单选框 extends RadioButton implements 基本视图 {
     
-    
     public 单选框(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
+        置背景颜色("控件");
     }
     
     public 单选框(ViewGroup $父视图) {

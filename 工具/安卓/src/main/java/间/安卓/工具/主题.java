@@ -76,11 +76,11 @@ public class 主题 {
         return 圆角大小;
     }
 
-    public static void 置主题颜色(颜色 $颜色) {
+    public static void 置颜色(颜色 $颜色) {
         主题颜色 = $颜色;
     }
 
-    public static 颜色 取主题颜色() {
+    public static 颜色 取颜色() {
         return 主题颜色;
     }
 
