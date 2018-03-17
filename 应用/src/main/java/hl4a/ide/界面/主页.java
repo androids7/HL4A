@@ -20,7 +20,7 @@ public class 主页 extends 界面 {
 
     private void 检查用户() {
         if (用户.取当前用户() == null) {
-            
+            布局.注册底层.显示();
         }
     }
     
