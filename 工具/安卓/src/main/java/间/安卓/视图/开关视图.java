@@ -110,7 +110,6 @@ public class 开关视图 extends Switch implements 基本视图 {
 
     }
 
-
     public void 置文本显示在同一行(Boolean $是否) {
         文本实现.置文本显示在同一行(this, $是否);
     }

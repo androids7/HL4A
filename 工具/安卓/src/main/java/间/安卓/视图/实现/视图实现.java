@@ -156,7 +156,6 @@ public final class 视图实现 {
         $左边距 = (($左 = 视图.检查大小($左)) == null) ? $左边距 : (int) $左;
         $右边距 = (($右 = 视图.检查大小($左)) == null) ? $右边距 : (int) $右;
         $设置.setMargins($左边距, $上边距, $右边距, $下边距);
-        // 这里的边距已经设置到了，但是为什么没有应用呢？
         置设置($视图, $设置);
     }
 
@@ -235,6 +234,10 @@ public final class 视图实现 {
     // BackgroundColor
 
     public static void 置背景颜色(View $视图,Object $颜色) {
+        if ($颜色 instanceof Integer) {
+            $视图.setBackgroundColor((Integer)$颜色);
+            return;
+        }
         if ($视图 instanceof CompoundButton) {
             Drawable $背景 = CompoundButtonCompat.getButtonDrawable((CompoundButton)$视图);
             if ($背景 != null) {
