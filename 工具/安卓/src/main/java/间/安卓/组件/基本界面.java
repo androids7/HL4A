@@ -26,10 +26,11 @@ import 间.工具.错误;
 import 间.接口.方法;
 import 间.收集.哈希表;
 import 间.收集.集合;
+import 间.收集.无序表;
 
 public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
-    public static final int 请求码_图片选择 = 19132;
+    public static final int 请求码_文件选择 = 19132;
     public static final int 请求码_权限请求 = 13133;
 
     public static final int 返回码_成功 = Activity.RESULT_OK;
@@ -37,12 +38,20 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
     public Object[] 传入参数;
 
-    public 集合<界面插件> 所有插件 = new 集合<>();
+    public 无序表<String,界面插件> 所有插件 = new 无序表<>();
 
     public void 注册插件(界面插件 $插件) {
         if ($插件 == null) return;
         synchronized (所有插件) {
-            所有插件.添加($插件);
+            所有插件.values().add($插件);
+            $插件.界面 = this;
+        }
+    }
+
+    public void 注册插件(String $标识,界面插件 $插件) {
+        if ($插件 == null) return;
+        synchronized (所有插件) {
+            所有插件.设置($标识, $插件);
             $插件.界面 = this;
         }
     }
@@ -58,7 +67,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         if ($意图.hasExtra("参数")) {
             传入参数 = (Object[])$意图.getSerializableExtra("参数");
         }
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.界面创建事件($恢复);
         }
         mHelper = new SwipeBackActivityHelper(this);
@@ -108,7 +117,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onStart() {
         super.onStart();
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.界面启动事件();
         }
         界面启动事件();
@@ -118,12 +127,12 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         if (hasFocus) {
-            for (界面插件 $单个 : 所有插件) {
+            for (界面插件 $单个 : 所有插件.values()) {
                 $单个.取得焦点事件();
             }
             取得焦点事件();
         } else {
-            for (界面插件 $单个 : 所有插件) {
+            for (界面插件 $单个 : 所有插件.values()) {
                 $单个.失去焦点事件();
             }
             失去焦点事件();
@@ -133,7 +142,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onNewIntent(Intent $意图) {
         super.onNewIntent($意图);
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.收到意图事件($意图);
         }
         收到意图事件($意图);
@@ -142,7 +151,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     protected void onSaveInstanceState(Bundle $输出) {
         super.onSaveInstanceState($输出);
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.保存状态事件($输出);
         }
         保存状态事件($输出);
@@ -151,7 +160,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onResume() {
         super.onResume();
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.界面刷新事件();
         }
         界面刷新事件();
@@ -160,7 +169,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onPause() {
         super.onPause();
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.界面遮挡事件();
         }
         界面遮挡事件();
@@ -170,10 +179,10 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
     @Override
     public boolean onKeyDown(int keyCode,KeyEvent event) {
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             Boolean $返回 = $单个.按键按下事件(keyCode, event);
-            if ($返回 != null) {
-                return $返回;
+            if ($返回 == true) {
+                return true;
             }
         }
         Boolean $返回 = 按键按下事件(keyCode, event);
@@ -182,10 +191,10 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         }
 
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            for (界面插件 $单个 : 所有插件) {
+            for (界面插件 $单个 : 所有插件.values()) {
                 $返回 = $单个.返回按下事件();
-                if ($返回 != null) {
-                    return $返回;
+                if ($返回 == true) {
+                    return true;
                 }
             }
             $返回 = 返回按下事件();
@@ -208,15 +217,15 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onActivityResult(int $请求码,int $返回码,Intent $意图) {
         super.onActivityResult($请求码, $请求码, $意图);
-        for (界面插件 $单个 : 所有插件) {
-            $单个.界面回调事件($请求码, $返回码, $意图);
+        for (界面插件 $单个 : 所有插件.values()) {
+            if ($单个.界面回调事件($请求码, $返回码, $意图)) return;
         }
         界面回调事件($请求码, $返回码, $意图);
     }
 
     @Override
     public void onStop() {
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.离开界面事件();
         }
         离开界面事件();
@@ -226,7 +235,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     @Override
     public void onRequestPermissionsResult(int requestCode,String[] permissions,int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.权限回调事件();
         }
         权限回调事件();
@@ -234,7 +243,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
     @Override
     public void onDestroy() {
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.界面销毁事件();
         }
         for (应用插件 $单个 : ((基本应用)环境.取应用()).所有插件) {
@@ -271,7 +280,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
     public void 打开布局(View $视图) {
         if ($视图 == null) return;
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.打开布局事件($视图);
         }
         当前视图 = $视图;
@@ -293,7 +302,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     public <类型 extends View> 类型 取视图() {
         return (类型)当前视图;
     }
-    
+
     public <类型 extends View> 类型 取视图(Object $标签) {
         return (类型)当前视图.findViewWithTag($标签);
     }
@@ -363,7 +372,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             权限回调事件();
             return;
         }
-        for (界面插件 $单个 : 所有插件) {
+        for (界面插件 $单个 : 所有插件.values()) {
             $单个.请求权限事件();
         }
         权限.默认请求(this);

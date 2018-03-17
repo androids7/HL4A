@@ -33,9 +33,9 @@ public class 浏览器 extends WebView implements 基本视图 {
     public WebSettings 设置;
 
     public 浏览器(Context $上下文) {
-        this($上下文,true);
+        this($上下文, true);
     }
-    
+
     public 浏览器(Context $上下文,boolean $初始化) {
         super($上下文);
         if ($上下文 instanceof 基本界面) {
@@ -108,7 +108,7 @@ public class 浏览器 extends WebView implements 基本视图 {
             浏览器.this.removeAllViews();
             ViewGroup $父视图 = (ViewGroup)getParent();
             if ($父视图 != null)
-            $父视图.removeView(浏览器.this);
+                $父视图.removeView(浏览器.this);
             浏览器.this.destroy();
         }
 

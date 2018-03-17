@@ -32,10 +32,19 @@ public class 提示 {
 
     private static boolean 调试 = 反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
 
-    public static void 日志(Object $日志,Object... $模板) {
+    public static void 日志(String $日志,Object... $模板) {
+        if ($日志 == null) $日志 = "null";
         if (调试) {
             Log.e(字符.截取结束(new Exception().getStackTrace()[1].getClassName(), ".", null), $日志 == null ? "null" : $日志 instanceof String ? String.format((String)$日志, $模板) : $日志.toString());
         }
+    }
+    
+    public static void 日志(Object $日志) {
+        if ($日志 == null) { 日志(null); return; }
+        if ($日志 instanceof Throwable) {
+            $日志 = 错误.取整个错误((Throwable)$日志);
+        }
+        日志($日志.toString());
     }
     
     public static void 指定(final Object $内容,final Object $颜色) {

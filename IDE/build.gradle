@@ -21,4 +21,5 @@ dependencies {
     compile project (':工具/脚本')
     compile project(':编辑器')
     compile project (':工具/后端/基本')
+    compile project(':工具/v2ray')
 }

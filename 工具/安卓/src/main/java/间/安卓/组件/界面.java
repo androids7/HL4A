@@ -20,8 +20,8 @@ public class 界面 {
         此.打开布局($地址);
     }
 
-    public void 注册插件(界面插件 $插件) {
-        此.注册插件($插件);
+    public void 注册插件(String $标识,界面插件 $插件) {
+        此.注册插件($标识,$插件);
     }
 
     public void 请求权限() {
