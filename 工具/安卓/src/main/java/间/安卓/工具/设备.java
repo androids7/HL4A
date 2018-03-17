@@ -26,7 +26,7 @@ public class 设备 {
     public static int 取目标SDK() {
         try {
             PackageInfo $信息 = 环境.取应用().getPackageManager().getPackageInfo(
-                应用.取应用信息().包名, 0);
+                应用.取信息().包名, 0);
             return $信息.applicationInfo.targetSdkVersion;
         } catch (Exception $错误) {}
         return 21;

@@ -11,9 +11,10 @@ import com.avos.avoscloud.utils.StringUtils;
 
 import java.io.File;
 import java.util.*;
+import 间.安卓.后端.数据;
 
 @JSONType(ignores = {"query", "password"}, asm = false)
-public class AVUser extends AVObject {
+public class AVUser extends 数据 {
   transient private static boolean enableAutomatic = false;
   private String sessionToken;
   transient private boolean isNew;
@@ -105,9 +106,7 @@ public class AVUser extends AVObject {
     super(userClassName());
   }
 
-  public AVUser(Parcel in) {
-    super(in);
-  }
+
 
   @Override
   protected void rebuildInstanceData() {

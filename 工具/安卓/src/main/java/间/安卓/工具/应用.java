@@ -53,7 +53,7 @@ public class 应用 {
     }
 
     public static boolean 是更新() {
-        Long $上次 =  ZIP.取CRC(取应用信息().地址);
+        Long $上次 =  ZIP.取CRC(取信息().地址);
         Long $记录 = (Long)设置.读取("安装包CRC");
         设置.保存("安装包CRC", $上次);
         return $记录 == null || !$上次.equals($记录);
@@ -102,7 +102,7 @@ public class 应用 {
         }
         Intent $意图 = new Intent(环境.取应用(), ErrorActivity.class);
         $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        $意图.putExtra("错误", "当前应用版本 :" + 应用.取应用信息().版本号 + "\n" + 错误.取整个错误($错误));
+        $意图.putExtra("错误", "当前应用版本 :" + 应用.取信息().版本号 + "\n" + 错误.取整个错误($错误));
         环境.取应用().startActivity($意图);
     }
 
@@ -110,7 +110,7 @@ public class 应用 {
         包管理 = $应用.getPackageManager();
         //System.setOut(new 打印处理(调用.代理(提示.class,"普通")));
         环境.置应用($应用);
-        当前 = 取应用信息();
+        当前 = 取信息();
         文件.初始化();
         锁屏.初始化();
         线程.置错误处理(调用.代理(应用.class, "错误处理"));
@@ -145,11 +145,11 @@ public class 应用 {
 
     private static 哈希表<String,信息> 信息缓存 = new 哈希表<>();
 
-    public static 信息 取应用信息() {
-        return 取应用信息(环境.取应用().getPackageName());
+    public static 信息 取信息() {
+        return 取信息(环境.取应用().getPackageName());
     }
 
-    public static 信息 取应用信息(String $包名) {
+    public static 信息 取信息(String $包名) {
         if (信息缓存.检查键值($包名)) {
             return 信息缓存.读取($包名);
         }

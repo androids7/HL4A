@@ -11,7 +11,6 @@ public class 界面 {
 
     public 基本界面 此;
     public Object[] 传入参数;
-    public View 当前视图;
 
     public void 结束界面() {
         此.结束界面();
@@ -47,20 +46,21 @@ public class 界面 {
 
     public void 打开布局(View $视图) {
         此.打开布局($视图);
-        当前视图 = 此.当前视图;
     }
 
     public void 打开布局(哈希表 $内容) {
         此.打开布局($内容);
-        当前视图 = 此.当前视图;
     }
 
     public void 解析布局(String $内容) {
         此.解析布局($内容);
-        当前视图 = 此.当前视图;
+    }
+    
+    public <类型 extends View> 类型 取视图() {
+        return 此.取视图();
     }
 
-    public View 取视图(Object $标签) {
+    public <类型 extends View> 类型 取视图(Object $标签) {
         return 此.取视图($标签);
     }
 

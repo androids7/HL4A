@@ -18,6 +18,8 @@ import 间.安卓.视图.事件.触摸;
 import 间.安卓.视图.事件.长按;
 import 间.工具.反射;
 import 间.接口.方法;
+import android.widget.Button;
+import android.support.v4.graphics.drawable.DrawableCompat;
 
 public final class 视图实现 {
 
@@ -227,7 +229,7 @@ public final class 视图实现 {
                     case "透明":case "through":置背景($视图, 绘画.透明());break;
                     case "白色":case "white":置背景($视图, 绘画.白色());break;
                     case "黑色":case "black":置背景($视图, 绘画.黑色());break;
-                    case "主题":置背景($视图,绘画.主题());break;
+                    case "主题":置背景($视图, 绘画.主题());break;
                     default:置背景颜色($视图, (String)$背景);
                 }
         } catch (Exception $错误) {}
@@ -238,11 +240,11 @@ public final class 视图实现 {
 
     public static void 置背景颜色(View $视图,Object $颜色) {
         try {
-            if ($颜色 instanceof Integer)
-                $视图.setBackgroundColor((Integer)$颜色);
-            else if ($颜色 instanceof String) {
-                $视图.setBackgroundColor(视图.检查颜色($颜色));
+            if ($视图 instanceof Button) {
+                DrawableCompat.setTint(((Button)$视图).getBackground(), 视图.检查颜色($颜色));
+                return;
             }
+            $视图.setBackgroundColor(视图.检查颜色($颜色));
         } catch (Exception $错误) {}
     }
 

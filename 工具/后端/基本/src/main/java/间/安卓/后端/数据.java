@@ -14,12 +14,20 @@ import com.avos.avoscloud.SaveCallback;
 
 public class 数据 extends AVObject {
     
+    public 数据(String $表名) {
+        super($表名);
+    }
+    
     public void 设置(String $键值,Object $内容) {
         put($键值,$内容);
     }
     
     public <类型> 类型 读取(String $键值) {
         return (类型)get($键值);
+    }
+    
+    public void 置权限(权限 $权限) {
+        setACL($权限);
     }
     
     public void 置文件(String $键值,String $地址) {

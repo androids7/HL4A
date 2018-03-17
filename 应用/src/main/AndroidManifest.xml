@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:label="乐园之土"
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar"
+        android:icon="@drawable/icon"
+        android:name=".Application">
+   		<activity android:name=".LaunchPad">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+</manifest>

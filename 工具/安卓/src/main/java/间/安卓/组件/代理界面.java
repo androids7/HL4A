@@ -78,12 +78,4 @@ public class 代理界面 extends 基本界面 {
         内容.保存状态事件($输出);
     }
 
-    @Override
-    public void 打开布局(View $视图) {
-        super.打开布局($视图);
-        if ($视图 != null) {
-            内容.当前视图 = $视图;
-        }
-    }
-    
 }

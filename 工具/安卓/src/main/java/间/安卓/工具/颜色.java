@@ -6,6 +6,7 @@ public class 颜色 {
 
 
     public static final String 白色 = "#FFFFFF";
+    public static final String 白烟 = "#EBEBEB";
     public static final String 黑色 = "#000000";
     public static final String 透明 = "#00000000";
     public static final String 半透明 = "#10000000";

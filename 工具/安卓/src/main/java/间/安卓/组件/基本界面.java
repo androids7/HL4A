@@ -267,7 +267,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             }).启动();
     }
 
-    public View 当前视图;
+    private View 当前视图;
 
     public void 打开布局(View $视图) {
         if ($视图 == null) return;
@@ -290,8 +290,12 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         打开布局(布局.解析(this, $内容));
     }
 
-    public View 取视图(Object $标签) {
-        return 当前视图.findViewWithTag($标签);
+    public <类型 extends View> 类型 取视图() {
+        return (类型)当前视图;
+    }
+    
+    public <类型 extends View> 类型 取视图(Object $标签) {
+        return (类型)当前视图.findViewWithTag($标签);
     }
 
     public void 跳转界面(Class<?> $类) {

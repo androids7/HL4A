@@ -12,6 +12,8 @@ import 间.安卓.视图.实现.基本文本;
 import 间.安卓.视图.实现.文本实现;
 import 间.安卓.视图.实现.视图实现;
 import 间.接口.方法;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import 间.安卓.工具.视图;
 
 public class 按钮 extends Button implements 基本文本 {
 
@@ -20,7 +22,7 @@ public class 按钮 extends Button implements 基本文本 {
         视图实现.初始化控件(this);
         置宽度("最大");
         置高度("自动");
-        置背景(绘画.主题());
+        置背景颜色("基本");
         置文本颜色(颜色.白色);
         置阴影(主题.取默认阴影());
     }
@@ -30,7 +32,6 @@ public class 按钮 extends Button implements 基本文本 {
         加入到($父视图);
     }
     
-
     @Override
     public void 置布局重力(String $重力) {
         视图实现.置布局重力(this,$重力);

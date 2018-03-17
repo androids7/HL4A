@@ -75,7 +75,11 @@ public class 主页 extends 界面 {
     }
 
     public void 测试() throws AVException {
-        提示.普通(权限组.读取("Owner").存在("MikaGuraN"));
+        用户 $用户 = new 用户();
+        $用户.置用户名("MikaGuraN");
+        $用户.置密码("xn-p7r///");
+        $用户.置邮箱("1069952275@qq.com");
+        提示.普通($用户.同步注册());
     }
 
     private void 检查导入() {
