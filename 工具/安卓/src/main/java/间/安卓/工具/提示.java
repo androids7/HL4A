@@ -30,7 +30,7 @@ public class 提示 {
         上次提示 = 时间.时间戳();
     }
 
-    private static boolean 调试 = 反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
+    private static Boolean 调试 = 反射.取变量(应用.取信息().包名 + ".BuildConfig", "DEBUG");
 
     public static void 日志(String $日志,Object... $模板) {
         if ($日志 == null) $日志 = "null";

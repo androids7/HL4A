@@ -8,6 +8,10 @@ import java.lang.reflect.Type;
 import java.util.List;
 import 间.收集.哈希表;
 import 间.收集.集合;
+import android.app.Application;
+import java.lang.reflect.InvocationTargetException;
+import 间.接口.方法;
+import java.io.ObjectInput;
 
 public class 反射 {
     
@@ -66,7 +70,7 @@ public class 反射 {
     }
     
 
-    public static Object 取变量(Object $对象,String $名称) {
+    public static <类型> 类型 取变量(Object $对象,String $名称) {
         Class<?> $作用类;
         if ($对象 instanceof Class) {
             $作用类 = (Class<?>)$对象;
@@ -90,12 +94,14 @@ public class 反射 {
         置变量($对象, $作用类, $名称, $内容);
     }
 
-    public static Object 取变量(Object $对象,Class<?> $作用类,String $名称) {
+    public static <类型> 类型 取变量(Object $对象,Class<?> $作用类,String $名称) {
         Field $变量 = 取变量($作用类, $名称);
         try {
-            if ($变量 != null)
-                return $变量.get($对象);
-        } catch (IllegalAccessException $错误) {} catch (IllegalArgumentException $错误) {}
+            if ($变量 != null) 
+                return (类型)$变量.get($对象);
+        } catch (Exception $错误) {
+            错误.抛出($错误);
+        }
         return null;
     }
 
@@ -142,8 +148,7 @@ public class 反射 {
         }
         try {
             $方法.setAccessible(true);
-            类型 $实例 = (类型) $方法.newInstance($参数组);
-            return $实例;
+            return (类型) $方法.newInstance($参数组);
         } catch (Exception $错误) {
             错误.抛出($错误);
         }
@@ -186,33 +191,21 @@ public class 反射 {
         }
         return 有方法($实例.getSuperclass(),$名称);
     }
-
-    public static Object 调用方法(Object $对象,String $名称,List $参数) {
-        Class<?> $作用类;
-        if ($对象 instanceof Class) {
-            $作用类 = (Class)$对象;
-        } else {
-            $作用类 = $对象.getClass();
-        }
-        return 调用方法($对象, $作用类, $名称, $参数);
+    
+    public static Object[] 变参(Object... $参数) {
+        return $参数;
     }
-
+    
     public static Object 调用方法(Object $对象,String $名称,Object... $参数) {
-        Class<?> $作用类;
-        if ($对象 instanceof Class) {
-            $作用类 = (Class)$对象;
-        } else {
-            $作用类 = $对象.getClass();
-        }
-        return 调用方法($对象, $作用类, $名称, $参数);
+        return 调用($对象,$名称,$参数);
     }
-
-    public static Object 调用方法(Object $对象,Class<?> $作用类,String $名称,List $参数) {
-        return 调用方法($对象, $作用类, $名称, $参数.toArray());
+    
+    public static <类型> 类型 调用(Object $对象,String $名称) {
+        return 调用($对象,$名称,new Object[0]);
     }
-
-    public static Object 调用方法(Object $对象,Class<?> $作用类,String $名称,Object... $参数) {
-        Method[] $所有 = 取所有方法($作用类, $名称);
+    
+    public static <类型> 类型 调用(Object $对象,String $名称,Object[] $参数) {
+        Method[] $所有 = 取所有方法($名称.getClass(), $名称);
         Method $方法 = null;
         Object[] $参数组 = null;
         for (int $键值 = 0;$键值 < $所有.length;$键值 ++) {
@@ -239,13 +232,13 @@ public class 反射 {
         }
 
         try {
-            return $方法.invoke($对象, $参数组);
+            return (类型)$方法.invoke($对象, $参数组);
         } catch (Exception $错误) {
             错误.抛出($错误);
         }
         return null;
     }
-
+    
     private static Object[] 适配参数(Method $单个,Object[] $参数) {
         Class[] $类组 = $单个.getParameterTypes();
         if ($类组.length == 0) {
@@ -320,35 +313,17 @@ public class 反射 {
         return $参数类组;
     }
     
-    private static Class i = int.class;
-    private static Class l = long.class;
-    private static Class b = boolean.class;
-    private static Class f = float.class;
-    private static Class c = char.class;
-    private static Class d = double.class;
-    private static Class s = short.class;
-    private static Class by = byte.class;
-    private static Class I = Integer.class;
-    private static Class L = Long.class;
-    private static Class B = Boolean.class;
-    private static Class F = Float.class;
-    private static Class C = Character.class;
-    private static Class D = Double.class;
-    private static Class S = Short.class;
-    private static Class By = Byte.class;
-    
     private static 哈希表<Class,Class> 对应表 = new 哈希表<>();
     
     static {
-        对应表.设置(i,I);
-        对应表.设置(l,L);
-        对应表.设置(b,B);
-        对应表.设置(f,F);
-        对应表.设置(c,C);
-        对应表.设置(i,I);
-        对应表.设置(d,D);
-        对应表.设置(s,S);
-        对应表.设置(by,By);
+        对应表.设置(int.class,Integer.class);
+        对应表.设置(long.class,Long.class);
+        对应表.设置(boolean.class,Boolean.class);
+        对应表.设置(float.class,Float.class);
+        对应表.设置(char.class,Character.class);
+        对应表.设置(double.class,Double.class);
+        对应表.设置(short.class,Short.class);
+        对应表.设置(byte.class,Byte.class);
     }
     
     public static boolean 是子类(Class<?> $类,Class<?> $子类) {

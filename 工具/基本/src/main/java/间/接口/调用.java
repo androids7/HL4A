@@ -18,7 +18,7 @@ public class 调用 {
         return new 方法() {
             @Override
             public Object 调用(Object[] $参数) {
-                return 反射.调用方法($对象, $方法名, $参数);
+                return 反射.调用($对象, $方法名, $参数);
             }
         };
     }
@@ -27,7 +27,7 @@ public class 调用 {
         return new 方法() {
             @Override
             public Object 调用(Object[] $参数) {
-                return 反射.调用方法($对象, $方法名, $配置参数);
+                return 反射.调用($对象, $方法名, $配置参数);
             }
         };
     }

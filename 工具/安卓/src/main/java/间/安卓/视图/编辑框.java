@@ -39,7 +39,7 @@ public class 编辑框 extends EditText implements 基本视图 {
 
     public void 置指针颜色(Object $颜色) {
         if (设备.取SDK() > 21) {
-            int $资源ID = 反射.取变量(this, "mCursorDrawableRes");
+            Integer $资源ID = 反射.取变量(this, "mCursorDrawableRes");
             Object $编辑器 = 反射.取变量(this, "mEditor");
             Drawable[] $绘画组 = new Drawable[1];
             $绘画组[0] = getContext().getResources().getDrawable($资源ID,getContext().getTheme());
