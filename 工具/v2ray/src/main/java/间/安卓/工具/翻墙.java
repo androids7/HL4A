@@ -16,8 +16,7 @@ public class 翻墙 {
         翻墙服务.置地址($配置地址);
         翻墙服务 $服务 = 翻墙服务.取实例();
         if ($服务 != null) {
-            $服务.停止();
-            $服务.启动();
+            $服务.重启();
         } else {
             Intent $意图 = VpnService.prepare($界面);
             if ($意图 == null) {

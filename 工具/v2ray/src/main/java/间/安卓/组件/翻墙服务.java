@@ -32,7 +32,12 @@ public class 翻墙服务 extends VpnService {
         V2RAY = Libv2ray.newV2RayPoint();
         V2RAY.setPackageName(应用.取信息().包名);
         实例 = this;
-        启动();
+        启动(false);
+    }
+
+    public void 重启() {
+        停止();
+        启动(true);
     }
 
     public static void 置地址(String $地址) {
@@ -85,9 +90,9 @@ public class 翻墙服务 extends VpnService {
         提示.日志("新实例:" + VPN);
     }
 
-    public void 启动() {
+    public void 启动(boolean $直接) {
         try {
-            if (!状态()) {
+            if (!状态() || $直接) {
                 V2RAY.setCallbacks(回调);
                 V2RAY.setVpnSupportSet(回调);
                 V2RAY.upgradeToContext();
