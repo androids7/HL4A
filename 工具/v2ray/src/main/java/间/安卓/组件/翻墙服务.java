@@ -56,6 +56,11 @@ public class 翻墙服务 extends VpnService {
     @Override
     public void onRevoke() {
         停止();
+    }
+
+    @Override
+    public void onDestroy() {
+        停止();
         实例 = null;
     }
 
