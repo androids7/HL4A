@@ -6,6 +6,7 @@ import hl4a.ide.布局.布局_主页;
 import 间.接口.调用;
 import 间.安卓.工具.提示;
 import 间.安卓.后端.用户;
+import 间.安卓.工具.翻墙;
 
 public class 主页 extends 界面 {
 
@@ -16,16 +17,17 @@ public class 主页 extends 界面 {
         打开布局(new 布局_主页(此));
         布局 = 取视图();
         检查用户();
+        布局.翻墙按钮.置单击事件(调用.配置(this,"连接"));
     }
 
     private void 检查用户() {
         if (用户.取当前用户() == null) {
-            布局.注册底层.显示();
+            //布局.注册底层.显示();
         }
     }
     
-    public void 单击() {
-        提示.普通("单击");
+    public void 连接() {
+        翻墙.启动(此,"%hl4a.json");
     }
     
 }
