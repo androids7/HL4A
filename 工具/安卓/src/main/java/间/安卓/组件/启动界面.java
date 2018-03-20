@@ -14,6 +14,7 @@ public class 启动界面 extends 基本界面 {
 
     @Override
     public void 界面创建事件(Bundle $恢复) {
+        置滑动返回(true);
         打开布局(new 布局_初始化(this));
         new 线程(this, "释放文件").启动();
     }

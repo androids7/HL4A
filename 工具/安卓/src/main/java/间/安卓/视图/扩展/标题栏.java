@@ -10,6 +10,11 @@ import 间.安卓.视图.文本视图;
 import 间.安卓.视图.线性布局;
 import 间.安卓.资源.图标;
 import 间.接口.方法;
+import 间.接口.调用;
+import android.app.Activity;
+import 间.安卓.视图.侧滑布局;
+import android.support.v4.view.ViewPager;
+import 间.安卓.组件.基本界面;
 
 public class 标题栏 extends 线性布局 {
 
@@ -48,19 +53,11 @@ public class 标题栏 extends 线性布局 {
         右按钮栏.置方向("水平");
         右按钮栏.置重力("右边");
         
-        菜单视图 = 右按钮(菜单显示);
+        菜单视图 = 右按钮(图标.更多,调用.配置(菜单对象,"显示"));
         菜单对象 = new 弹出菜单(菜单视图);
         菜单视图.隐藏();
 
     }
-    
-    方法 菜单显示 = new 方法() {
-        @Override
-        public Object 调用(Object[] $参数) {
-            菜单对象.显示();
-            return null;
-        }
-    };
     
     public 标题栏(ViewGroup $父视图) {
         this($父视图.getContext());
@@ -81,23 +78,9 @@ public class 标题栏 extends 线性布局 {
         标题对象.置文本($内容);
     }
 
-    public 线性按钮 左按钮(方法 $事件) {
-        线性按钮 $按钮 = new 线性按钮(上下文, 图标.菜单);
-        $按钮.加入到(左按钮栏);
-        $按钮.置单击事件($事件);
-        return $按钮;
-    }
-
     public 线性按钮 左按钮(Object $图片,方法 $事件) {
         线性按钮 $按钮 = new 线性按钮(上下文, $图片);
         $按钮.加入到(左按钮栏);
-        $按钮.置单击事件($事件);
-        return $按钮;
-    }
-
-    public 线性按钮 右按钮(方法 $事件) {
-        线性按钮 $按钮 = new 线性按钮(上下文, 图标.更多);
-        $按钮.加入到(右按钮栏);
         $按钮.置单击事件($事件);
         return $按钮;
     }
@@ -112,6 +95,14 @@ public class 标题栏 extends 线性布局 {
     public 弹出菜单 取菜单() {
         菜单视图.显示();
         return 菜单对象;
+    }
+    
+    public void 返回按钮(基本界面 $界面) {
+        左按钮(图标.返回,调用.配置($界面,"结束界面"));
+    }
+    
+    public void 菜单按钮 (侧滑布局 $侧滑) {
+        左按钮(图标.菜单,调用.配置($侧滑,"打开侧滑"));
     }
 
 
