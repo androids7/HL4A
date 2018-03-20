@@ -170,28 +170,6 @@ public class 反射 {
         return (Method[])$方法.到数组(Method.class);
     }
     
-    public static boolean 有方法(Object $对象,String $名称) {
-        Class<?> $作用类;
-        if ($对象 instanceof Class) {
-            $作用类 = (Class<?>)$对象;
-        } else {
-            $作用类 = $对象.getClass();
-        }
-        return 有方法($作用类,$名称);
-    }
-    
-    private static boolean 有方法(Class<?> $实例,String $名称) {
-        Method[] $所有 = null;
-        if ($实例 == null) return false;
-        else $所有 = $实例.getDeclaredMethods();
-        for (Method $单个 : $所有) {
-            if ($名称.equals($单个.getName())) {
-                return true;
-            }
-        }
-        return 有方法($实例.getSuperclass(),$名称);
-    }
-    
     public static Object[] 变参(Object... $参数) {
         return $参数;
     }
@@ -205,7 +183,8 @@ public class 反射 {
     }
     
     public static <类型> 类型 调用(Object $对象,String $名称,Object[] $参数) {
-        Method[] $所有 = 取所有方法($名称.getClass(), $名称);
+        if ($对象 == null) 错误.内容("参数1 [对象] 为空");
+        Method[] $所有 = 取所有方法($对象.getClass(), $名称);
         Method $方法 = null;
         Object[] $参数组 = null;
         for (int $键值 = 0;$键值 < $所有.length;$键值 ++) {
