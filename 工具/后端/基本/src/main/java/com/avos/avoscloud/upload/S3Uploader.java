@@ -1,7 +1,7 @@
 package com.avos.avoscloud.upload;
 
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUtils;
 import com.avos.avoscloud.LogUtil;
@@ -58,17 +58,17 @@ class S3Uploader extends HttpClientUploader {
   }
 
   @Override
-  public AVException doWork() {
+  public 后端错误 doWork() {
     try {
       byte[] bytes = avFile.getData();
 
       return executeWithRetry(bytes);
     } catch (Exception e) {
-      return new AVException(e.getCause());
+      return new 后端错误(e.getCause());
     }
   }
 
-  private AVException executeWithRetry(byte[] data){
+  private 后端错误 executeWithRetry(byte[] data){
     if (null != data && data.length > 0) {
       OkHttpClient.Builder okhttpBuilder = getOKHttpClient().newBuilder();
 
@@ -116,7 +116,7 @@ class S3Uploader extends HttpClientUploader {
             retryTimes -- ;
             executeWithRetry(data);
           }else {
-            return AVErrorUtils.createException(AVException.OTHER_CAUSE, "upload file failure:" + response.code());
+            return AVErrorUtils.createException(后端错误.OTHER_CAUSE, "upload file failure:" + response.code());
           }
         }
       }catch (IOException exception){
@@ -124,7 +124,7 @@ class S3Uploader extends HttpClientUploader {
           retryTimes -- ;
           return executeWithRetry(data);
         }else {
-          return new AVException(exception.getCause());
+          return new 后端错误(exception.getCause());
         }
       }
     }
@@ -152,12 +152,12 @@ class S3Uploader extends HttpClientUploader {
    * @param seconds
    * @throws AVException
    */
-  public static void setWriteTimeout(int seconds) throws AVException {
+  public static void setWriteTimeout(int seconds) throws 后端错误 {
     if (seconds <= 0) {
-      throw new AVException(new IllegalArgumentException("Timeout too small"));
+      throw new 后端错误(new IllegalArgumentException("Timeout too small"));
     }
     if (seconds > 60 * 60) {
-      throw new AVException(new IllegalArgumentException("Timeout too large"));
+      throw new 后端错误(new IllegalArgumentException("Timeout too large"));
     }
     writeTimeout = seconds;
   }

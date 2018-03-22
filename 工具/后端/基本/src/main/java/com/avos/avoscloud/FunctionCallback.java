@@ -39,9 +39,9 @@ public abstract class FunctionCallback<T> extends AVCallback<T> {
    * @param object The object that was returned by the cloud function.
    * @param e The exception raised by the cloud call, or null if it succeeded.
    */
-  public abstract void done(T object, AVException e);
+  public abstract void done(T object, 后端错误 e);
 
-  protected final void internalDone0(T returnValue, AVException e) {
+  protected final void internalDone0(T returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

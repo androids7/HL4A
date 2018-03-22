@@ -1,6 +1,6 @@
 package 间.安卓.后端;
 
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVUser;
 import com.avos.avoscloud.LogInCallback;
 import com.avos.avoscloud.RequestEmailVerifyCallback;
@@ -37,10 +37,10 @@ public class 用户 extends AVUser {
         return getEmail();
     }
 
-    public 返回值<Void,AVException> 同步注册() {
+    public 返回值<Void,后端错误> 同步注册() {
         try {
             signUp();
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }
         return 返回值.创建(null,null);
@@ -49,7 +49,7 @@ public class 用户 extends AVUser {
     public void 注册(final 方法 $回调) {
         signUpInBackground(new SignUpCallback() {
                 @Override
-                public void done(AVException $错误) {
+                public void done(后端错误 $错误) {
                     调用.事件($回调, 返回值.创建(null,$错误));
                 }
             });
@@ -62,16 +62,16 @@ public class 用户 extends AVUser {
     public void 验证邮箱(String $邮箱,final 方法 $回调) {
         requestEmailVerifyInBackground($邮箱, new RequestEmailVerifyCallback() {
                 @Override
-                public void done(AVException $错误) {
+                public void done(后端错误 $错误) {
                     调用.事件($回调, 返回值.创建(null,$错误));
                 }
             });
     }
 
-    public static 返回值<用户,AVException> 同步登录(String $账号,String $密码) {
+    public static 返回值<用户,后端错误> 同步登录(String $账号,String $密码) {
         try {
             return 返回值.创建(logIn($账号, $密码, 用户.class),null);
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }
     }
@@ -79,7 +79,7 @@ public class 用户 extends AVUser {
     public static void 登录(String $账号,String $密码,final 方法 $回调) {
         logInInBackground($账号, $密码, new LogInCallback<用户>() {
                 @Override
-                public void done(用户 $用户,AVException $错误) {
+                public void done(用户 $用户,后端错误 $错误) {
                     调用.事件($回调, 返回值.创建($用户,$错误));
                 }
             }, 用户.class);

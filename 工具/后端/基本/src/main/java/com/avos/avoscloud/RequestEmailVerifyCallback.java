@@ -35,10 +35,10 @@ public abstract class RequestEmailVerifyCallback extends AVCallback<Void> {
    * @param e The exception raised by the save, or null if no account is associated with the email
    *          address.
    */
-  public abstract void done(AVException e);
+  public abstract void done(后端错误 e);
 
   @Override
-  protected void internalDone0(Void t, AVException avException) {
+  protected void internalDone0(Void t, 后端错误 avException) {
     this.done(avException);
   }
 }

@@ -343,7 +343,7 @@ public class AVOSCloud {
           localUser.fetchInBackground(new GetCallback<AVObject>() {
 
             @Override
-            public void done(AVObject object, AVException e) {
+            public void done(AVObject object, 后端错误 e) {
               AVUser.changeCurrentUser((AVUser) object, true);
             }
           });
@@ -389,11 +389,11 @@ public class AVOSCloud {
    * @return
    * @throws AVException
    */
-  public static Date getServerDate() throws AVException {
+  public static Date getServerDate() throws 后端错误 {
     final Date[] results = {null};
     getServerDateInBackground(true, new AVServerDateCallback() {
       @Override
-      public void done(Date serverDate, AVException e) {
+      public void done(Date serverDate, 后端错误 e) {
         if (e == null) {
           results[0] = serverDate;
         } else {
@@ -415,7 +415,7 @@ public class AVOSCloud {
   private static void getServerDateInBackground(boolean sync, final AVServerDateCallback callback) {
     PaasClient.storageInstance().getObject("date", null, sync, null, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         try {
           Date date = AVUtils.dateFromMap(JSON.parseObject(content, Map.class));
           if (callback != null) {
@@ -440,14 +440,14 @@ public class AVOSCloud {
   /**
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#requestSMSCode(String, AVSMSOption)}
    */
-  public static void requestSMSCode(String phone) throws AVException {
+  public static void requestSMSCode(String phone) throws 后端错误 {
     AVSMS.requestSMSCode(phone, null);
   }
 
   /**
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#requestSMSCode(String, AVSMSOption)}
    */
-  public static void requestSMSCode(String phone, String name, String op, int ttl) throws AVException {
+  public static void requestSMSCode(String phone, String name, String op, int ttl) throws 后端错误 {
     AVSMSOption option = new AVSMSOption();
     option.setApplicationName(name);
     option.setOperation(op);
@@ -459,7 +459,7 @@ public class AVOSCloud {
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#requestSMSCode(String, AVSMSOption)}
    */
   public static void requestSMSCode(String phone, String templateName, Map<String, Object> env)
-    throws AVException {
+    throws 后端错误 {
     AVSMSOption option = new AVSMSOption();
     option.setTemplateName(templateName);
     option.setEnvMap(env);
@@ -470,7 +470,7 @@ public class AVOSCloud {
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#requestSMSCode(String, AVSMSOption)}
    */
   public static void requestSMSCode(String phone, String templateName, String sign,
-                                    Map<String, Object> env) throws AVException {
+                                    Map<String, Object> env) throws 后端错误 {
     AVSMSOption option = new AVSMSOption();
     option.setTemplateName(templateName);
     option.setSignatureName(sign);
@@ -523,7 +523,7 @@ public class AVOSCloud {
   /**
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#requestSMSCode(String, AVSMSOption)}
    */
-  public static void requestVoiceCode(String phoneNumber) throws AVException {
+  public static void requestVoiceCode(String phoneNumber) throws 后端错误 {
     AVSMSOption smsOption = new AVSMSOption();
     smsOption.setSmsType(AVSMSOption.AVSMS_TYPE.VOICE_SMS);
     AVSMS.requestSMSCode(phoneNumber, smsOption);
@@ -541,14 +541,14 @@ public class AVOSCloud {
   /**
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#verifySMSCode(String, String)}
    */
-  public static void verifySMSCode(String code, String mobilePhoneNumber) throws AVException {
+  public static void verifySMSCode(String code, String mobilePhoneNumber) throws 后端错误 {
     AVSMS.verifySMSCode(code, mobilePhoneNumber);
   }
 
   /**
    * @deprecated Please use {@link com.avos.avoscloud.AVSMS#verifySMSCode(String, String)}
    */
-  public static void verifyCode(String code, String mobilePhoneNumber) throws AVException {
+  public static void verifyCode(String code, String mobilePhoneNumber) throws 后端错误 {
     AVSMS.verifySMSCode(code, mobilePhoneNumber);
   }
 

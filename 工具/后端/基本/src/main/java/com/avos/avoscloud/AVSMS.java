@@ -15,11 +15,11 @@ public class AVSMS {
    * @param smsOption the option value for this operation
    * @throws AVException
    */
-  public static void requestSMSCode(String phone, AVSMSOption smsOption) throws AVException {
+  public static void requestSMSCode(String phone, AVSMSOption smsOption) throws 后端错误 {
     requestSMSCodeInBackground(phone, smsOption, true,
       new RequestMobileCodeCallback() {
         @Override
-        public void done(AVException e) {
+        public void done(后端错误 e) {
           if (e != null) {
             AVExceptionHolder.add(e);
           }
@@ -48,7 +48,7 @@ public class AVSMS {
   private static void requestSMSCodeInBackground(String phone, AVSMSOption option, boolean sync, RequestMobileCodeCallback callback) {
     final RequestMobileCodeCallback internalCallback = callback;
     if (AVUtils.isBlankString(phone) || !AVUtils.checkMobilePhoneNumber(phone)) {
-      callback.internalDone(new AVException(AVException.INVALID_PHONE_NUMBER,
+      callback.internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER,
         "Invalid Phone Number"));
     }
     Map<String, Object> map = null;
@@ -63,7 +63,7 @@ public class AVSMS {
     PaasClient.storageInstance().postObject("requestSmsCode", object, sync, false,
       new GenericObjectCallback() {
         @Override
-        public void onSuccess(String content, AVException e) {
+        public void onSuccess(String content, 后端错误 e) {
           if (internalCallback != null) {
             internalCallback.internalDone(null, null);
           }
@@ -85,10 +85,10 @@ public class AVSMS {
    * @param mobilePhoneNumber 手机号码
    * @throws AVException
    */
-  public static void verifySMSCode(String code, String mobilePhoneNumber) throws AVException {
+  public static void verifySMSCode(String code, String mobilePhoneNumber) throws 后端错误 {
     verifySMSCodeInBackground(code, mobilePhoneNumber, true, new AVMobilePhoneVerifyCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -123,7 +123,7 @@ public class AVSMS {
 
     if (AVUtils.isBlankString(code) || !AVUtils.checkMobileVerifyCode(code)) {
       callback
-        .internalDone(new AVException(AVException.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
+        .internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
     }
     String endpointer = String.format("verifySmsCode/%s", code);
     Map<String, Object> params = new HashMap<String, Object>();
@@ -131,7 +131,7 @@ public class AVSMS {
     PaasClient.storageInstance().postObject(endpointer, AVUtils.restfulServerData(params), sync,
       false, new GenericObjectCallback() {
         @Override
-        public void onSuccess(String content, AVException e) {
+        public void onSuccess(String content, 后端错误 e) {
           if (internalCallback != null) {
             internalCallback.internalDone(null, null);
           }

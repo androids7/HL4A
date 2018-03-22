@@ -2,7 +2,7 @@ package com.avos.avoscloud;
 
 
 public abstract class GenericObjectCallback {
-  public void onSuccess(String content, AVException e) {}
+  public void onSuccess(String content, 后端错误 e) {}
 
   public void onFailure(int statusCode, Throwable error, String content) {
     if (isRetryNeeded(statusCode, error)) {

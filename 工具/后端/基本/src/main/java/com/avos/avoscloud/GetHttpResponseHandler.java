@@ -41,7 +41,7 @@ public class GetHttpResponseHandler extends AsyncHttpResponseHandler {
     AVCacheManager.sharedInstance().get(absoluteURLString, Long.MAX_VALUE, lastModifiedValue,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             getCallback().onSuccess(content, null);
           }
 

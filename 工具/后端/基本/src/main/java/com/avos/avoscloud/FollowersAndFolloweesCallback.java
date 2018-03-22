@@ -16,9 +16,9 @@ public abstract class FollowersAndFolloweesCallback<T extends AVObject>
    * @param avObjects The objects matching the query, or null if it failed.
    * @param avException The exception raised by the find, or null if it succeeded.
    */
-  public abstract void done(Map<String, T> avObjects, AVException avException);
+  public abstract void done(Map<String, T> avObjects, 后端错误 avException);
 
-  protected final void internalDone0(Map<String, T> returnValue, AVException e) {
+  protected final void internalDone0(Map<String, T> returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

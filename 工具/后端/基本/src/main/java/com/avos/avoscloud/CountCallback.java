@@ -40,14 +40,14 @@ public abstract class CountCallback extends AVCallback<Integer> {
    * @param count The number of objects matching the query, or -1 if it failed.
    * @param e The exception raised by the count, or null if it succeeded.
    */
-  public abstract void done(int count, AVException e);
+  public abstract void done(int count, 后端错误 e);
 
   /**
    * 
    * @param returnValue
    * @param e
    */
-  protected final void internalDone0(Integer returnValue, AVException e) {
+  protected final void internalDone0(Integer returnValue, 后端错误 e) {
     done(returnValue == null ? -1 : returnValue, e);
   }
 }

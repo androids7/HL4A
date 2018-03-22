@@ -33,9 +33,9 @@ public abstract class DeleteCallback extends AVCallback<Void> {
    * 
    * @param e The exception raised by the delete, or null if it succeeded.
    */
-  public abstract void done(AVException e);
+  public abstract void done(后端错误 e);
 
-  protected final void internalDone0(Void returnValue, AVException e) {
+  protected final void internalDone0(Void returnValue, 后端错误 e) {
     done(e);
   }
 }

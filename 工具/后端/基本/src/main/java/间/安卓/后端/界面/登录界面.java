@@ -1,7 +1,7 @@
 package 间.安卓.后端.界面;
 
 import android.os.Bundle;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import 间.安卓.后端.LeanCloud;
 import 间.安卓.后端.布局.布局_登录界面;
 import 间.安卓.后端.用户;
@@ -49,7 +49,7 @@ public class 登录界面 extends 界面 {
     }
 
     public void 线程登录(String $用户名,String $密码) {
-        返回值<用户, AVException> $返回值 = 用户.同步登录($用户名, $密码);
+        返回值<用户, 后端错误> $返回值 = 用户.同步登录($用户名, $密码);
         if ($返回值.成功()) {
             进度.隐藏();
             置返回值(基本界面.返回码_成功);
@@ -57,7 +57,7 @@ public class 登录界面 extends 界面 {
             提示.普通("登录成功 ~");
         } else {
             进度.隐藏();
-            提示.警告(LeanCloud.转换错误($返回值.取错误()));
+            提示.警告($返回值.取错误().取错误信息());
         }
     }
 

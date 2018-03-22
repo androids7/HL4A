@@ -1,7 +1,7 @@
 package com.avos.avoscloud.upload;
 
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVPowerfulUtils;
 import com.avos.avoscloud.AVUtils;
@@ -25,15 +25,15 @@ public class UrlDirectlyUploader extends HttpClientUploader {
   }
 
   @Override
-  public AVException doWork() {
+  public 后端错误 doWork() {
 
-    final AVException[] exceptionSaveFile = new AVException[1];
+    final 后端错误[] exceptionSaveFile = new 后端错误[1];
     String url = AVPowerfulUtils.getEndpoint(avFile, true);
     String params = getFileRequestParameters();
     PaasClient.storageInstance().postObject(url, params, true,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (e == null) {
               try {
                 JSONObject jsonObject = new JSONObject(content);
@@ -44,7 +44,7 @@ public class UrlDirectlyUploader extends HttpClientUploader {
 //                    jsonObject.getString("objectId"), avFile.getUrl());
                 publishProgress(100);
               } catch (Exception ex) {
-                exceptionSaveFile[0] = new AVException(ex);
+                exceptionSaveFile[0] = new 后端错误(ex);
               }
             } else {
               exceptionSaveFile[0] = AVErrorUtils.createException(e, content);

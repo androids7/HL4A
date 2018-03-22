@@ -11,7 +11,7 @@ abstract class GenericRetryCallback extends GenericObjectCallback {
   }
 
   @Override
-  public void onSuccess(String content, AVException e) {
+  public void onSuccess(String content, 后端错误 e) {
     if (callback != null) {
       callback.onSuccess(content, e);
     }

@@ -5,14 +5,14 @@ package com.avos.avoscloud;
  */
 public final class AVExceptionHolder {
 
-  private static final ThreadLocal<AVException> local = new ThreadLocal<AVException>() {
+  private static final ThreadLocal<后端错误> local = new ThreadLocal<后端错误>() {
     @Override
-    protected AVException initialValue() {
+    protected 后端错误 initialValue() {
       return null;
     }
   };
 
-  public final static void add(AVException e) {
+  public final static void add(后端错误 e) {
     local.set(e);
   }
 
@@ -20,8 +20,8 @@ public final class AVExceptionHolder {
     return local.get() != null;
   }
 
-  public final static AVException remove() {
-    AVException e = local.get();
+  public final static 后端错误 remove() {
+    后端错误 e = local.get();
     local.remove();
     return e;
   }

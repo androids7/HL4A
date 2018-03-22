@@ -26,9 +26,9 @@ public abstract class AVMobilePhoneVerifyCallback extends AVCallback<Void> {
    * </pre>
    */
   @Override
-  protected final void internalDone0(Void t, AVException avException) {
+  protected final void internalDone0(Void t, 后端错误 avException) {
     this.done(avException);
   }
 
-  public abstract void done(AVException e);
+  public abstract void done(后端错误 e);
 }

@@ -11,27 +11,27 @@ public class AVErrorUtils {
   public static final int MISSING_OBJECTID = 104;
 
   // {"error":"The user cannot be altered by a client without the session.","code":206}
-  public static AVException createException(String content) {
+  public static 后端错误 createException(String content) {
     try {
       JSONObject object = new JSONObject(content);
       String errorMessage = object.getString("error");
       int code = object.getInt("code");
-      return new AVException(code, errorMessage);
+      return new 后端错误(code, errorMessage);
     } catch (Exception exception) {
-      return new AVException(AVException.UNKNOWN, content);
+      return new 后端错误(后端错误.UNKNOWN, content);
     }
   }
 
-  public static AVException createException(Throwable t, String content) {
+  public static 后端错误 createException(Throwable t, String content) {
     if (content != null) {
       return createException(content);
     } else if (t != null) {
-      if (t instanceof AVException) {
-        return (AVException) t;
+      if (t instanceof 后端错误) {
+        return (后端错误) t;
       }
-      return new AVException(t);
+      return new 后端错误(t);
     } else {
-      return new AVException(AVException.UNKNOWN, "unknown reason");
+      return new 后端错误(后端错误.UNKNOWN, "unknown reason");
     }
 
   }
@@ -46,25 +46,25 @@ public class AVErrorUtils {
     return code;
   }
 
-  static public AVException createException(int code, String content) {
-    return new AVException(code, content);
+  static public 后端错误 createException(int code, String content) {
+    return new 后端错误(code, content);
   }
 
-  static public AVException invalidObjectIdException() {
-    return AVErrorUtils.createException(AVException.MISSING_OBJECT_ID, "Invalid object id.");
+  static public 后端错误 invalidObjectIdException() {
+    return AVErrorUtils.createException(后端错误.MISSING_OBJECT_ID, "Invalid object id.");
   }
 
-  static public AVException invalidQueryException() {
-    return AVErrorUtils.createException(AVException.INVALID_QUERY, "Invalid query.");
+  static public 后端错误 invalidQueryException() {
+    return AVErrorUtils.createException(后端错误.INVALID_QUERY, "Invalid query.");
   }
 
-  static public AVException sessionMissingException() {
-    return AVErrorUtils.createException(AVException.SESSION_MISSING,
+  static public 后端错误 sessionMissingException() {
+    return AVErrorUtils.createException(后端错误.SESSION_MISSING,
         "No valid session token, make sure signUp or login has been called.");
   }
 
-  static public AVException fileDownloadInConsistentFailureException() {
-    return AVErrorUtils.createException(AVException.FILE_DOWNLOAD_INCONSISTENT_FAILURE,
+  static public 后端错误 fileDownloadInConsistentFailureException() {
+    return AVErrorUtils.createException(后端错误.FILE_DOWNLOAD_INCONSISTENT_FAILURE,
         "Downloaded file is inconsistent with original file");
   }
 
@@ -73,8 +73,8 @@ public class AVErrorUtils {
   // Some Special Exception
   // ================================================================================
 
-  static AVException circleException() {
-    return new AVException(CIRCLE_REFERENCE, "Found a circular dependency when saving.");
+  static 后端错误 circleException() {
+    return new 后端错误(CIRCLE_REFERENCE, "Found a circular dependency when saving.");
   }
 
 }

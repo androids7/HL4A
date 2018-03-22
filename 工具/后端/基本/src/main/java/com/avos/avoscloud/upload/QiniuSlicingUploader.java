@@ -1,7 +1,7 @@
 package com.avos.avoscloud.upload;
 
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUtils;
@@ -35,7 +35,7 @@ class QiniuSlicingUploader extends HttpClientUploader {
   }
 
   @Override
-  public AVException doWork() {
+  public 后端错误 doWork() {
     boolean isWifi = AVUtils.isWifi(AVOSCloud.applicationContext);
     if (!isWifi) {
       // 从七牛的接口来看block size为4M不可变，但是chunkSize是可以调整的
@@ -93,15 +93,15 @@ class QiniuSlicingUploader extends HttpClientUploader {
         } else {
           // error.
           // FIXME: 2017/8/14 603 is hardcode.
-          return new AVException(603, "failed to upload file to qiniu.");
+          return new 后端错误(603, "failed to upload file to qiniu.");
         }
       }
       QiniuAccessor.QiniuMKFileResponseData finalResponse = this.qiniuAccessor.makeFile(fileSize, uploadFileCtxs, DEFAULT_RETRY_TIMES);
       if (finalResponse == null || !finalResponse.key.equals(fileKey)) {
-        return AVErrorUtils.createException(AVException.OTHER_CAUSE, "upload file failure");
+        return AVErrorUtils.createException(后端错误.OTHER_CAUSE, "upload file failure");
       }
     } catch (Exception ex) {
-      return new AVException(ex);
+      return new 后端错误(ex);
     } finally {
       try {
         if (null != is) {

@@ -57,7 +57,7 @@ public class AVAnonymousUtils {
     String string = anonymousAuthData();
     PaasClient.storageInstance().postObject(AVUser.AVUSER_ENDPOINT, string, false, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         AVUser user = AVUser.newAVUser();
         AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
         user.setAnonymous(true);

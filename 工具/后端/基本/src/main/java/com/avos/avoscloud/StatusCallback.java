@@ -13,10 +13,10 @@ public abstract class StatusCallback extends AVCallback<AVStatus> {
    * @param statusObject The objects matching the query, or null if it failed.
    * @param avException The exception raised by the find, or null if it succeeded.
    */
-  public abstract void done(AVStatus statusObject, AVException avException);
+  public abstract void done(AVStatus statusObject, 后端错误 avException);
 
   @Override
-  protected final void internalDone0(AVStatus returnValue, AVException e) {
+  protected final void internalDone0(AVStatus returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

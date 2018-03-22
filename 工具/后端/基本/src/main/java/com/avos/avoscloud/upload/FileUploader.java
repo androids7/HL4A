@@ -7,7 +7,7 @@ import com.alibaba.fastjson.JSONException;
 import com.alibaba.fastjson.JSONObject;
 import com.avos.avoscloud.AVCallback;
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVUtils;
 import com.avos.avoscloud.GenericObjectCallback;
@@ -44,15 +44,15 @@ public class FileUploader extends HttpClientUploader {
     this.callback = uploadCallback;
   }
 
-  public AVException doWork() {
+  public 后端错误 doWork() {
     // fileKey 是随机值，在 fileTokens 请求与真正的 upload 请求时都会用到，这里要保证是同一个值
     String fileKey = AVUtils.parseFileKey(avFile.getName());
     if (AVUtils.isBlankString(uploadUrl)) {
-      final AVException getBucketException = fetchUploadBucket("fileTokens", fileKey, true, new AVCallback<String>() {
+      final 后端错误 getBucketException = fetchUploadBucket("fileTokens", fileKey, true, new AVCallback<String>() {
         @Override
-        protected void internalDone0(String s, AVException avException) {
+        protected void internalDone0(String s, 后端错误 avException) {
           if (null == avException) {
-            AVException ex = handleGetBucketResponse(s);
+            后端错误 ex = handleGetBucketResponse(s);
             if (null != ex) {
               LogUtil.log.e("failed to parse response of fileTokens.", ex);
             }
@@ -74,10 +74,10 @@ public class FileUploader extends HttpClientUploader {
     publishProgress(PROGRESS_GET_TOKEN);
     Uploader uploader = getUploaderImplementation(fileKey);
     if (null == uploader) {
-      return new AVException(new Throwable("Uploader can not be instantiated."));
+      return new 后端错误(new Throwable("Uploader can not be instantiated."));
     }
 
-    AVException uploadException = uploader.doWork();
+    后端错误 uploadException = uploader.doWork();
     if (uploadException == null) {
       if (null != callback) {
         callback.finishedWithResults(finalObjectId, finalUrl);
@@ -107,12 +107,12 @@ public class FileUploader extends HttpClientUploader {
     }
   }
 
-  private AVException fetchUploadBucket(String path, String fileKey, boolean sync, final AVCallback<String> callback) {
-    final AVException[] exceptionWhenGetBucket = new AVException[1];
+  private 后端错误 fetchUploadBucket(String path, String fileKey, boolean sync, final AVCallback<String> callback) {
+    final 后端错误[] exceptionWhenGetBucket = new 后端错误[1];
     PaasClient.storageInstance().postObject(path, getGetBucketParameters(fileKey), sync,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             callback.internalDone(content, e);
             exceptionWhenGetBucket[0] = e;
           }
@@ -129,7 +129,7 @@ public class FileUploader extends HttpClientUploader {
     return null;
   }
 
-  private AVException handleGetBucketResponse(String responseStr) {
+  private 后端错误 handleGetBucketResponse(String responseStr) {
     if (!AVUtils.isBlankContent(responseStr)) {
       try {
         com.alibaba.fastjson.JSONObject jsonObject = JSON.parseObject(responseStr);
@@ -140,7 +140,7 @@ public class FileUploader extends HttpClientUploader {
         this.token = jsonObject.getString("token");
         this.finalUrl = jsonObject.getString("url");
       } catch (JSONException e) {
-        return new AVException(e);
+        return new 后端错误(e);
       }
     }
     return null;

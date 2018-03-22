@@ -5,7 +5,7 @@ import com.avos.avoscloud.AVObject;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import 间.接口.方法;
 import com.avos.avoscloud.CountCallback;
 import 间.接口.调用;
@@ -129,10 +129,10 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         return this;
     }
 
-    public 返回值<无序集合<类型>,AVException> 查询() {
+    public 返回值<无序集合<类型>,后端错误> 查询() {
         try {
             return 返回值.创建(new 无序集合<类型>(find()), null);
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
     }
@@ -140,16 +140,16 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
     public void 查询(final 方法 $回调) {
         findInBackground(new FindCallback<类型>() {
                 @Override
-                public void done(List<类型> $集合,AVException $错误) {
+                public void done(List<类型> $集合,后端错误 $错误) {
                     调用.事件($回调, 返回值.创建(new 无序集合<类型>($集合), $错误));
                 }
             });
     }
 
-    public 返回值<Integer,AVException> 统计() {
+    public 返回值<Integer,后端错误> 统计() {
         try {
             return 返回值.创建(count(), null);
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
     }
@@ -157,7 +157,7 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
     public void 统计(final 方法 $回调) {
         countInBackground(new CountCallback() {
                 @Override
-                public void done(int $数量,AVException $错误) {
+                public void done(int $数量,后端错误 $错误) {
                     调用.事件($回调, 返回值.创建($数量, $错误));
                 }
             });

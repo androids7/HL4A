@@ -3,7 +3,7 @@ package com.avos.avoscloud.upload;
 import android.os.Build;
 
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVHttpClient;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUtils;
@@ -76,7 +76,7 @@ public abstract class HttpClientUploader implements Uploader {
     return client;
   }
 
-  protected Response executeWithRetry(Request request, int retry) throws AVException {
+  protected Response executeWithRetry(Request request, int retry) throws 后端错误 {
     if (retry > 0 && !isCancelled()) {
       try {
         Response response = getOKHttpClient().newCall(request).execute();
@@ -92,7 +92,7 @@ public abstract class HttpClientUploader implements Uploader {
         return executeWithRetry(request, retry - 1);
       }
     } else {
-      throw new AVException(AVException.OTHER_CAUSE, "Upload File failure");
+      throw new 后端错误(后端错误.OTHER_CAUSE, "Upload File failure");
     }
   }
 
@@ -106,14 +106,14 @@ public abstract class HttpClientUploader implements Uploader {
     Runnable task = new Runnable() {
       @Override
       public void run() {
-        AVException exception = doWork();
+        后端错误 exception = doWork();
         if (!cancelled) {
           if (saveCallback != null) {
             saveCallback.internalDone(exception);
           }
         } else {
           if (saveCallback != null) {
-            saveCallback.internalDone(AVErrorUtils.createException(AVException.UNKNOWN,
+            saveCallback.internalDone(AVErrorUtils.createException(后端错误.UNKNOWN,
                 "Uploading file task is canceled."));
           }
         }

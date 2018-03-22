@@ -14,7 +14,7 @@ public abstract class ProgressCallback extends AVCallback<Integer> {
   /**
    * Override this function with your desired callback.
    */
-  protected final void internalDone0(Integer returnValue, AVException e) {
+  protected final void internalDone0(Integer returnValue, 后端错误 e) {
     done(returnValue);
   }
 }

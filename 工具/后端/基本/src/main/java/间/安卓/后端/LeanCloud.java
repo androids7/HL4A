@@ -3,7 +3,7 @@ package 间.安卓.后端;
 import com.avos.avoscloud.AVOSCloud;
 import 间.安卓.工具.环境;
 import com.avos.avoscloud.AVCloud;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 
 public class LeanCloud {
 
@@ -11,8 +11,8 @@ public class LeanCloud {
         AVOSCloud.initialize(环境.取应用(),$ID,$KEY);
     }
     
-    public static Object 转换错误(AVException $错误) {
-        return 转换错误($错误.getCode());
+    public static Object 转换错误(后端错误 $错误) {
+        return 转换错误($错误.取错误码());
     }
     
     

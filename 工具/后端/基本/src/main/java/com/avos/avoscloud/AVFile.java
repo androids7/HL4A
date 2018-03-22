@@ -216,7 +216,7 @@ public final class AVFile {
     query.getInBackground(objectId, new GetCallback<AVObject>() {
 
       @Override
-      public void done(AVObject object, AVException e) {
+      public void done(AVObject object, 后端错误 e) {
         if (e != null) {
           if (null != cb) {
             cb.internalDone(null, e);
@@ -229,7 +229,7 @@ public final class AVFile {
             cb.internalDone(file, null);
           }
         } else if (null != cb) {
-          cb.internalDone(null, new AVException(AVException.OBJECT_NOT_FOUND,
+          cb.internalDone(null, new 后端错误(后端错误.OBJECT_NOT_FOUND,
             "Could not find file object by id:" + objectId));
         }
       }
@@ -247,7 +247,7 @@ public final class AVFile {
    * @deprecated Please use #{@link #withObjectId(String)}
    */
   @Deprecated
-  static public AVFile parseFileWithObjectId(String objectId) throws AVException,
+  static public AVFile parseFileWithObjectId(String objectId) throws 后端错误,
     FileNotFoundException {
     return withObjectId(objectId);
   }
@@ -261,7 +261,7 @@ public final class AVFile {
    * @throws AVException ,FileNotFoundException
    * @since 2.0.2
    */
-  public static AVFile withObjectId(String objectId) throws AVException, FileNotFoundException {
+  public static AVFile withObjectId(String objectId) throws 后端错误, FileNotFoundException {
     AVQuery<AVObject> query = new AVQuery<AVObject>("_File");
     AVObject object = query.get(objectId);
     if (object != null && !AVUtils.isBlankString(object.getObjectId())) {
@@ -616,17 +616,17 @@ public final class AVFile {
    *
    * @throws AVException
    */
-  public void save() throws AVException {
+  public void save() throws 后端错误 {
     // 如果文件已经上传过，则不再进行上传
     if (AVUtils.isBlankString(objectId)) {
       cancelUploadIfNeed();
-      final AVException[] avExceptions = new AVException[1];
+      final 后端错误[] avExceptions = new 后端错误[1];
       uploader = getUploader(null, null);
 
       if (null != avExceptions[0]) {
         throw avExceptions[0];
       }
-      AVException exception = uploader.doWork();
+      后端错误 exception = uploader.doWork();
       if (exception != null) {
         throw exception;
       }
@@ -684,7 +684,7 @@ public final class AVFile {
    */
   @Deprecated
   @JSONField(serialize = false)
-  public byte[] getData() throws AVException {
+  public byte[] getData() throws 后端错误 {
     if (!AVUtils.isBlankString(localPath)) {
       return getLocalFileData();
     } else if (!AVUtils.isBlankString(localTmpFilePath)) {
@@ -695,11 +695,11 @@ public final class AVFile {
         return data;
       }
       if (!AVUtils.isConnected(AVOSCloud.applicationContext)) {
-        throw new AVException(AVException.CONNECTION_FAILED, "Connection lost");
+        throw new 后端错误(后端错误.CONNECTION_FAILED, "Connection lost");
       } else {
         cancelDownloadIfNeed();
         downloader = new AVFileDownloader();
-        AVException exception = downloader.doWork(getUrl());
+        后端错误 exception = downloader.doWork(getUrl());
         if (exception != null) {
           throw exception;
         }
@@ -719,7 +719,7 @@ public final class AVFile {
    * @throws AVException
    */
   @JSONField(serialize = false)
-  public InputStream getDataStream() throws AVException {
+  public InputStream getDataStream() throws 后端错误 {
     String filePath = "";
     if(!AVUtils.isBlankString(localPath)) {
       filePath = localPath;
@@ -729,11 +729,11 @@ public final class AVFile {
       File cacheFile = AVFileDownloader.getCacheFile(url);
       if (null == cacheFile || !cacheFile.exists()) {
         if (!AVUtils.isConnected(AVOSCloud.applicationContext)) {
-          throw new AVException(AVException.CONNECTION_FAILED, "Connection lost");
+          throw new 后端错误(后端错误.CONNECTION_FAILED, "Connection lost");
         } else {
           cancelDownloadIfNeed();
           downloader = new AVFileDownloader();
-          AVException exception = downloader.doWork(getUrl());
+          后端错误 exception = downloader.doWork(getUrl());
           if (exception != null) {
             throw exception;
           }
@@ -745,7 +745,7 @@ public final class AVFile {
       try {
         return AVPersistenceUtils.getInputStreamFromFile(new File(filePath));
       } catch (IOException e){
-        throw new AVException(e);
+        throw new 后端错误(e);
       }
     }
     return null;
@@ -782,7 +782,7 @@ public final class AVFile {
       downloader = new AVFileDownloader(progressCallback, dataCallback);
       downloader.execute(getUrl());
     } else if (dataCallback != null) {
-      dataCallback.internalDone(new AVException(AVException.INVALID_FILE_URL, ""));
+      dataCallback.internalDone(new 后端错误(后端错误.INVALID_FILE_URL, ""));
     }
   }
 
@@ -837,7 +837,7 @@ public final class AVFile {
           InputStream is = AVPersistenceUtils.getInputStreamFromFile(new File(filePath));
           callback.internalDone0(is, null);
         } catch (IOException e) {
-          callback.internalDone(new AVException(e));
+          callback.internalDone(new 后端错误(e));
         }
       }
     } else {
@@ -891,11 +891,11 @@ public final class AVFile {
    * @see AVObject#delete()
    * @since 1.3.4
    */
-  public void delete() throws AVException {
+  public void delete() throws 后端错误 {
     if (getFileObject() != null)
       getFileObject().delete();
     else
-      throw AVErrorUtils.createException(AVException.FILE_DELETE_ERROR,
+      throw AVErrorUtils.createException(后端错误.FILE_DELETE_ERROR,
         "File object is not exists.");
   }
 
@@ -934,7 +934,7 @@ public final class AVFile {
       getFileObject().deleteInBackground(callback);
     else
       callback
-        .internalDone(null, AVErrorUtils.createException(AVException.FILE_DELETE_ERROR,
+        .internalDone(null, AVErrorUtils.createException(后端错误.FILE_DELETE_ERROR,
           "File object is not exists."));
   }
 

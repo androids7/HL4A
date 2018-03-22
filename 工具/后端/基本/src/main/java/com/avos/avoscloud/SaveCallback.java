@@ -34,9 +34,9 @@ public abstract class SaveCallback extends AVCallback<Void> {
    * 
    * @param e The exception raised by the save, or null if it succeeded.
    */
-  public abstract void done(AVException e);
+  public abstract void done(后端错误 e);
 
-  protected final void internalDone0(java.lang.Void returnValue, AVException e) {
+  protected final void internalDone0(java.lang.Void returnValue, 后端错误 e) {
     done(e);
   }
 }

@@ -36,9 +36,9 @@ public abstract class LogInCallback<T extends AVUser> extends AVCallback<T> {
    * @param user The user that logged in, if the username and password is valid.
    * @param e The exception raised by the login.
    */
-  public abstract void done(T user, AVException e);
+  public abstract void done(T user, 后端错误 e);
 
-  protected final void internalDone0(T returnValue, AVException e) {
+  protected final void internalDone0(T returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

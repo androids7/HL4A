@@ -68,8 +68,8 @@ public class AVCacheManager {
     if (!file.exists()
         || ((maxAgeInMilliseconds > 0) && (System.currentTimeMillis() - file.lastModified() > maxAgeInMilliseconds))) {
       getCallback
-          .onFailure(AVErrorUtils.createException(AVException.CACHE_MISS,
-              AVException.cacheMissingErrorString), null);
+          .onFailure(AVErrorUtils.createException(后端错误.CACHE_MISS,
+              后端错误.cacheMissingErrorString), null);
     } else {
       String content = AVPersistenceUtils.readContentFromFile(file);
       getCallback.onSuccess(content, null);

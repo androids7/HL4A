@@ -2,7 +2,7 @@ package com.avos.avoscloud.upload;
 
 import com.alibaba.fastjson.JSON;
 import com.avos.avoscloud.AVErrorUtils;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVExceptionHolder;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVOSCloud;
@@ -60,7 +60,7 @@ class QiniuUploader extends HttpClientUploader {
   static final ExecutorService fileUploadExecutor = Executors.newFixedThreadPool(10);
 
   @Override
-  public AVException doWork() {
+  public 后端错误 doWork() {
       boolean isWifi = AVUtils.isWifi(AVOSCloud.applicationContext);
       if (!isWifi) {
         // 从七牛的接口来看block size为4M不可变，但是chunkSize是可以调整的
@@ -81,7 +81,7 @@ class QiniuUploader extends HttpClientUploader {
     return builder;
   }
 
-  private AVException uploadWithBlocks() {
+  private 后端错误 uploadWithBlocks() {
 
     try {
       byte[] bytes = avFile.getData();
@@ -120,12 +120,12 @@ class QiniuUploader extends HttpClientUploader {
       if (!isCancelled()) {
         // qiniu's status code is 200, but should be 201 like parse..
         if (mkfileResp == null || !mkfileResp.key.equals(fileKey)) {
-          return AVErrorUtils.createException(AVException.OTHER_CAUSE, "upload file failure");
+          return AVErrorUtils.createException(后端错误.OTHER_CAUSE, "upload file failure");
         }
       }
     } catch (Exception e) {
       e.printStackTrace();
-      return new AVException(e);
+      return new 后端错误(e);
     }
     return null;
   }
@@ -231,7 +231,7 @@ class QiniuUploader extends HttpClientUploader {
         uploadFileCtx[blockOffset] = respBlockData.ctx;
         progressCalculator.publishProgress(blockOffset, 100);
       } else {
-        AVExceptionHolder.add(new AVException(AVException.OTHER_CAUSE, "Upload File failure"));
+        AVExceptionHolder.add(new 后端错误(后端错误.OTHER_CAUSE, "Upload File failure"));
         long count = latch.getCount();
         for (; count > 0; count--) {
           latch.countDown();
@@ -323,12 +323,12 @@ class QiniuUploader extends HttpClientUploader {
       return null;
     }
 
-    private void validateCrc32Value(QiniuBlockResponseData respData, byte[] data, int offset, int nextChunkSize) throws AVException {
+    private void validateCrc32Value(QiniuBlockResponseData respData, byte[] data, int offset, int nextChunkSize) throws 后端错误 {
       CRC32 crc32 = new CRC32();
       crc32.update(data,offset,nextChunkSize);
       long localCRC32 = crc32.getValue();
       if(respData!=null && respData.crc32 != localCRC32){
-        throw  new AVException(AVException.OTHER_CAUSE,"CRC32 validation failure for chunk upload");
+        throw  new 后端错误(后端错误.OTHER_CAUSE,"CRC32 validation failure for chunk upload");
       }
     }
 

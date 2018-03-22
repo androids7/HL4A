@@ -1,4 +1,5 @@
 package com.avos.avoscloud;
+import 间.安卓.后端.LeanCloud;
 
 /**
  * <p>
@@ -7,7 +8,7 @@ package com.avos.avoscloud;
  * preventing communication with the AVOSCloud server.
  * </p>
  */
-public class AVException extends Exception {
+public class 后端错误 extends Exception {
   private static final long serialVersionUID = 1L;
   protected int code;
   public static final int OTHER_CAUSE = -1;
@@ -250,7 +251,7 @@ public class AVException extends Exception {
    * @param theCode The error code to identify the type of exception.
    * @param theMessage A message describing the error in more detail.
    */
-  public AVException(int theCode, String theMessage) {
+  public 后端错误(int theCode, String theMessage) {
     super(theMessage);
     this.code = theCode;
   }
@@ -261,10 +262,10 @@ public class AVException extends Exception {
    * @param message A message describing the error in more detail.
    * @param cause The cause of the error.
    */
-  public AVException(String message, Throwable cause) {
+  public 后端错误(String message, Throwable cause) {
     super(message, cause);
-    if (cause instanceof AVException) {
-      this.code = ((AVException) cause).getCode();
+    if (cause instanceof 后端错误) {
+      this.code = ((后端错误) cause).取错误码();
     }
   }
 
@@ -274,10 +275,10 @@ public class AVException extends Exception {
    * 
    * @param cause The cause of the error.
    */
-  public AVException(Throwable cause) {
+  public 后端错误(Throwable cause) {
     super(cause);
-    if (cause instanceof AVException) {
-      this.code = ((AVException) cause).getCode();
+    if (cause instanceof 后端错误) {
+      this.code = ((后端错误) cause).取错误码();
     }
   }
 
@@ -286,7 +287,14 @@ public class AVException extends Exception {
    * 
    * @return The numerical code for this error.
    */
-  public int getCode() {
+  public int 取错误码() {
     return code;
   }
+  
+  public String 取错误信息() {
+      return LeanCloud.转换错误(code);
+  }
+  
+  
+  
 }

@@ -1,6 +1,6 @@
 package 间.安卓.后端;
 
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVFile;
 import com.avos.avoscloud.AVObject;
 import 间.安卓.工具.文件;
@@ -39,11 +39,11 @@ public class 数据 extends AVObject {
         return getAVUser($键值,用户.class);
     }
     
-    public 返回值<byte[],AVException> 取文件(String $键值) {
+    public 返回值<byte[],后端错误> 取文件(String $键值) {
         AVFile $文件 = getAVFile($键值);
         try {
             return 返回值.创建($文件.getData(), null);
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }
     }
@@ -58,11 +58,11 @@ public class 数据 extends AVObject {
             }).启动();
     }
     
-    public 返回值<Void,AVException> 同步保存() {
+    public 返回值<Void,后端错误> 同步保存() {
         try {
             save();
             return 返回值.创建(null,null);
-        } catch (AVException $错误) {
+        } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }
     }
@@ -70,7 +70,7 @@ public class 数据 extends AVObject {
     public void 保存(final 方法 $回调) {
         saveInBackground(new SaveCallback() {
                 @Override
-                public void done(AVException $错误) {
+                public void done(后端错误 $错误) {
                     调用.事件($回调,返回值.创建(null,$错误));
                 }
             });

@@ -4,7 +4,7 @@ package com.avos.avoscloud;
  * User: summer Date: 13-4-11 Time: PM3:46
  */
 public abstract class AVCallback<T> {
-  public void internalDone(final T t, final AVException avException) {
+  public void internalDone(final T t, final 后端错误 avException) {
     if (mustRunOnUIThread() && !AVUtils.isMainThread()) {
       if (!AVOSCloud.handler.post(new Runnable() {
         @Override
@@ -23,9 +23,9 @@ public abstract class AVCallback<T> {
     return true;
   }
 
-  public void internalDone(final AVException avException) {
+  public void internalDone(final 后端错误 avException) {
     this.internalDone(null, avException);
   }
 
-  protected abstract void internalDone0(T t, AVException avException);
+  protected abstract void internalDone0(T t, 后端错误 avException);
 }

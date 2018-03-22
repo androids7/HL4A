@@ -270,7 +270,7 @@ public class AVStatus extends AVObject {
     String endPoint = String.format("statuses/%s", statusId);
     PaasClient.storageInstance().deleteObject(endPoint, sync, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         if (callback != null) {
           callback.internalDone(null);
         }
@@ -297,7 +297,7 @@ public class AVStatus extends AVObject {
       throws Exception {
     deleteInboxStatus(true, messageId, inboxType, owner, new DeleteCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -336,7 +336,7 @@ public class AVStatus extends AVObject {
     } else {
       if (callback != null) {
         callback
-            .internalDone(new AVException(AVException.USER_DOESNOT_EXIST, "Owner can't be null"));
+            .internalDone(new 后端错误(后端错误.USER_DOESNOT_EXIST, "Owner can't be null"));
       }
       return;
     }
@@ -350,7 +350,7 @@ public class AVStatus extends AVObject {
         AVUtils.getEncodeUrl("subscribe/statuses/inbox", params);
     PaasClient.storageInstance().deleteObject(endPoint, sync, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         if (callback != null) {
           callback.internalDone(null);
         }
@@ -586,7 +586,7 @@ public class AVStatus extends AVObject {
     PaasClient.storageInstance().getObject(endPoint, params, false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             List<AVStatus> result = processStatusResultList(content);
             if (callback != null) {
               callback.internalDone(result, null);
@@ -619,7 +619,7 @@ public class AVStatus extends AVObject {
     PaasClient.storageInstance().getObject(endPoint, new AVRequestParams(map), false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             int count = processStatusCount(content);
             if (callback != null) {
               callback.internalDone(count, null);
@@ -720,7 +720,7 @@ public class AVStatus extends AVObject {
     PaasClient.storageInstance().getObject(endPoint, params, false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             AVStatus status = new AVStatus();
             processStatus(content, status);
             if (callback != null) {
@@ -743,7 +743,7 @@ public class AVStatus extends AVObject {
     PaasClient.storageInstance().postObject(STATUS_ENDPOINT, postData, false, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             processStatus(content, status);
             if (callback != null) {
               callback.internalDone(null);
@@ -897,7 +897,7 @@ public class AVStatus extends AVObject {
    * @return
    * @throws AVException
    */
-  public static AVStatusQuery statusQuery(AVUser owner) throws AVException {
+  public static AVStatusQuery statusQuery(AVUser owner) throws 后端错误 {
     AVStatusQuery query = new AVStatusQuery();
     query.setSelfQuery(true);
     query.whereEqualTo("source", owner);
@@ -966,11 +966,11 @@ public class AVStatus extends AVObject {
   }
 
   @Override
-  public void delete() throws AVException {
+  public void delete() throws 后端错误 {
     AVStatus.deleteStatusWithId(true, this.getObjectId(), new DeleteCallback() {
 
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1393,7 +1393,7 @@ public class AVStatus extends AVObject {
    */
   @Deprecated
   @Override
-  public void refresh() throws AVException {
+  public void refresh() throws 后端错误 {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException();
   }
@@ -1403,7 +1403,7 @@ public class AVStatus extends AVObject {
    */
   @Deprecated
   @Override
-  public void refresh(String includeKeys) throws AVException {
+  public void refresh(String includeKeys) throws 后端错误 {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException();
   }
@@ -1443,7 +1443,7 @@ public class AVStatus extends AVObject {
    */
   @Deprecated
   @Override
-  public void save() throws AVException {
+  public void save() throws 后端错误 {
     // TODO Auto-generated method stub
     throw new UnsupportedOperationException();
   }
@@ -1546,7 +1546,7 @@ public class AVStatus extends AVObject {
     String jsonString = AVUtils.jsonStringFromMapWithNull(params);
     PaasClient.storageInstance().postObject(endPoint, jsonString, false, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         if (callback != null) {
           callback.internalDone(null);
         }

@@ -1,7 +1,7 @@
 package com.avos.avoscloud.upload;
 
 import com.alibaba.fastjson.JSON;
-import com.avos.avoscloud.AVException;
+import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.AVOSCloud;
 import com.avos.avoscloud.AVUtils;
 import com.avos.avoscloud.LogUtil;
@@ -221,12 +221,12 @@ class QiniuAccessor {
   }
 
   private void validateCrc32Value(QiniuBlockResponseData respData, byte[] data, int offset, int nextChunkSize)
-      throws AVException {
+      throws 后端错误 {
     CRC32 crc32 = new CRC32();
     crc32.update(data,offset,nextChunkSize);
     long localCRC32 = crc32.getValue();
     if(respData!=null && respData.crc32 != localCRC32){
-      throw  new AVException(AVException.OTHER_CAUSE,"CRC32 validation failure for chunk upload");
+      throw  new 后端错误(后端错误.OTHER_CAUSE,"CRC32 validation failure for chunk upload");
     }
   }
 

@@ -21,9 +21,9 @@ package com.avos.avoscloud;
  * </pre>
  */
 public abstract class GetDataCallback extends AVCallback<byte[]> {
-  public abstract void done(byte[] data, AVException e);
+  public abstract void done(byte[] data, 后端错误 e);
 
-  protected final void internalDone0(byte[] returnValue, AVException e) {
+  protected final void internalDone0(byte[] returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

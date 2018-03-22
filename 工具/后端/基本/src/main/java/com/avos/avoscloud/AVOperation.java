@@ -58,7 +58,7 @@ public class AVOperation {
     return sequence;
   }
 
-  public void invokeCallback(AVException exception) {
+  public void invokeCallback(后端错误 exception) {
     if (getCallback() != null) {
       getCallback().internalDone(exception);
     }

@@ -33,12 +33,12 @@ public class AVFriendshipQuery<T extends AVUser> {
         sync, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             AVFriendship<T> friendship = null;
-            AVException error = e;
+            后端错误 error = e;
             if (AVUtils.isBlankContent(content)) {
               friendship = null;
-              error = new AVException(AVException.OBJECT_NOT_FOUND, "Object is not found.");
+              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "Object is not found.");
             } else {
               try {
                 friendship = new AVFriendship<T>();
@@ -90,11 +90,11 @@ public class AVFriendshipQuery<T extends AVUser> {
         });
   }
 
-  public AVFriendship get() throws AVException {
+  public AVFriendship get() throws 后端错误 {
     final Object[] result = {null};
     this.getInBackground(this.userId, true, new AVFriendshipCallback() {
       @Override
-      public void done(AVFriendship object, AVException e) {
+      public void done(AVFriendship object, 后端错误 e) {
         if (e == null) {
           result[0] = object;
         } else {

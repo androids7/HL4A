@@ -28,7 +28,7 @@ public class AVCaptcha {
     PaasClient.storageInstance().getObject("requestCaptcha", getOptionParams(option), false, null,
       new GenericObjectCallback() {
         @Override
-        public void onSuccess(String content, AVException e) {
+        public void onSuccess(String content, 后端错误 e) {
           AVCaptchaDigest digest = new AVCaptchaDigest();
           if (!AVUtils.isBlankString(content)) {
             Map<String, String> map = JSON.parseObject(content, HashMap.class);
@@ -79,7 +79,7 @@ public class AVCaptcha {
     String jsonString = AVUtils.jsonStringFromMapWithNull(map);
     PaasClient.storageInstance().postObject("verifyCaptcha", jsonString, false, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         if (!AVUtils.isBlankString(content)) {
           Map<String, String> map = JSON.parseObject(content, HashMap.class);
           if (null != map && map.containsKey(VALIDATE_TOKEN)) {

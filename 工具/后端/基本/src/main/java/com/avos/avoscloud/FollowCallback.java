@@ -14,9 +14,9 @@ public abstract class FollowCallback<T extends AVObject> extends AVCallback<T> {
    * @param object The object that was retrieved, or null if it did not succeed.
    * @param e The exception raised by the save, or null if it succeeded.
    */
-  public abstract void done(T object, AVException e);
+  public abstract void done(T object, 后端错误 e);
 
-  protected final void internalDone0(T returnValue, AVException e) {
+  protected final void internalDone0(T returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

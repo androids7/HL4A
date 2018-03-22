@@ -305,7 +305,7 @@ public class AVUser extends 数据 {
 
     PaasClient.storageInstance().getObject("users/me", params, false, null, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         callback.internalDone(true, e);
       }
 
@@ -342,7 +342,7 @@ public class AVUser extends 数据 {
    * @param password
    * @return
    */
-  public static AVUser logIn(String username, String password) throws AVException {
+  public static AVUser logIn(String username, String password) throws 后端错误 {
     return logIn(username, password, AVUser.class);
   }
 
@@ -363,13 +363,13 @@ public class AVUser extends 数据 {
    * @return The user if the login was successful.
    */
   public static <T extends AVUser> T logIn(String username, String password, Class<T> clazz)
-      throws AVException {
+      throws 后端错误 {
     final AVUser[] list = {null};
 
     logInInBackground(username, password, true, new LogInCallback<T>() {
 
       @Override
-      public void done(T user, AVException e) {
+      public void done(T user, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         } else {
@@ -476,8 +476,8 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(logInPath(), JSON.toJSONString(map), sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
-            AVException error = e;
+          public void onSuccess(String content, 后端错误 e) {
+            后端错误 error = e;
             T resultUser = user;
             if (!AVUtils.isBlankContent(content)) {
               AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
@@ -485,7 +485,7 @@ public class AVUser extends 数据 {
               AVUser.changeCurrentUser(user, true);
             } else {
               resultUser = null;
-              error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
             }
             if (internalCallback != null) {
               internalCallback.internalDone(resultUser, error);
@@ -501,19 +501,19 @@ public class AVUser extends 数据 {
         }, null, null);
   }
 
-  public static AVUser loginByMobilePhoneNumber(String phone, String password) throws AVException {
+  public static AVUser loginByMobilePhoneNumber(String phone, String password) throws 后端错误 {
     return loginByMobilePhoneNumber(phone, password, AVUser.class);
   }
 
   public static <T extends AVUser> T loginByMobilePhoneNumber(String phone, String password,
-      Class<T> clazz) throws AVException {
+      Class<T> clazz) throws 后端错误 {
 
     final AVUser[] list = {null};
 
     loginByMobilePhoneNumberInBackground(phone, password, true, new LogInCallback<T>() {
 
       @Override
-      public void done(T user, AVException e) {
+      public void done(T user, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         } else {
@@ -554,15 +554,15 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(logInPath(), JSON.toJSONString(map), sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
-            AVException error = e;
+          public void onSuccess(String content, 后端错误 e) {
+            后端错误 error = e;
             T resultUser = user;
             if (!AVUtils.isBlankContent(content)) {
               AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
               AVUser.changeCurrentUser(user, true);
             } else {
               resultUser = null;
-              error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
             }
             if (internalCallback != null) {
               internalCallback.internalDone(resultUser, error);
@@ -588,7 +588,7 @@ public class AVUser extends 数据 {
    * @return
    * @throws AVException
    */
-  public static AVUser loginBySMSCode(String phone, String smsCode) throws AVException {
+  public static AVUser loginBySMSCode(String phone, String smsCode) throws 后端错误 {
     return loginBySMSCode(phone, smsCode, AVUser.class);
   }
 
@@ -604,12 +604,12 @@ public class AVUser extends 数据 {
    * @throws AVException
    */
   public static <T extends AVUser> T loginBySMSCode(String phone, String smsCode, Class<T> clazz)
-      throws AVException {
+      throws 后端错误 {
     final AVUser[] list = {null};
     loginBySMSCodeInBackground(phone, smsCode, true, new LogInCallback<T>() {
 
       @Override
-      public void done(T user, AVException e) {
+      public void done(T user, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         } else {
@@ -669,15 +669,15 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(logInPath(), JSON.toJSONString(map), sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
-            AVException error = e;
+          public void onSuccess(String content, 后端错误 e) {
+            后端错误 error = e;
             T resultUser = user;
             if (!AVUtils.isBlankContent(content)) {
               AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
               AVUser.changeCurrentUser(user, true);
             } else {
               resultUser = null;
-              error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
             }
             if (internalCallback != null) {
               internalCallback.internalDone(resultUser, error);
@@ -703,7 +703,7 @@ public class AVUser extends 数据 {
     final ArrayList<T> arrayList = new ArrayList<>();
     refreshSessionToken(true, new LogInCallback<T>(){
       @Override
-      public void done(T user, AVException e) {
+      public void done(T user, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         } else {
@@ -727,7 +727,7 @@ public class AVUser extends 数据 {
   private <T extends AVUser> void refreshSessionToken(boolean sync, final LogInCallback<T> callback) {
     if (AVUtils.isBlankContent(objectId) || AVUtils.isBlankContent(sessionToken)) {
       if (null != callback) {
-        callback.internalDone(null, new AVException(AVException.MISSING_OBJECT_ID, "current user is not login"));
+        callback.internalDone(null, new 后端错误(后端错误.MISSING_OBJECT_ID, "current user is not login"));
       }
       return;
     }
@@ -736,8 +736,8 @@ public class AVUser extends 数据 {
     String param = AVUtils.restfulServerData(null);
     PaasClient.storageInstance().putObject(path, param, sync, headerMap(), new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
-        AVException error = e;
+      public void onSuccess(String content, 后端错误 e) {
+        后端错误 error = e;
 
         T user = (T)AVUser.newAVUser(subClazz == null ? AVUser.class : subClazz, null);
         if (null != user && !AVUtils.isBlankContent(content)) {
@@ -745,7 +745,7 @@ public class AVUser extends 数据 {
           user.processAuthData(null);
           AVUser.changeCurrentUser(user, true);
         } else {
-          error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+          error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
         }
         if (callback != null) {
           callback.internalDone(user, error);
@@ -769,7 +769,7 @@ public class AVUser extends 数据 {
    * @return
    * @throws AVException
    */
-  public static AVUser becomeWithSessionToken(String sessionToken) throws AVException {
+  public static AVUser becomeWithSessionToken(String sessionToken) throws 后端错误 {
     return becomeWithSessionToken(sessionToken, AVUser.class);
   }
 
@@ -782,12 +782,12 @@ public class AVUser extends 数据 {
    * @return
    * @throws AVException
    */
-  public static <T extends AVUser> AVUser becomeWithSessionToken(String sessionToken, Class<T> clazz) throws AVException {
+  public static <T extends AVUser> AVUser becomeWithSessionToken(String sessionToken, Class<T> clazz) throws 后端错误 {
     final AVUser[] list = {null};
 
     becomeWithSessionTokenInBackground(sessionToken, true, new LogInCallback<T>() {
       @Override
-      public void done(T user, AVException e) {
+      public void done(T user, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         } else {
@@ -843,8 +843,8 @@ public class AVUser extends 数据 {
 
     PaasClient.storageInstance().getObject("users/me", params, sync, null, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
-        AVException error = e;
+      public void onSuccess(String content, 后端错误 e) {
+        后端错误 error = e;
         T resultUser = user;
         if (!AVUtils.isBlankContent(content)) {
           AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
@@ -852,7 +852,7 @@ public class AVUser extends 数据 {
           AVUser.changeCurrentUser(user, true);
         } else {
           resultUser = null;
-          error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+          error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
         }
         if (internalCallback != null) {
           internalCallback.internalDone(resultUser, error);
@@ -882,7 +882,7 @@ public class AVUser extends 数据 {
    * @see AVOSCloud#requestSMSCode(String)
    */
   public static AVUser signUpOrLoginByMobilePhone(String mobilePhoneNumber, String smsCode)
-      throws AVException {
+      throws 后端错误 {
     return signUpOrLoginByMobilePhone(mobilePhoneNumber, smsCode, AVUser.class);
   }
 
@@ -900,13 +900,13 @@ public class AVUser extends 数据 {
    * @see AVOSCloud#requestSMSCode(String)
    */
   public static <T extends AVUser> T signUpOrLoginByMobilePhone(String mobilePhoneNumber,
-      String smsCode, Class<T> clazz) throws AVException {
+      String smsCode, Class<T> clazz) throws 后端错误 {
     final AVUser[] list = {null};
     signUpOrLoginByMobilePhoneInBackground(mobilePhoneNumber, smsCode, true, clazz,
         new LogInCallback<T>() {
 
           @Override
-          public void done(T user, AVException e) {
+          public void done(T user, 后端错误 e) {
             if (e != null) {
               AVExceptionHolder.add(e);
             } else {
@@ -961,7 +961,7 @@ public class AVUser extends 数据 {
       LogInCallback<T> callback) {
     if (AVUtils.isBlankString(smsCode)) {
       if (callback != null) {
-        callback.internalDone(null, new AVException(AVException.OTHER_CAUSE,
+        callback.internalDone(null, new 后端错误(后端错误.OTHER_CAUSE,
             "SMS Code can't be empty"));
       } else {
         LogUtil.avlog.e("SMS Code can't be empty");
@@ -978,15 +978,15 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("usersByMobilePhone", JSON.toJSONString(map), sync,
         false, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
-            AVException error = e;
+          public void onSuccess(String content, 后端错误 e) {
+            后端错误 error = e;
             T resultUser = user;
             if (!AVUtils.isBlankContent(content)) {
               AVUtils.copyPropertiesFromJsonStringToAVObject(content, user);
               AVUser.changeCurrentUser(user, true);
             } else {
               resultUser = null;
-              error = new AVException(AVException.OBJECT_NOT_FOUND, "User is not found.");
+              error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "User is not found.");
             }
             if (internalCallback != null) {
               internalCallback.internalDone(resultUser, error);
@@ -1098,7 +1098,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("requestPasswordReset", object, sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1118,11 +1118,11 @@ public class AVUser extends 数据 {
    * 
    * 您需要保证用户有效的登录状态
    */
-  public void updatePassword(String oldPassword, String newPassword) throws AVException {
+  public void updatePassword(String oldPassword, String newPassword) throws 后端错误 {
     updatePasswordInBackground(oldPassword, newPassword, new UpdatePasswordCallback() {
 
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1161,7 +1161,7 @@ public class AVUser extends 数据 {
       PaasClient.storageInstance().putObject(relativePath, paramsString, sync, headerMap(),
           new GenericObjectCallback() {
             @Override
-            public void onSuccess(String content, AVException e) {
+            public void onSuccess(String content, 后端错误 e) {
               if (null == e && !TextUtils.isEmpty(content)) {
                 sessionToken = AVUtils.getJSONValue(content, SESSION_TOKEN_KEY);
               }
@@ -1182,7 +1182,7 @@ public class AVUser extends 数据 {
    * @param phoneNumber the phone need to reset password
    * @throws AVException
    */
-  public static void requestPasswordResetBySmsCode(String phoneNumber) throws AVException {
+  public static void requestPasswordResetBySmsCode(String phoneNumber) throws 后端错误 {
     requestPasswordResetBySmsCode(phoneNumber, null);
   }
 
@@ -1193,11 +1193,11 @@ public class AVUser extends 数据 {
    * @param validateToken the token has been verified by captcha
    * @throws AVException
    */
-  public static void requestPasswordResetBySmsCode(String phoneNumber, String validateToken) throws AVException {
+  public static void requestPasswordResetBySmsCode(String phoneNumber, String validateToken) throws 后端错误 {
     requestPasswordResetBySmsCodeInBackground(phoneNumber, validateToken, true,
         new RequestMobileCodeCallback() {
           @Override
-          public void done(AVException e) {
+          public void done(后端错误 e) {
             if (e != null) {
               AVExceptionHolder.add(e);
             }
@@ -1240,7 +1240,7 @@ public class AVUser extends 数据 {
 
     if (AVUtils.isBlankString(phoneNumber)
         || !AVUtils.checkMobilePhoneNumber(phoneNumber)) {
-      callback.internalDone(new AVException(AVException.INVALID_PHONE_NUMBER,
+      callback.internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER,
           "Invalid Phone Number"));
       return;
     }
@@ -1255,7 +1255,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("requestPasswordResetBySmsCode", object, sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1280,10 +1280,10 @@ public class AVUser extends 数据 {
    * @param newPassword
    * @throws AVException
    */
-  public static void resetPasswordBySmsCode(String smsCode, String newPassword) throws AVException {
+  public static void resetPasswordBySmsCode(String smsCode, String newPassword) throws 后端错误 {
     resetPasswordBySmsCodeInBackground(smsCode, newPassword, true, new UpdatePasswordCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1317,7 +1317,7 @@ public class AVUser extends 数据 {
 
     if (AVUtils.isBlankString(smsCode) || !AVUtils.checkMobileVerifyCode(smsCode)) {
       callback
-          .internalDone(new AVException(AVException.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
+          .internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
       return;
     }
 
@@ -1330,12 +1330,12 @@ public class AVUser extends 数据 {
           @Override
           public void onFailure(Throwable error, String content) {
             if (internalCallback != null) {
-              internalCallback.internalDone(new AVException(content, error));
+              internalCallback.internalDone(new 后端错误(content, error));
             }
           }
 
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             internalCallback.internalDone(e);
           }
         }, null, null);
@@ -1376,7 +1376,7 @@ public class AVUser extends 数据 {
       RequestEmailVerifyCallback callback) {
     final RequestEmailVerifyCallback internalCallback = callback;
     if (AVUtils.isBlankString(email) || !AVUtils.checkEmailAddress(email)) {
-      callback.internalDone(new AVException(AVException.INVALID_EMAIL_ADDRESS, "Invalid Email"));
+      callback.internalDone(new 后端错误(后端错误.INVALID_EMAIL_ADDRESS, "Invalid Email"));
       return;
     }
     Map<String, Object> map = new HashMap<String, Object>();
@@ -1385,7 +1385,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("requestEmailVerify", object, sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1405,7 +1405,7 @@ public class AVUser extends 数据 {
    * @param phoneNumber the phone need to be verified
    * @throws AVException
    */
-  public static void requestMobilePhoneVerify(String phoneNumber) throws AVException {
+  public static void requestMobilePhoneVerify(String phoneNumber) throws 后端错误 {
     requestMobilePhoneVerify(phoneNumber, null);
   }
 
@@ -1415,10 +1415,10 @@ public class AVUser extends 数据 {
    * @param validateToken the token has been verified by captcha
    * @throws AVException
    */
-  public static void requestMobilePhoneVerify(String phoneNumber, String validateToken) throws AVException {
+  public static void requestMobilePhoneVerify(String phoneNumber, String validateToken) throws 后端错误 {
     requestMobilePhoneVerifyInBackground(phoneNumber, validateToken, true, new RequestMobileCodeCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1462,7 +1462,7 @@ public class AVUser extends 数据 {
 
     if (AVUtils.isBlankString(phoneNumber)
         || !AVUtils.checkMobilePhoneNumber(phoneNumber)) {
-      callback.internalDone(new AVException(AVException.INVALID_PHONE_NUMBER,
+      callback.internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER,
           "Invalid Phone Number"));
       return;
     }
@@ -1477,7 +1477,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("requestMobilePhoneVerify", object, sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1498,7 +1498,7 @@ public class AVUser extends 数据 {
    * @param phoneNumber the phone need to login
    * @throws AVException
    */
-  public static void requestLoginSmsCode(String phoneNumber) throws AVException {
+  public static void requestLoginSmsCode(String phoneNumber) throws 后端错误 {
     requestLoginSmsCode(phoneNumber, null);
   }
 
@@ -1509,10 +1509,10 @@ public class AVUser extends 数据 {
    * @param validateToken the token has been verified by captcha
    * @throws AVException
    */
-  public static void requestLoginSmsCode(String phoneNumber, String validateToken) throws AVException {
+  public static void requestLoginSmsCode(String phoneNumber, String validateToken) throws 后端错误 {
     requestLoginSmsCodeInBackground(phoneNumber, validateToken, false, new RequestMobileCodeCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1555,7 +1555,7 @@ public class AVUser extends 数据 {
 
     if (AVUtils.isBlankString(phoneNumber)
         || !AVUtils.checkMobilePhoneNumber(phoneNumber)) {
-      callback.internalDone(new AVException(AVException.INVALID_PHONE_NUMBER,
+      callback.internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER,
           "Invalid Phone Number"));
       return;
     }
@@ -1570,7 +1570,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject("requestLoginSmsCode", object, sync, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1592,10 +1592,10 @@ public class AVUser extends 数据 {
    * 
    * @param verifyCode
    */
-  public static void verifyMobilePhone(String verifyCode) throws AVException {
+  public static void verifyMobilePhone(String verifyCode) throws 后端错误 {
     verifyMobilePhoneInBackground(true, verifyCode, new AVMobilePhoneVerifyCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1628,7 +1628,7 @@ public class AVUser extends 数据 {
 
     if (AVUtils.isBlankString(verifyCode) || !AVUtils.checkMobileVerifyCode(verifyCode)) {
       callback
-          .internalDone(new AVException(AVException.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
+          .internalDone(new 后端错误(后端错误.INVALID_PHONE_NUMBER, "Invalid Verify Code"));
       return;
     }
 
@@ -1636,7 +1636,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(endpointer, AVUtils.restfulServerData(null), sync,
         false, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -1703,7 +1703,7 @@ public class AVUser extends 数据 {
   }
 
   @JSONField(serialize = false)
-  public List<AVRole> getRoles() throws AVException {
+  public List<AVRole> getRoles() throws 后端错误 {
     AVQuery<AVRole> roleQuery = new AVQuery<AVRole>(AVRole.className);
     roleQuery.whereEqualTo(AVUser.AVUSER_ENDPOINT, this);
     return roleQuery.find();
@@ -1714,7 +1714,7 @@ public class AVUser extends 数据 {
     roleQuery.whereEqualTo(AVUSER_ENDPOINT, this);
     roleQuery.findInBackground(new FindCallback<AVRole>() {
       @Override
-      public void done(List<AVRole> list, AVException e) {
+      public void done(List<AVRole> list, 后端错误 e) {
         callback.internalDone(list, e);
       }
     });
@@ -1725,7 +1725,7 @@ public class AVUser extends 数据 {
       try {
         this.save();
         if (callback != null) callback.internalDone(null);
-      } catch (AVException e) {
+      } catch (后端错误 e) {
         if (callback != null) callback.internalDone(e);
       }
 
@@ -1733,7 +1733,7 @@ public class AVUser extends 数据 {
       this.saveInBackground(new SaveCallback() {
 
         @Override
-        public void done(AVException e) {
+        public void done(后端错误 e) {
           if (callback != null) callback.internalDone(e);
         }
       });
@@ -1755,11 +1755,11 @@ public class AVUser extends 数据 {
    * unless you are managing your own threading.
    * </p>
    */
-  public void signUp() throws AVException {
+  public void signUp() throws 后端错误 {
     signUp(true, new SignUpCallback() {
 
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1854,7 +1854,7 @@ public class AVUser extends 数据 {
   private boolean checkUserAuthentication(final AVCallback callback) {
     if (!this.isAuthenticated() || AVUtils.isBlankString(getObjectId())) {
       if (callback != null) {
-        callback.internalDone(AVErrorUtils.createException(AVException.SESSION_MISSING,
+        callback.internalDone(AVErrorUtils.createException(后端错误.SESSION_MISSING,
             "No valid session token, make sure signUp or login has been called."));
       }
       return false;
@@ -1889,7 +1889,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(endPoint, paramsString, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             super.onSuccess(content, e); // To change body of overridden methods use File | Settings
             // |
             // File Templates.
@@ -1917,7 +1917,7 @@ public class AVUser extends 数据 {
     String endPoint = AVPowerfulUtils.getFollowEndPoint(getObjectId(), userObjectId);
     PaasClient.storageInstance().deleteObject(endPoint, false, new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         super.onSuccess(content, e); // To change body of overridden methods use File | Settings |
         // File Templates.
         if (callback != null) {
@@ -2017,7 +2017,7 @@ public class AVUser extends 数据 {
    * @param clazz AVUser类或者其子类。
    * @since 2.3.0
    */
-  public <T extends AVUser> AVQuery<T> followerQuery(Class<T> clazz) throws AVException {
+  public <T extends AVUser> AVQuery<T> followerQuery(Class<T> clazz) throws 后端错误 {
     if (AVUtils.isBlankString(this.getObjectId())) {
       throw AVErrorUtils.sessionMissingException();
     }
@@ -2058,7 +2058,7 @@ public class AVUser extends 数据 {
    * 
    * @since 2.3.0
    */
-  public <T extends AVUser> AVQuery<T> followeeQuery(Class<T> clazz) throws AVException {
+  public <T extends AVUser> AVQuery<T> followeeQuery(Class<T> clazz) throws 后端错误 {
     if (AVUtils.isBlankString(this.getObjectId())) {
       throw AVErrorUtils.sessionMissingException();
     }
@@ -2118,7 +2118,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().getObject(endPoint, null, false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             super.onSuccess(content, e);
             List<AVUser> list = processResultByTag(content, FOLLOWER_TAG);
             if (callback != null) {
@@ -2145,7 +2145,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().getObject(endPoint, null, false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             super.onSuccess(content, e);
             List<AVUser> list = processResultByTag(content, FOLLOWEE_TAG);
             if (callback != null) {
@@ -2171,7 +2171,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().getObject(endPoint, null, false, null,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             super.onSuccess(content, e);
             Map<String, List<AVUser>> map = processFollowerAndFollowee(content);
             if (callback != null) {
@@ -2269,31 +2269,31 @@ public class AVUser extends 数据 {
                                        final LogInCallback callback) {
     if (null == clazz) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. clazz must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. clazz must not null/empty."));
       }
       return;
     }
     if (null == authData || authData.isEmpty()) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(platform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(unionId)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. unionId must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. unionId must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(unionIdPlatform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. unionIdPlatform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. unionIdPlatform must not null/empty."));
       }
       return;
     }
@@ -2327,19 +2327,19 @@ public class AVUser extends 数据 {
                                                           final String platform, final LogInCallback callback) {
     if (null == clazz) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. clazz must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. clazz must not null/empty."));
       }
       return;
     }
     if (null == authData || authData.isEmpty()) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(platform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
       }
       return;
     }
@@ -2351,7 +2351,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(AVUSER_ENDPOINT, jsonString, false, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (e == null) {
               AVUser userObject = AVUser.newAVUser(clazz, callback);
               if (userObject == null) {
@@ -2394,7 +2394,7 @@ public class AVUser extends 数据 {
     if (userInfo == null) {
       if (callback != null) {
         callback.internalDone(null,
-            AVErrorUtils.createException(AVException.OTHER_CAUSE, "NULL userInfo."));
+            AVErrorUtils.createException(后端错误.OTHER_CAUSE, "NULL userInfo."));
       }
       return;
     }
@@ -2405,7 +2405,7 @@ public class AVUser extends 数据 {
     PaasClient.storageInstance().postObject(AVUSER_ENDPOINT, jsonString, false, false,
         new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (e == null) {
               T userObject = AVUser.newAVUser(clazz, callback);
               if (userObject == null) {
@@ -2442,7 +2442,7 @@ public class AVUser extends 数据 {
       final SaveCallback callback) {
     if (userInfo == null) {
       if (callback != null) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE,
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE,
             "NULL userInfo."));
       }
       return;
@@ -2476,13 +2476,13 @@ public class AVUser extends 数据 {
   public void associateWithAuthData(Map<String, Object> authData, String platform, final SaveCallback callback) {
     if (null == authData || authData.isEmpty()) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(platform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
       }
       return;
     }
@@ -2501,25 +2501,25 @@ public class AVUser extends 数据 {
                                     boolean asMainAccount, final SaveCallback callback) {
     if (null == authData || authData.isEmpty()) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. authdata must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(platform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(unionId)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. unionId must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. unionId must not null/empty."));
       }
       return;
     }
     if (StringUtils.isBlankString(unionIdPlatform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. unionIdPlatform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. unionIdPlatform must not null/empty."));
       }
       return;
     }
@@ -2545,7 +2545,7 @@ public class AVUser extends 数据 {
   public void dissociateAuthData(final String platform, final SaveCallback callback) {
     if (AVUtils.isBlankString(platform)) {
       if (null != callback) {
-        callback.internalDone(AVErrorUtils.createException(AVException.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
+        callback.internalDone(AVErrorUtils.createException(后端错误.OTHER_CAUSE, "illegal parameter. platform must not null/empty."));
       }
       return;
     }
@@ -2557,7 +2557,7 @@ public class AVUser extends 数据 {
     if (this.isAuthenticated() && !AVUtils.isBlankString(getObjectId())) {
       this.saveInBackground(new SaveCallback() {
         @Override
-        public void done(AVException e) {
+        public void done(后端错误 e) {
           processAuthData(new AVThirdPartyUserAuth(null, null, platform, null));
           if (null != callback) {
             callback.internalDone(e);
@@ -2566,7 +2566,7 @@ public class AVUser extends 数据 {
       });
     } else {
       if (null != callback) {
-        callback.internalDone(new AVException(AVException.SESSION_MISSING,
+        callback.internalDone(new 后端错误(后端错误.SESSION_MISSING,
             "the user object missing a valid session"));
       }
     }
@@ -2584,7 +2584,7 @@ public class AVUser extends 数据 {
       user.saveInBackground(new SaveCallback() {
 
         @Override
-        public void done(AVException e) {
+        public void done(后端错误 e) {
           user.processAuthData(new AVThirdPartyUserAuth(null, null, type, null));
           if (callback != null) {
             callback.internalDone(e);
@@ -2593,7 +2593,7 @@ public class AVUser extends 数据 {
       });
     } else {
       if (callback != null) {
-        callback.internalDone(new AVException(AVException.SESSION_MISSING,
+        callback.internalDone(new 后端错误(后端错误.SESSION_MISSING,
             "the user object missing a valid session"));
       }
     }

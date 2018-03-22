@@ -244,7 +244,7 @@ public class PaasClient {
         AVCacheManager.sharedInstance().get(absolutURLString, maxAgeInMilliseconds, lastModifyTime,
             new GenericObjectCallback() {
               @Override
-              public void onSuccess(String content, AVException e) {
+              public void onSuccess(String content, 后端错误 e) {
                 callback.onSuccess(content, e);
               }
 
@@ -257,7 +257,7 @@ public class PaasClient {
       case NETWORK_ELSE_CACHE:
         getObject(relativePath, parameters, sync, header, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             callback.onSuccess(content, e);
           }
 
@@ -276,7 +276,7 @@ public class PaasClient {
         AVCacheManager.sharedInstance().get(absolutURLString, maxAgeInMilliseconds, lastModifyTime,
             new GenericObjectCallback() {
               @Override
-              public void onSuccess(String content, AVException e) {
+              public void onSuccess(String content, 后端错误 e) {
                 callback.onSuccess(content, e);
                 getObject(relativePath, parameters, sync, header, callback, policy);
               }
@@ -566,7 +566,7 @@ public class PaasClient {
         String _internalId = fileMap.get("_internalId");
         GenericObjectCallback newCallback = new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (callback != null) {
               callback.onSuccess(content, e);
             }

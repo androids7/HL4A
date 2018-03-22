@@ -174,7 +174,7 @@ public class AppRouterManager {
         builder.url(ROUTER_ADDRESS + AVOSCloud.applicationId).get();
         client.execute(builder.build(), false, new GetHttpResponseHandler(new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (null == e) {
               if (AVOSCloud.showInternalDebugLog()) {
                 LogUtil.avlog.d(" fetchRouter :" + content);
@@ -191,9 +191,9 @@ public class AppRouterManager {
 
           @Override
           public void onFailure(Throwable error, String content) {
-            LogUtil.avlog.e("get router error ", new AVException(error));
+            LogUtil.avlog.e("get router error ", new 后端错误(error));
             if (null != callback) {
-              callback.internalDone(new AVException(error));
+              callback.internalDone(new 后端错误(error));
             }
           }
 

@@ -23,9 +23,9 @@ import java.io.InputStream;
  * </pre>
  */
 public abstract class GetDataStreamCallback extends AVCallback<InputStream> {
-  public abstract void done(InputStream data, AVException e);
+  public abstract void done(InputStream data, 后端错误 e);
 
-  protected final void internalDone0(InputStream returnValue, AVException e) {
+  protected final void internalDone0(InputStream returnValue, 后端错误 e) {
     done(returnValue, e);
   }
 }

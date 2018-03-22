@@ -19,7 +19,7 @@ import okhttp3.Request;
  * 流程：
  * 如果本地包含缓存，则直接返回缓存数据，反正则从网络加载数据
  */
-class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
+class AVFileDownloader extends AsyncTask<String, Integer, 后端错误> {
 
   private final GetDataCallback dataCallback;
   private final GetDataStreamCallback dataStreamCallback;
@@ -47,7 +47,7 @@ class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
     this.progressCallback = progressCallback;
   }
 
-  protected AVException doWork(final String url) {
+  protected 后端错误 doWork(final String url) {
     fileData = null;
     if (!AVUtils.isBlankContent(url)) {
       File cacheFile = getCacheFile(url);
@@ -68,12 +68,12 @@ class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
         return downloadFileFromNetwork(url);
       }
     } else {
-      return new AVException(new IllegalArgumentException("url is null"));
+      return new 后端错误(new IllegalArgumentException("url is null"));
     }
   }
 
   @Override
-  protected AVException doInBackground(String... sUrl) {
+  protected 后端错误 doInBackground(String... sUrl) {
     return doWork(sUrl[0]);
   }
 
@@ -86,7 +86,7 @@ class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
   }
 
   @Override
-  protected void onPostExecute(AVException e) {
+  protected void onPostExecute(后端错误 e) {
     super.onPostExecute(e);
     if (dataCallback != null) {
       dataCallback.internalDone(fileData, e);
@@ -100,13 +100,13 @@ class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
    * @param url
    * @return
    */
-  private AVException downloadFileFromNetwork(final String url) {
+  private 后端错误 downloadFileFromNetwork(final String url) {
     if (AVOSCloud.isDebugLogEnabled()) {
       LogUtil.avlog.d("downloadFileFromNetwork: " + url);
     }
     final File cacheFile = getCacheFile(url);
 
-    final AVException[] errors = new AVException[1];
+    final 后端错误[] errors = new 后端错误[1];
     Request.Builder requestBuilder = new Request.Builder();
     requestBuilder.url(url);
 
@@ -160,15 +160,15 @@ class AVFileDownloader extends AsyncTask<String, Integer, AVException> {
             }
           }
         } else if (null != data) {
-          errors[0] = new AVException(statusCode, "status code is invalid");
+          errors[0] = new 后端错误(statusCode, "status code is invalid");
         } else {
-          errors[0] = new AVException(statusCode, "data is empty!");
+          errors[0] = new 后端错误(statusCode, "data is empty!");
         }
       }
 
       @Override
       public void onFailure(int statusCode, Header[] headers, Throwable error) {
-        errors[0] = new AVException(error);
+        errors[0] = new 后端错误(error);
       }
     });
     this.publishProgress(100);

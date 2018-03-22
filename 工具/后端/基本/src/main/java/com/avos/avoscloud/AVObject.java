@@ -76,8 +76,8 @@ public class AVObject implements Parcelable {
     }
 
     @Override
-    public void onSuccess(String content, AVException e) {
-      AVException error = e;
+    public void onSuccess(String content, 后端错误 e) {
+      后端错误 error = e;
       AVObject object = AVObject.this;
       if (!AVUtils.isBlankContent(content)) {
         AVUtils.copyPropertiesFromJsonStringToAVObject(content, object);
@@ -85,7 +85,7 @@ public class AVObject implements Parcelable {
         AVObject.this.onDataSynchronized();
       } else {
         object = null;
-        error = new AVException(AVException.OBJECT_NOT_FOUND, "The object is not Found");
+        error = new 后端错误(后端错误.OBJECT_NOT_FOUND, "The object is not Found");
       }
       if (internalCallback != null) {
         internalCallback.internalDone(object, error);
@@ -495,14 +495,14 @@ public class AVObject implements Parcelable {
    * @return A AVObject without data.
    */
   public static <T extends AVObject> T createWithoutData(Class<T> clazz, String objectId)
-      throws AVException {
+      throws 后端错误 {
     try {
       T result = clazz.newInstance();
       result.setClassName(getSubClassName(clazz));
       result.setObjectId(objectId);
       return result;
     } catch (Exception e) {
-      throw new AVException("Create subclass instance failed.", e);
+      throw new 后端错误("Create subclass instance failed.", e);
     }
   }
 
@@ -511,7 +511,7 @@ public class AVObject implements Parcelable {
    *
    * @throws AVException Throws an error if the object does not exist or if the internet fails.
    */
-  public void delete() throws AVException {
+  public void delete() throws 后端错误 {
     delete(null);
   }
 
@@ -521,10 +521,10 @@ public class AVObject implements Parcelable {
    * @param option options for server to
    * @throws Exception AVException Throws an error if the object does not exist or if the internet fails.
    */
-  public void delete(AVDeleteOption option) throws AVException {
+  public void delete(AVDeleteOption option) throws 后端错误 {
     delete(true, false, option, new DeleteCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -547,10 +547,10 @@ public class AVObject implements Parcelable {
    * @throws AVException
    * @since 1.4.0
    */
-  public static void deleteAll(Collection<? extends AVObject> objects) throws AVException {
+  public static void deleteAll(Collection<? extends AVObject> objects) throws 后端错误 {
     deleteAll(true, false, objects, new DeleteCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -615,7 +615,7 @@ public class AVObject implements Parcelable {
       String endpoint = sb.toString();
       PaasClient.storageInstance().deleteObject(endpoint, sync, false, new GenericObjectCallback() {
         @Override
-        public void onSuccess(String content, AVException e) {
+        public void onSuccess(String content, 后端错误 e) {
           if (internalCallback != null) {
             internalCallback.internalDone(null, null);
           }
@@ -712,7 +712,7 @@ public class AVObject implements Parcelable {
     Map<String, String> params = null;
     if (option != null && option.matchQuery != null) {
       if (this.getClassName() != null && !this.getClassName().equals(option.matchQuery.getClassName())) {
-        callback.internalDone(new AVException(0, "AVObject class inconsistant with AVQuery in AVDeleteOption"));
+        callback.internalDone(new 后端错误(0, "AVObject class inconsistant with AVQuery in AVDeleteOption"));
         return;
       }
       Map<String, Object> whereOperationMap = null;
@@ -727,7 +727,7 @@ public class AVObject implements Parcelable {
     getPaasClientInstance().deleteObject(url, sync,
         isEventually, new GenericObjectCallback() {
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             if (internalCallback != null) {
               internalCallback.internalDone(null, null);
             }
@@ -742,14 +742,14 @@ public class AVObject implements Parcelable {
         }, this.getObjectId(), internalId());
   }
 
-  public AVObject fetch() throws AVException {
+  public AVObject fetch() throws 后端错误 {
     return this.fetch(null);
   }
 
-  public AVObject fetch(String includeKeys) throws AVException {
+  public AVObject fetch(String includeKeys) throws 后端错误 {
     fetchInBackground(true, includeKeys, new GetCallback<AVObject>() {
       @Override
-      public void done(AVObject object, AVException e) {
+      public void done(AVObject object, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -773,7 +773,7 @@ public class AVObject implements Parcelable {
    * @return The list passed in.
    * @throws AVException Throws an exception if the server returns an error or is inaccessible.
    */
-  public static List<AVObject> fetchAll(List<AVObject> objects) throws AVException {
+  public static List<AVObject> fetchAll(List<AVObject> objects) throws 后端错误 {
     List<AVObject> results = new LinkedList<AVObject>();
     for (AVObject o : objects) {
       results.add(o.fetch());
@@ -787,7 +787,7 @@ public class AVObject implements Parcelable {
    * @param objects The list of objects to fetch.
    * @throws AVException Throws an exception if the server returns an error or is inaccessible.
    */
-  public static List<AVObject> fetchAllIfNeeded(List<AVObject> objects) throws AVException {
+  public static List<AVObject> fetchAllIfNeeded(List<AVObject> objects) throws 后端错误 {
     List<AVObject> results = new LinkedList<AVObject>();
     for (AVObject o : objects) {
       results.add(o.fetchIfNeeded());
@@ -848,7 +848,7 @@ public class AVObject implements Parcelable {
       if (!check || !object.isDataAvailable()) {
         object.fetchInBackground(false, null, new GetCallback<AVObject>() {
           @Override
-          public void done(AVObject object, AVException e) {
+          public void done(AVObject object, 后端错误 e) {
             if (callback != null) {
               callback.onGroupRequestFinished(counter.decrementAndGet(), total, object);
             }
@@ -864,15 +864,15 @@ public class AVObject implements Parcelable {
     }
   }
 
-  public AVObject fetchIfNeeded() throws AVException {
+  public AVObject fetchIfNeeded() throws 后端错误 {
     return this.fetchIfNeeded(null);
   }
 
-  public AVObject fetchIfNeeded(String includeKeys) throws AVException {
+  public AVObject fetchIfNeeded(String includeKeys) throws 后端错误 {
     if (!isDataAvailable()) {
       fetchInBackground(true, includeKeys, new GetCallback<AVObject>() {
         @Override
-        public void done(AVObject object, AVException e) {
+        public void done(AVObject object, 后端错误 e) {
           if (e != null) {
             AVExceptionHolder.add(e);
           }
@@ -942,7 +942,7 @@ public class AVObject implements Parcelable {
   private void fetchInBackground(boolean sync, String includeKeys, GetCallback<AVObject> callback) {
     if (AVUtils.isBlankString(getObjectId())) {
       if (callback != null) {
-        AVException exception =
+        后端错误 exception =
             AVErrorUtils.createException(AVErrorUtils.MISSING_OBJECTID, "Missing objectId");
         callback.internalDone(null, exception);
       }
@@ -1457,7 +1457,7 @@ public class AVObject implements Parcelable {
    *
    * @throws AVException Throws an exception if the server is inaccessible.
    */
-  public void refresh() throws AVException {
+  public void refresh() throws 后端错误 {
     this.refresh(null);
   }
 
@@ -1469,10 +1469,10 @@ public class AVObject implements Parcelable {
    * @throws AVException Throws an exception if the server is inaccessible.
    * @since 2.0.2
    */
-  public void refresh(String includeKeys) throws AVException {
+  public void refresh(String includeKeys) throws 后端错误 {
     refreshInBackground(true, includeKeys, new RefreshCallback<AVObject>() {
       @Override
-      public void done(AVObject object, AVException e) {
+      public void done(AVObject object, 后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1557,10 +1557,10 @@ public class AVObject implements Parcelable {
    *
    * @throws AVException
    */
-  public void save() throws AVException {
+  public void save() throws 后端错误 {
     saveObject(true, false, new SaveCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1581,10 +1581,10 @@ public class AVObject implements Parcelable {
    *
    * @param option save options
    */
-  public void save(AVSaveOption option) throws AVException {
+  public void save(AVSaveOption option) throws 后端错误 {
     saveObject(option, true, false, new SaveCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1607,10 +1607,10 @@ public class AVObject implements Parcelable {
    * @param objects The objects to save.
    * @throws AVException Throws an exception if the server returns an error or is inaccessible.
    */
-  public static void saveAll(List<? extends AVObject> objects) throws AVException {
+  public static void saveAll(List<? extends AVObject> objects) throws 后端错误 {
     _saveAll(true, objects, new SaveCallback() {
       @Override
-      public void done(AVException e) {
+      public void done(后端错误 e) {
         if (e != null) {
           AVExceptionHolder.add(e);
         }
@@ -1669,7 +1669,7 @@ public class AVObject implements Parcelable {
 
     final GenericObjectCallback genericObjectCallback = new GenericObjectCallback() {
       @Override
-      public void onSuccess(String content, AVException e) {
+      public void onSuccess(String content, 后端错误 e) {
         for (AVObject o : objects) {
           o.copyFromJson(content);
           o.running = false;
@@ -1698,7 +1698,7 @@ public class AVObject implements Parcelable {
         saveFileBeforeSave(files, sync, new SaveCallback() {
 
           @Override
-          public void done(AVException e) {
+          public void done(后端错误 e) {
             for (AVObject o : objects) {
               o.running = true;
               o.buildParameterForNonSavedObject(list);
@@ -1716,7 +1716,7 @@ public class AVObject implements Parcelable {
         PaasClient.storageInstance().postBatchSave(list, sync, false, null, genericObjectCallback,
             null, null);
       }
-    } catch (AVException e) {
+    } catch (后端错误 e) {
       if (callback != null) {
         callback.internalDone(e);
       }
@@ -1770,7 +1770,7 @@ public class AVObject implements Parcelable {
     // add request to queue
     if (running) {
       if (callback != null) {
-        callback.internalDone(new AVException(AVException.OTHER_CAUSE,
+        callback.internalDone(new 后端错误(后端错误.OTHER_CAUSE,
             "already has one request sending"));
       }
       return;
@@ -1785,7 +1785,7 @@ public class AVObject implements Parcelable {
 
     if (option != null && option.matchQuery != null) {
       if (this.getClassName() != null && !this.getClassName().equals(option.matchQuery.getClassName())) {
-        callback.internalDone(new AVException(0, "AVObject class inconsistant with AVQuery in AVSaveOption"));
+        callback.internalDone(new 后端错误(0, "AVObject class inconsistant with AVQuery in AVSaveOption"));
         return;
       }
     }
@@ -1797,14 +1797,14 @@ public class AVObject implements Parcelable {
         saveFileBeforeSave(files, sync, new SaveCallback() {
 
           @Override
-          public void done(AVException e) {
+          public void done(后端错误 e) {
             _saveObject(option, sync, isEventually, callback);
           }
         });
       } else {
         _saveObject(option, sync, isEventually, callback);
       }
-    } catch (AVException e) {
+    } catch (后端错误 e) {
       if (callback != null) {
         callback.internalDone(e);
       }
@@ -1906,7 +1906,7 @@ public class AVObject implements Parcelable {
           }
 
           @Override
-          public void onSuccess(String content, AVException e) {
+          public void onSuccess(String content, 后端错误 e) {
             AVObject.this.running = false;
             copyFromJson(content);
             onSaveSuccess();
@@ -2323,7 +2323,7 @@ public class AVObject implements Parcelable {
   }
 
   public static void saveFileBeforeSave(List<AVFile> files, final boolean sync,
-                                        final SaveCallback callback) throws AVException {
+                                        final SaveCallback callback) throws 后端错误 {
     if (sync) {
       for (AVFile file : files) {
         if (file != null) {
@@ -2339,7 +2339,7 @@ public class AVObject implements Parcelable {
           file.saveInBackground(new SaveCallback() {
 
             @Override
-            public void done(AVException e) {
+            public void done(后端错误 e) {
               if (e != null && failureLock.compareAndSet(false, true)) {
                 callback.done(e);
               } else if (e != null) {

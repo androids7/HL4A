@@ -1068,7 +1068,7 @@ public class AVUtils {
       if (callback != null) {
         callback
             .onFailure(
-                statusCode, new AVException(AVException.INVALID_JSON,
+                statusCode, new 后端错误(后端错误.INVALID_JSON,
                     "Wrong response content type:"
                         + contentType),
                 content);

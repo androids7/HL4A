@@ -39,9 +39,9 @@ public abstract class SendCallback extends com.avos.avoscloud.AVCallback<java.la
    * 
    * @param e The exception raised by the send, or null if it succeeded.
    */
-  public abstract void done(com.avos.avoscloud.AVException e);
+  public abstract void done(com.avos.avoscloud.后端错误 e);
 
-  protected final void internalDone0(java.lang.Void returnValue, com.avos.avoscloud.AVException e) {
+  protected final void internalDone0(java.lang.Void returnValue, com.avos.avoscloud.后端错误 e) {
     this.done(e);
   }
 }
