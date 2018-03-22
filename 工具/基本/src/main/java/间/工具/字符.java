@@ -428,8 +428,8 @@ public class 字符 {
     public static boolean 是空白(Object... $内容) {
         if ($内容 == null)
             return true;
-        for (Object $单个内容 : $内容) {
-            if ($单个内容 == null || $内容.toString().trim().isEmpty())
+        for (Object $单个 : $内容) {
+            if ($单个 == null || "".equals($单个.toString().trim()))
                 return true;
         }
         return false;

@@ -8,6 +8,8 @@ import com.avos.avoscloud.SignUpCallback;
 import 间.接口.方法;
 import 间.接口.调用;
 import 间.接口.返回值;
+import android.content.Context;
+import 间.安卓.工具.环境;
 
 public class 用户 extends AVUser {
     
@@ -87,7 +89,6 @@ public class 用户 extends AVUser {
     public static 用户 取当前用户() {
         return getCurrentUser(用户.class);
     }
-
 
 
 }
