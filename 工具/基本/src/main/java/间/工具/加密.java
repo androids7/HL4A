@@ -28,9 +28,7 @@ public class 加密 {
             $密码器.init(Cipher.ENCRYPT_MODE, $秘钥格式);// 加密模式
             byte[] $返回 = $密码器.doFinal($内容);
             return $返回; // 加密
-        } catch (Exception $错误) {
-            错误.抛出($错误);
-        }
+        } catch (Exception $错误) {}
         return null;
     }
     
@@ -48,9 +46,7 @@ public class 加密 {
             $密码器.init(Cipher.DECRYPT_MODE, $秘钥格式);// 解密模式
             byte[] $返回 = $密码器.doFinal($内容);
             return $返回; // 解密
-        } catch (Exception $错误) {
-            错误.抛出($错误);
-        }
+        } catch (Exception $错误) {}
         return null;
     }
     

@@ -1,5 +1,6 @@
 package 间.安卓.组件;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -9,6 +10,14 @@ import 间.收集.哈希表;
 
 public class 界面 {
 
+    public static final int 请求码_文件选择 = 19132;
+    public static final int 请求码_权限请求 = 13133;
+    public static final int 请求码_注册用户 = 19134;
+    
+    public static final int 返回码_成功 = Activity.RESULT_OK;
+    public static final int 返回码_失败 = Activity.RESULT_CANCELED;
+    
+    
     public 基本界面 此;
     public Object[] 传入参数;
 

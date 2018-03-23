@@ -1,15 +1,14 @@
 package 间.安卓.后端;
 
 import com.avos.avoscloud.AVRole;
-import com.avos.avoscloud.AVUser;
-import com.avos.avoscloud.后端错误;
 import com.avos.avoscloud.SaveCallback;
+import com.avos.avoscloud.后端错误;
+import 间.安卓.工具.线程;
 import 间.接口.方法;
 import 间.接口.调用;
-import 间.收集.无序表;
-import 间.收集.无序集合;
-import 间.安卓.工具.线程;
 import 间.接口.返回值;
+import 间.收集.无序表;
+import 间.收集.集合;
 
 public class 权限组 {
 
@@ -21,7 +20,7 @@ public class 权限组 {
             查询<AVRole> $所有 = new 查询<>("_Role");
             返回值 $返回 = $所有.查询();
             if ($返回.成功()) {
-                无序集合<AVRole> $集合 = $所有.查询().取内容();
+                集合<AVRole> $集合 = $所有.查询().取内容();
                 for (AVRole $单个 : $集合) {
                     所有权限组.设置($单个.getName(), new 权限组($单个));
                 }

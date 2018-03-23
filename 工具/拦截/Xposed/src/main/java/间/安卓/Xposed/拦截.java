@@ -1,4 +1,4 @@
-package 间.安卓.工具;
+package 间.安卓.Xposed;
 
 import de.robv.android.xposed.XC_MethodHook;
 import de.robv.android.xposed.XC_MethodReplacement;
@@ -20,16 +20,7 @@ public class 拦截 {
     public static void 替换方法(Class<?> $类,String $方法,方法 $替换) {
         XposedBridge.hookAllMethods($类, $方法,new 方法替换($替换));
     }
-
-    public static class 应用参数 {
-
-        public ClassLoader 类加载器;
-        public String 包名;
-        public String 应用名;
-        public String 进程名;
-
-    }
-
+    
     public static class 方法钩子 extends XC_MethodHook {
 
         public 方法 调用前;

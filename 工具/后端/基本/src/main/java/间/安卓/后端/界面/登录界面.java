@@ -13,6 +13,7 @@ import 间.安卓.组件.界面;
 import 间.工具.字符;
 import 间.接口.返回值;
 import 间.接口.调用;
+import android.content.Intent;
 
 public class 登录界面 extends 界面 {
 
@@ -21,16 +22,29 @@ public class 登录界面 extends 界面 {
     @Override
     public void 界面创建事件(Bundle $恢复) {
         置滑动返回(true);
+        置返回值(返回码_失败);
         打开布局(new 布局_登录界面(此));
         布局 = 取视图();
         布局.标题.返回按钮(此);
         布局.登录.置单击事件(调用.配置(this,"登录"));
-        置返回值(基本界面.返回码_失败);
+        布局.注册.置单击事件(调用.配置(this,"注册"));
         进度 = new 进度弹窗(此);
+        进度.置可关闭(false);
     }
 
     private 进度弹窗 进度;
 
+    public void 注册() {
+        跳转界面(请求码_注册用户,注册界面.class);
+    }
+
+    @Override
+    public void 界面回调事件(int $请求码,int $返回码,Intent $意图) {
+        if ($请求码 == 请求码_注册用户 || $返回码 == 返回码_成功) {
+            结束界面();
+        }
+    }
+    
     public void 登录() {
         String $用户名 = 布局.用户名.取文本();
         String $密码 = 布局.密码.取文本();
@@ -52,7 +66,7 @@ public class 登录界面 extends 界面 {
         返回值<用户, 后端错误> $返回值 = 用户.同步登录($用户名, $密码);
         if ($返回值.成功()) {
             进度.隐藏();
-            置返回值(基本界面.返回码_成功);
+            置返回值(返回码_成功);
             结束界面();
             提示.普通("登录成功 ~");
         } else {

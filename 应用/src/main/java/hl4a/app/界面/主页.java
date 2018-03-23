@@ -1,12 +1,14 @@
 package hl4a.app.界面;
 
-import 间.安卓.组件.界面;
+import android.app.Application;
 import android.os.Bundle;
 import hl4a.app.布局.布局_主页;
-import 间.接口.调用;
-import 间.安卓.工具.提示;
 import 间.安卓.后端.用户;
 import 间.安卓.后端.界面.登录界面;
+import 间.安卓.工具.提示;
+import 间.安卓.组件.界面;
+import 间.工具.反射;
+import 间.接口.调用;
 
 public class 主页 extends 界面 {
 
@@ -22,6 +24,7 @@ public class 主页 extends 界面 {
         布局.注册按钮.置单击事件(调用.配置(this,"注册"));
         
         检查用户();
+        
     }
     
     private void 检查用户() {

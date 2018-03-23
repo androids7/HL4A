@@ -9,7 +9,7 @@ import android.app.Activity;
 
 public class 界面插件 {
     
-    public 基本界面 界面;
+    public 基本界面 当前界面;
     
     public void 注册(Activity $界面) {
         if ($界面 instanceof 基本界面)

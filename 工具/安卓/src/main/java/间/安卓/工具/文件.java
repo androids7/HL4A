@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 import 间.工具.字符;
 import 间.工具.ZIP;
+import android.support.v4.content.FileProvider;
 
 public class 文件 extends 间.工具.文件 {
 
@@ -18,8 +19,16 @@ public class 文件 extends 间.工具.文件 {
         文件.替换地址("$", 取数据目录(""));
         文件.替换地址("#", 取自身目录(""));
     }
+    
+    public static Uri 取Uri(String $地址) {
+        if (设备.取SDK() < 23 || 设备.取目标SDK() < 23) {
+            return Uri.fromFile(文件.取文件对象($地址));
+        } else {
+            return FileProvider.getUriForFile(环境.取应用(),"hl4a.fileprovider",文件.取文件对象($地址));
+        }
+    }
 
-    public static String 取URI路径(Uri $链接) {
+    public static String 取Uri路径(Uri $链接) {
         if (null == $链接) return null;
         String $类型 = $链接.getScheme();
         String $返回 = null;
@@ -40,6 +49,7 @@ public class 文件 extends 间.工具.文件 {
         return $返回;
     }
 
+    
     
     public static void 打开(String $地址) {
         Intent $意图 = new Intent(Intent.ACTION_VIEW);

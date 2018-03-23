@@ -15,16 +15,16 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
     <application>
-        <meta-data
-            android:name="xposedmodule"
-            android:value="true" />
-        <meta-data
-            android:name="xposeddescription"
-            android:value="使用或自己开发Xposed程序" /> 
-        <meta-data
-            android:name="xposedminversion"
-            android:value="30" />
 		<activity android:name=".ErrorActivity" />
         <activity android:name=".ProxyActivity" />
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="hl4a.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/paths" /> 
+        </provider>
     </application>
 </manifest>

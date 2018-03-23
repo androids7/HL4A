@@ -46,12 +46,12 @@ public class 服务 {
         
         @Override
         public void 界面销毁事件() {
-            界面.unbindService(处理);
+            当前界面.unbindService(处理);
         }
 
         @Override
         public void 保存状态事件(Bundle $输出) {
-            界面.unbindService(处理);
+            当前界面.unbindService(处理);
         }
         
     }

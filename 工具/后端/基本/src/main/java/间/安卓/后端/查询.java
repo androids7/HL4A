@@ -1,17 +1,17 @@
 package 间.安卓.后端;
 
-import com.avos.avoscloud.AVQuery;
 import com.avos.avoscloud.AVObject;
-import java.lang.reflect.Array;
+import com.avos.avoscloud.AVQuery;
+import com.avos.avoscloud.CountCallback;
+import com.avos.avoscloud.FindCallback;
+import com.avos.avoscloud.后端错误;
 import java.util.Arrays;
 import java.util.List;
-import com.avos.avoscloud.后端错误;
 import 间.接口.方法;
-import com.avos.avoscloud.CountCallback;
 import 间.接口.调用;
-import 间.收集.无序集合;
-import com.avos.avoscloud.FindCallback;
 import 间.接口.返回值;
+import 间.收集.无序集合;
+import 间.收集.集合;
 
 public class 查询<类型 extends AVObject> extends AVQuery<类型> {
 
@@ -129,9 +129,9 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         return this;
     }
 
-    public 返回值<无序集合<类型>,后端错误> 查询() {
+    public 返回值<集合<类型>,后端错误> 查询() {
         try {
-            return 返回值.创建(new 无序集合<类型>(find()), null);
+            return 返回值.创建(new 集合<类型>(find()), null);
         } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
@@ -141,7 +141,7 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         findInBackground(new FindCallback<类型>() {
                 @Override
                 public void done(List<类型> $集合,后端错误 $错误) {
-                    调用.事件($回调, 返回值.创建(new 无序集合<类型>($集合), $错误));
+                    调用.事件($回调, 返回值.创建(new 集合<类型>($集合), $错误));
                 }
             });
     }

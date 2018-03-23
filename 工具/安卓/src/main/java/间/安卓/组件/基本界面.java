@@ -30,12 +30,6 @@ import 间.收集.无序表;
 
 public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
-    public static final int 请求码_文件选择 = 19132;
-    public static final int 请求码_权限请求 = 13133;
-
-    public static final int 返回码_成功 = Activity.RESULT_OK;
-    public static final int 返回码_失败 = Activity.RESULT_CANCELED;
-
     public Object[] 传入参数;
 
     public 无序表<String,界面插件> 所有插件 = new 无序表<>();
@@ -48,7 +42,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         if ($插件 == null) return;
         synchronized (所有插件) {
             所有插件.设置($标识, $插件);
-            $插件.界面 = this;
+            $插件.当前界面 = this;
         }
     }
 

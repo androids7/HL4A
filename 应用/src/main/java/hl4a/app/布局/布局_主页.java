@@ -11,6 +11,7 @@ import 间.安卓.工具.颜色;
 import 间.安卓.视图.复选框;
 import 间.安卓.视图.开关视图;
 import 间.安卓.视图.文本视图;
+import 间.安卓.视图.编辑框;
 
 public class 布局_主页 extends 布局_基本界面 {
 

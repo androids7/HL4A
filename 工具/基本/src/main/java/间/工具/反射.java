@@ -208,7 +208,7 @@ public class 反射 {
         断言.不为空($对象,"参数1 [对象] 为空");
         断言.不为空($对象,"参数2 [名称] 为空");
         if ($参数 == null) $参数 = new Object[0];
-        Method[] $所有 = 取所有方法($对象.getClass(), $名称);
+        Method[] $所有 = 取所有方法($对象 instanceof Class ? (Class)$对象 : $对象.getClass(), $名称);
         Method $方法 = null;
         Object[] $参数组 = null;
         for (int $键值 = 0;$键值 < $所有.length;$键值 ++) {

@@ -1,6 +1,7 @@
 package 间.安卓.工具;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -29,12 +30,10 @@ import 间.安卓.工具.图片;
 import 间.安卓.工具.文件;
 import 间.安卓.插件.应用插件;
 import 间.安卓.插件.界面插件;
-import 间.安卓.组件.基本应用;
-import 间.安卓.组件.基本界面;
+import 间.安卓.组件.界面;
 import 间.工具.流;
 import 间.接口.方法;
 import 间.接口.调用;
-import android.app.Application;
 
 public class 图片 {
 
@@ -54,8 +53,8 @@ public class 图片 {
 
         @Override
         public boolean 界面回调事件(int $请求码,int $返回码,Intent $意图) {
-            if ($请求码 == 基本界面.请求码_文件选择) {
-                if ($返回码 == 基本界面.返回码_成功) {
+            if ($请求码 == 界面.请求码_文件选择) {
+                if ($返回码 == 界面.返回码_成功) {
                     Uri $图片 = $意图.getData();
                     String $地址 = 文件.取URI路径($图片);
                     调用.事件(图片.回调, 文件.是文件($地址), $地址);
@@ -75,7 +74,7 @@ public class 图片 {
     public static void 选择(Activity $界面,方法 $回调) {
         回调 = $回调;
         Intent $意图 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        $界面.startActivityForResult($意图, 基本界面.请求码_文件选择);
+        $界面.startActivityForResult($意图, 界面.请求码_文件选择);
     }
 
     public static Bitmap 读取(String $地址) {

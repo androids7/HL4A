@@ -11,7 +11,6 @@ import 间.工具.反射;
 public class 环境 {
 
     private volatile static 哈希表<String,Object> 环境表 = new 哈希表<>();
-    private volatile static 哈希表<String,集合<方法>> 事件表 = new 哈希表<>();
 
     public static <类型> 类型 读取(String $键值) {
         if ($键值 == null)return null;
@@ -35,7 +34,11 @@ public class 环境 {
         Application $应用 =  读取("应用");
         if ($应用 == null) {
             try {
-                Application $全局 =  反射.调用(反射.取类("android.app.AppGlobals"), "getInitialApplication");
+                // android.app.AppGlobals.getInitialApplication
+                // android.app.ActivityThread.currentApplication
+                Application $全局 = 反射.调用(反射.取类("android.app.ActivityThread"), "currentApplication");
+                置应用($全局);
+                return $全局;
             } catch (Exception $错误) {}
         }
         return $应用;
