@@ -39,11 +39,11 @@ public class 用户 extends AVUser {
         return getEmail();
     }
 
-    public 返回值<Void,后端错误> 同步注册() {
+    public 返回值<Void> 同步注册() {
         try {
             signUp();
         } catch (后端错误 $错误) {
-            return 返回值.创建($错误);
+            return 返回值.创建(null,$错误);
         }
         return 返回值.创建(null);
     }
@@ -70,11 +70,11 @@ public class 用户 extends AVUser {
             });
     }
 
-    public static 返回值<用户,后端错误> 同步登录(String $账号,String $密码) {
+    public static 返回值<用户> 同步登录(String $账号,String $密码) {
         try {
-            return 返回值.创建(logIn($账号, $密码, 用户.class),null);
+            return 返回值.创建(logIn($账号, $密码, 用户.class));
         } catch (后端错误 $错误) {
-            return 返回值.创建($错误);
+            return 返回值.创建(null,$错误);
         }
     }
 

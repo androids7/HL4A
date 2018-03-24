@@ -76,7 +76,7 @@ public class 权限组 {
         return 存在($用户.取用户名());
     }
 
-    public 返回值<Void,后端错误> 同步保存() {
+    public 返回值<Void> 同步保存() {
         try {
             权限组.save();
         } catch (后端错误 $错误) {

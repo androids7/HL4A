@@ -39,10 +39,10 @@ public class 数据 extends AVObject {
         return getAVUser($键值,用户.class);
     }
     
-    public 返回值<byte[],后端错误> 取文件(String $键值) {
+    public 返回值<byte[]> 取文件(String $键值) {
         AVFile $文件 = getAVFile($键值);
         try {
-            return 返回值.创建($文件.getData(), null);
+            return 返回值.创建($文件.getData());
         } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }
@@ -58,10 +58,10 @@ public class 数据 extends AVObject {
             }).启动();
     }
     
-    public 返回值<Void,后端错误> 同步保存() {
+    public 返回值<Void> 同步保存() {
         try {
             save();
-            return 返回值.创建(null,null);
+            return 返回值.创建(null);
         } catch (后端错误 $错误) {
             return 返回值.创建(null,$错误);
         }

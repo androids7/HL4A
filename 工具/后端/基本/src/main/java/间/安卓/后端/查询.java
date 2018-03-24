@@ -129,9 +129,9 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
         return this;
     }
 
-    public 返回值<集合<类型>,后端错误> 查询() {
+    public 返回值<集合<类型>> 查询() {
         try {
-            return 返回值.创建(new 集合<类型>(find()), null);
+            return 返回值.创建(new 集合<类型>(find()));
         } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
@@ -146,9 +146,9 @@ public class 查询<类型 extends AVObject> extends AVQuery<类型> {
             });
     }
 
-    public 返回值<Integer,后端错误> 统计() {
+    public 返回值<Integer> 统计() {
         try {
-            return 返回值.创建(count(), null);
+            return 返回值.创建(count());
         } catch (后端错误 $错误) {
             return 返回值.创建(null, $错误);
         }
