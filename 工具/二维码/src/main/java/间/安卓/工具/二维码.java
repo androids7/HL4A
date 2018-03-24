@@ -42,17 +42,14 @@ public class 二维码 {
         // 解码的参数
         Hashtable<DecodeHintType, Object> $设置 = new Hashtable<DecodeHintType, Object>(2);
         // 可以解析的编码类型
-        Vector<BarcodeFormat> $所有格式 = new Vector<BarcodeFormat>();
-        if ($所有格式 == null || $所有格式.isEmpty()) {
-            $所有格式 = new Vector<BarcodeFormat>();
-            $所有格式.addAll(new 无序集合<BarcodeFormat>(反射.取所有枚举(BarcodeFormat.class)));
-        }
+       
+        无序集合<BarcodeFormat> $所有格式 = new 无序集合<BarcodeFormat>(反射.取所有枚举(BarcodeFormat.class));
+
         $设置.put(DecodeHintType.POSSIBLE_FORMATS, $所有格式);
         // 设置继续的字符编码格式为UTF8
         // 设置.put(DecodeHintType.CHARACTER_SET, "UTF8");
         // 设置解析配置参数
         $解析器.setHints($设置);
-
  
         try {
             return 返回值.创建($解析器.decodeWithState(new BinaryBitmap(new HybridBinarizer(new 图片源码($图片)))).getText());
