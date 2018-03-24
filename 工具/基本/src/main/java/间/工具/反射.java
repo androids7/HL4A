@@ -325,7 +325,7 @@ public class 反射 {
     public static Class[] 取参数类组(Object... $参数) {
         Class[] $参数类组 = new Class[$参数.length];
         for (int i = 0, j = $参数.length; i < j; i++) {
-            $参数类组[i] = $参数[i].getClass();
+            $参数类组[i] = $参数[i] != null ? $参数[i].getClass() : null;
         }
         return $参数类组;
     }

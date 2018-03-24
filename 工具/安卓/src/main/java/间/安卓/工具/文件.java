@@ -20,6 +20,7 @@ import 间.工具.反射;
 import 间.工具.字符;
 import 间.接口.方法;
 import 间.接口.调用;
+import 间.接口.返回值;
 
 public class 文件 extends 间.工具.文件 {
 
@@ -41,9 +42,9 @@ public class 文件 extends 间.工具.文件 {
                         if ($返回码 == 界面.返回码_成功) {
                             Uri $文件 = $意图.getData();
                             String $地址 = 文件.取Uri路径($文件);
-                            调用.事件(文件.回调, 文件.是文件($地址), $地址);
+                            调用.事件(文件.回调, 返回值.创建($地址));
                         } else {
-                            调用.事件(文件.回调, false, null);
+                            调用.事件(文件.回调, 返回值.失败);
                         }
                         文件.回调 = null;
                         return true;

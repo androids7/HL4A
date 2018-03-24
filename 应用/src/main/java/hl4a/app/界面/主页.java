@@ -29,10 +29,10 @@ public class 主页 extends 界面 {
         
         检查用户();
         
-        图片.拍照(此,调用.代理(this,"回调"));
+        文件.选择(此,调用.代理(this,"回调"));
     }
     
-    public void 回调(返回值<Bitmap> $返回值) {
+    public void 回调(返回值<String> $返回值) {
         if ($返回值.成功()) {
             提示.普通($返回值.取内容());
         }
