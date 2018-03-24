@@ -9,6 +9,7 @@ import 间.安卓.工具.提示;
 import 间.安卓.组件.界面;
 import 间.工具.反射;
 import 间.接口.调用;
+import 间.安卓.工具.文件;
 
 public class 主页 extends 界面 {
 
@@ -25,6 +26,7 @@ public class 主页 extends 界面 {
         
         检查用户();
         
+        提示.普通(文件.取Uri路径(文件.取Uri("%f.apk")));
     }
     
     private void 检查用户() {

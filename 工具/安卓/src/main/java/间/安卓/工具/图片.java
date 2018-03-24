@@ -53,10 +53,10 @@ public class 图片 {
 
         @Override
         public boolean 界面回调事件(int $请求码,int $返回码,Intent $意图) {
-            if ($请求码 == 界面.请求码_文件选择) {
+            if ($请求码 == 界面.请求码_图片选择) {
                 if ($返回码 == 界面.返回码_成功) {
                     Uri $图片 = $意图.getData();
-                    String $地址 = 文件.取URI路径($图片);
+                    String $地址 = 文件.取Uri路径($图片);
                     调用.事件(图片.回调, 文件.是文件($地址), $地址);
                 } else {
                     调用.事件(图片.回调, false, null);
@@ -74,7 +74,7 @@ public class 图片 {
     public static void 选择(Activity $界面,方法 $回调) {
         回调 = $回调;
         Intent $意图 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        $界面.startActivityForResult($意图, 界面.请求码_文件选择);
+        $界面.startActivityForResult($意图, 界面.请求码_图片选择);
     }
 
     public static Bitmap 读取(String $地址) {

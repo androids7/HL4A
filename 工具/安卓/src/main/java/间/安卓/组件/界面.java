@@ -11,8 +11,9 @@ import 间.收集.哈希表;
 public class 界面 {
 
     public static final int 请求码_文件选择 = 19132;
-    public static final int 请求码_权限请求 = 13133;
-    public static final int 请求码_注册用户 = 19134;
+    public static final int 请求码_图片选择 = 19133;
+    public static final int 请求码_权限请求 = 13134;
+    public static final int 请求码_注册用户 = 19135;
     
     public static final int 返回码_成功 = Activity.RESULT_OK;
     public static final int 返回码_失败 = Activity.RESULT_CANCELED;
