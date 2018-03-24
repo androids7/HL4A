@@ -2,12 +2,15 @@ package 间.接口;
 
 public class 返回值<内容> {
     
+    public static 返回值<Void> 成功 = new 返回值<Void>().置状态(true);
+    public static 返回值<Void> 失败 = new 返回值<Void>().置状态(false);
+    
     public static <内容> 返回值<内容> 创建(内容 $内容,Exception $错误) {
         return new 返回值<内容>().置错误($错误);
     }
     
     public static <内容> 返回值<内容> 创建(内容 $内容,boolean $状态) {
-        return new 返回值<内容>().置成功($状态);
+        return new 返回值<内容>().置状态($状态);
     }
     
     public static <内容> 返回值<内容> 创建(内容 $内容) {
@@ -15,7 +18,7 @@ public class 返回值<内容> {
     }
     
     private 内容 内容;
-    private Boolean 成功;
+    private Boolean 状态;
     private Exception 错误;
     
     public 返回值<内容> 置内容(内容 $内容) {
@@ -23,8 +26,8 @@ public class 返回值<内容> {
         return this;
     }
     
-    public 返回值<内容> 置成功(boolean $状态) {
-        成功 = $状态;
+    public 返回值<内容> 置状态(boolean $状态) {
+        状态 = $状态;
         return this;
     }
     

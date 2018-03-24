@@ -9,7 +9,6 @@ public class 线程 extends 间.工具.线程 {
     
     public 线程(方法 $方法) {
         super($方法);
-        
     }
 
     public 线程(Object $对象,String $方法名) {

@@ -17,11 +17,27 @@ import java.util.Hashtable;
 import java.util.Vector;
 import 间.工具.反射;
 import 间.收集.无序集合;
+import 间.接口.方法;
+import 间.接口.调用;
+import 间.接口.返回值;
+import com.google.zxing.NotFoundException;
 
 public class 二维码 {
 
+    public static void 解析(final String $地址,final 方法 $回调) {
+        new 线程(new 方法() {
+                @Override
+                public Object 调用(Object[] $参数) {
+                    Bitmap $图片 = 图片.读取($地址);
+                    if ($图片 == null) 调用.事件($回调,返回值.失败);
+                    调用.事件($回调,同步解析($图片));
+                    return null;
+                }
+            }).启动();
+    }
     
-    public static String 解析(Bitmap $图片) {
+    public static 返回值<String> 同步解析(Bitmap $图片) {
+        
         MultiFormatReader $解析器 = new MultiFormatReader();
         // 解码的参数
         Hashtable<DecodeHintType, Object> $设置 = new Hashtable<DecodeHintType, Object>(2);
@@ -33,16 +49,16 @@ public class 二维码 {
         }
         $设置.put(DecodeHintType.POSSIBLE_FORMATS, $所有格式);
         // 设置继续的字符编码格式为UTF8
-        // hints.put(DecodeHintType.CHARACTER_SET, "UTF8");
+        // 设置.put(DecodeHintType.CHARACTER_SET, "UTF8");
         // 设置解析配置参数
         $解析器.setHints($设置);
 
+ 
         try {
-            String $文本 = $解析器.decodeWithState(new BinaryBitmap(new HybridBinarizer(new 图片源码($图片)))).getText();
+            return 返回值.创建($解析器.decodeWithState(new BinaryBitmap(new HybridBinarizer(new 图片源码($图片)))).getText());
         } catch (Exception $错误) {
-            e.printStackTrace();
+            return 返回值.创建(null,$错误);
         }
-        rawResult.getText();
 
     }
     
@@ -121,7 +137,7 @@ public class 二维码 {
         return result;
     }
 
-    public class 图片源码 extends LuminanceSource {
+    public static class 图片源码 extends LuminanceSource {
 
         private byte 像素[];
 
