@@ -6,6 +6,9 @@ import android.view.*;
 import android.widget.*;
 import 间.接口.*;
 import 间.安卓.视图.实现.*;
+import 间.工具.反射;
+import 间.安卓.工具.视图;
+import android.support.v4.widget.EdgeEffectCompat;
 
 public class 滚动视图 extends ScrollView implements 基本布局 {
 
@@ -14,25 +17,31 @@ public class 滚动视图 extends ScrollView implements 基本布局 {
         视图实现.初始化控件(this);
         置宽度("最大");
         置高度("最大");
+        变色("mEdgeGlowTop","mEdgeGlowBottom");
     }
-    
+
+    private void 变色(String... $变量) {
+        int $颜色 = 视图.检查颜色("控件");
+        for (String $单个 : $变量) {
+            EdgeEffect $设置 = 反射.取变量(this, $单个);
+            $设置.setColor($颜色);
+        }
+    }
     public 滚动视图(ViewGroup $父视图) {
         this($父视图.getContext());
         加入到($父视图);
     }
-    
-    
-    
+
     @Override
     public void 置布局重力(String $重力) {
-        视图实现.置布局重力(this,$重力);
+        视图实现.置布局重力(this, $重力);
     }
 
     @Override
     public void 置布局权重(float $权重) {
-        视图实现.置布局权重(this,$权重);
+        视图实现.置布局权重(this, $权重);
     }
-    
+
     @Override
     public void 加入子元素(View $子元素) {
         布局实现.加入子元素(this, $子元素);
@@ -52,7 +61,7 @@ public class 滚动视图 extends ScrollView implements 基本布局 {
     public View[] 取所有子元素() {
         return 布局实现.取所有子元素(this);
     }
-    
+
     @Override
     public void 加入到(ViewGroup $布局) {
         视图实现.加入到(this, $布局);
@@ -192,31 +201,31 @@ public class 滚动视图 extends ScrollView implements 基本布局 {
     public void 置背景颜色(Object $颜色) {
         视图实现.置背景颜色(this, $颜色);
     }
-    
+
     @Override
     public void 置上下边距(Object $边距) {
-        视图实现.置上下边距(this,$边距);
+        视图实现.置上下边距(this, $边距);
     }
 
     @Override
     public void 置左右边距(Object $边距) {
-        视图实现.置左右边距(this,$边距);
+        视图实现.置左右边距(this, $边距);
     }
 
     @Override
     public void 置上下填充(Object $填充) {
-        视图实现.置上下填充(this,$填充);
+        视图实现.置上下填充(this, $填充);
     }
 
     @Override
     public void 置左右填充(Object $填充) {
-        视图实现.置左右填充(this,$填充);
+        视图实现.置左右填充(this, $填充);
     }
-    
+
     @Override
     public void 置阴影(Object $阴影) {
         视图实现.置阴影(this, $阴影);
     }
-    
-    
+
+
 }

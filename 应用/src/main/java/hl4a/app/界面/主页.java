@@ -15,42 +15,42 @@ import 间.接口.返回值;
 import android.graphics.Bitmap;
 import 间.安卓.视图.图片视图;
 import 间.安卓.资源.图标;
+import 间.安卓.弹窗.基本弹窗;
 
 public class 主页 extends 界面 {
 
     private 布局_主页 布局;
-    
+
     @Override
     public void 界面创建事件(Bundle $恢复) {
         打开布局(new 布局_主页(此));
-        
+
         布局 = 取视图();
-        
-        布局.登录按钮.置单击事件(调用.配置(this,"登录"));
-        布局.注册按钮.置单击事件(调用.配置(this,"注册"));
-        
+
+        布局.登录按钮.置单击事件(调用.配置(this, "登录"));
+
         检查用户();
-        
+
     }
-    
-    public void 回调(返回值<String> $返回值) {
-        if ($返回值.成功()) {
-            提示.普通($返回值.取内容());
-        }
-    }
-    
+
     private void 检查用户() {
         if (用户.取当前用户() == null) {
             布局.注册底层.显示();
+            布局.用户底层.隐藏();
+        } else {
+            布局.用户底层.显示();
+            布局.注册底层.隐藏();
+            布局.用户名.置文本(用户.取当前用户().取用户名());
         }
     }
-    
+
     public void 登录() {
         跳转界面(登录界面.class);
     }
-    
-    public void 注册() {
-        
+
+    @Override
+    public void 界面刷新事件() {
+        检查用户();
     }
-    
+
 }

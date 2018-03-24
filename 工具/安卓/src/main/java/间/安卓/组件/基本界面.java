@@ -309,7 +309,6 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
         if (反射.是子类(界面.class, $类)) {
             Intent $意图 = new Intent(this, ProxyActivity.class);
-            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             $意图.putExtra("类", (Serializable)$类);
             if ($数据 != null) 
                 $意图.putExtra("参数", (Serializable)$数据);
@@ -320,7 +319,6 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             return;
         }
         Intent $意图 = new Intent(this, $类);
-        $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if ($数据 != null)
             $意图.putExtra("参数", (Serializable)$数据);
         if ($请求码 == null)
@@ -339,15 +337,10 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     }
 
     public void 跳转脚本(Integer $请求码,String $类,Object[] $数据) {
-        new 线程(this, "直接跳转脚本").启动($请求码, $类, $数据);
-    }
-
-    public void 直接跳转脚本(Integer $请求码,String $类,Object[] $数据) {
         $请求码 = $请求码 == null ? -1 : $请求码;
         Class<?> $界面 = 反射.取类("hl4a.runtime.ScriptActivity");
         if ($界面 != null) {
             Intent $意图 = new Intent(this, $界面);
-            $意图.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             $意图.putExtra("脚本", $类);
             if ($数据 != null)
                 $意图.putExtra("参数", (Serializable)$数据);

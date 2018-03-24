@@ -13,8 +13,6 @@ import 间.安卓.工具.环境;
 
 public class 用户 extends AVUser {
     
-    
-    
     public 用户() {
         super();
     }
@@ -52,6 +50,10 @@ public class 用户 extends AVUser {
         signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(后端错误 $错误) {
+                    if ($错误 == null) {
+                        置权限(new 权限(用户.this));
+                        保存();
+                    }
                     调用.事件($回调, 返回值.创建($错误));
                 }
             });

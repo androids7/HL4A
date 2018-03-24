@@ -11,7 +11,6 @@ public class 布局_注册界面 extends 布局_基本界面 {
     public 编辑框 密码;
     public 编辑框 邮箱;
     public 按钮 注册;
-    public 按钮 登录;
     
     public 布局_注册界面(Context $上下文) {
         super($上下文);
@@ -28,10 +27,7 @@ public class 布局_注册界面 extends 布局_基本界面 {
         注册 = new 按钮(底层);
         注册.置宽度("最大");
         注册.置文本("注册");
-        登录 = new 按钮(底层);
-        登录.置宽度("最大");
-        登录.置文本("登录");
-        登录.置上边距("4dp");
+
     }
     
 }

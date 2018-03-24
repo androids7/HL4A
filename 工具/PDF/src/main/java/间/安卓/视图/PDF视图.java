@@ -16,15 +16,11 @@ public class PDF视图 extends PDFView implements 基本视图 {
     }
     
     public void 置PDF(String $地址) {
-        fromFile(文件.取文件对象($地址));
+        fromFile(文件.取文件对象($地址)).defaultPage(1).load();
     }
     
     public void 可滑动(boolean $状态) {
         setSwipeEnabled($状态);
-    }
-    
-    public void 跳转到(int $页) {
-        jumpTo($页);
     }
     
     public int 取页数() {
@@ -33,6 +29,10 @@ public class PDF视图 extends PDFView implements 基本视图 {
     
     public int 取当前页数() {
         return getCurrentPage();
+    }
+    
+    public void 置当前页数(int $页) {
+        jumpTo($页);
     }
     
     
