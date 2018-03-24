@@ -46,6 +46,7 @@ public class 图片 {
         @Override
         public void 界面新建(Activity $界面) {
             new 界面选图().注册($界面);
+            new 拍照回调().注册($界面);
         }
     }
 
@@ -57,11 +58,30 @@ public class 图片 {
                 if ($返回码 == 界面.返回码_成功) {
                     Uri $图片 = $意图.getData();
                     String $地址 = 文件.取Uri路径($图片);
-                    调用.事件(图片.回调, 文件.是文件($地址), $地址);
+                    调用.事件(图片.选图回调, 文件.是文件($地址), $地址);
                 } else {
-                    调用.事件(图片.回调, false, null);
+                    调用.事件(图片.选图回调, false, null);
                 }
-                图片.回调 = null;
+                图片.选图回调 = null;
+                return true;
+            }
+            return false;
+        }
+
+    }
+    
+    public static class 拍照回调 extends 界面插件 {
+
+        @Override
+        public boolean 界面回调事件(int $请求码,int $返回码,Intent $意图) {
+            if ($请求码 == 界面.请求码_相机拍照) {
+                if ($返回码 == 界面.返回码_成功) {
+                    Bitmap $图片 = (Bitmap)$意图.getExtras().get("data");
+                    调用.事件(图片.拍照回调, true, $图片);
+                } else {
+                    调用.事件(图片.拍照回调, false, null);
+                }
+                图片.选图回调 = null;
                 return true;
             }
             return false;
@@ -69,14 +89,21 @@ public class 图片 {
 
     }
 
-    public static volatile 方法 回调;
+    private static 方法 选图回调;
+    private static 方法 拍照回调;
 
     public static void 选择(Activity $界面,方法 $回调) {
-        回调 = $回调;
+        选图回调 = $回调;
         Intent $意图 = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         $界面.startActivityForResult($意图, 界面.请求码_图片选择);
     }
 
+    public static void 拍照(Activity $界面,方法 $回调) {
+        拍照回调 = $回调;
+        Intent $意图 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        $界面.startActivityForResult($意图, 界面.请求码_相机拍照);
+    }
+    
     public static Bitmap 读取(String $地址) {
         if (!文件.是文件($地址)) return null;
         return BitmapFactory.decodeFile(文件.检查地址($地址));
@@ -94,7 +121,7 @@ public class 图片 {
         return $绘画.getBitmap();
     }
 
-    public static void 保存(Bitmap $图片,String $输出) {
+    public static void 保存(String $输出,Bitmap $图片) {
         FileOutputStream $输出流 = 流.输出.文件($输出);
         $图片.compress(Bitmap.CompressFormat.PNG, 100, $输出流);
         流.关闭($输出流);
