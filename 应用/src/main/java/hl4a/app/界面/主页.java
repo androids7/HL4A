@@ -13,6 +13,9 @@ import 间.安卓.工具.文件;
 import 间.安卓.工具.图片;
 import 间.接口.返回值;
 import android.graphics.Bitmap;
+import 间.安卓.视图.图片视图;
+import 间.安卓.工具.二维码;
+import 间.安卓.资源.图标;
 
 public class 主页 extends 界面 {
 
@@ -29,7 +32,9 @@ public class 主页 extends 界面 {
         
         检查用户();
         
-        文件.选择(此,调用.代理(this,"回调"));
+        图片视图 $图片 = new 图片视图(此);
+        $图片.置图片(二维码.创建("苟利国家生死以",1024,"基本","白色"));
+        提示.弹窗(此,"qrcode",$图片);
     }
     
     public void 回调(返回值<String> $返回值) {

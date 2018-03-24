@@ -125,13 +125,13 @@ public class 二维码 {
         return null;
     }
 
-    private static Bitmap 转换图标(Bitmap $图标,int w,int h) {
-        if ($图标 == null)return null;
-        Matrix matrix = new Matrix();
-        float scaleFactor = Math.min(w * 1.0f / 5 / $图标.getWidth(), h * 1.0f / 5 / $图标.getHeight());
-        matrix.postScale(scaleFactor, scaleFactor);
-        Bitmap result = Bitmap.createBitmap($图标, 0, 0, $图标.getWidth(),   $图标.getHeight(), matrix, true);
-        return result;
+    private static Bitmap 转换图标(Bitmap $图标,int $宽度,int $高度) {
+        if ($图标 == null) return null;
+        Matrix $矩阵 = new Matrix();
+        float scaleFactor = Math.min($宽度 * 1.0f / 5 / $图标.getWidth(), $高度 * 1.0f / 5 / $图标.getHeight());
+        $矩阵.postScale(scaleFactor, scaleFactor);
+        Bitmap $返回 = Bitmap.createBitmap($图标, 0, 0, $图标.getWidth(),   $图标.getHeight(), $矩阵, true);
+        return $返回;
     }
 
     public static class 图片源码 extends LuminanceSource {
@@ -141,13 +141,13 @@ public class 二维码 {
         public 图片源码(Bitmap $图片) {
             super($图片.getWidth(), $图片.getHeight());
             // 首先，要取得该图片的像素数组内容
-            int[] data = new int[$图片.getWidth() * $图片.getHeight()];
+            int[] $数据 = new int[$图片.getWidth() * $图片.getHeight()];
             this.像素 = new byte[$图片.getWidth() * $图片.getHeight()];
-            $图片.getPixels(data, 0, getWidth(), 0, 0, getWidth(), getHeight());
+            $图片.getPixels($数据, 0, getWidth(), 0, 0, getWidth(), getHeight());
 
             // 将int数组转换为byte数组，也就是取像素值中蓝色值部分作为辨析内容
-            for (int i = 0; i < data.length; i++) {
-                this.像素[i] = (byte) data[i];
+            for (int i = 0; i < $数据.length; i++) {
+                this.像素[i] = (byte) $数据[i];
             }
         }
 
