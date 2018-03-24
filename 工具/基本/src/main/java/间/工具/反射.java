@@ -15,6 +15,20 @@ import java.io.ObjectInput;
 
 public class 反射 {
     
+    public static <类型 extends Enum> 类型 取枚举(Class<类型> $类,String $名称) {
+        类型[] $所有 = 取所有枚举($类);
+        for (类型 $单个 : $所有) {
+            if($单个.name().equals($名称)) {
+                return $单个;
+            }
+        }
+        return null;
+    }
+    
+    public static <类型 extends Enum> 类型[] 取所有枚举(Class<类型> $类) {
+        return $类.getEnumConstants();
+    }
+    
     public static Class<?> 取类(String $类名) {
         return 取类($类名,反射.class.getClassLoader());
     }

@@ -1,0 +1,11 @@
+apply plugin: 'com.android.library'
+
+
+android {
+    
+}
+
+dependencies {
+    compile project(':安卓')
+   compile 'com.google.zxing:core:3.3.2'
+}
