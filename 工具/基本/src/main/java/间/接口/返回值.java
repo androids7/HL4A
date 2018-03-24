@@ -50,7 +50,7 @@ public class 返回值<内容> {
     }
     
     public boolean 成功() {
-        return 成功 == null ? 内容 != null && 错误 == null : 成功;
+        return 状态 == null ? 内容 != null && 错误 == null : 状态;
     }
     
 }
