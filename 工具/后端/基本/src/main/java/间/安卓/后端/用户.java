@@ -43,16 +43,16 @@ public class 用户 extends AVUser {
         try {
             signUp();
         } catch (后端错误 $错误) {
-            return 返回值.创建(null,$错误);
+            return 返回值.创建($错误);
         }
-        return 返回值.创建(null,null);
+        return 返回值.创建(null);
     }
 
     public void 注册(final 方法 $回调) {
         signUpInBackground(new SignUpCallback() {
                 @Override
                 public void done(后端错误 $错误) {
-                    调用.事件($回调, 返回值.创建(null,$错误));
+                    调用.事件($回调, 返回值.创建($错误));
                 }
             });
     }
@@ -65,7 +65,7 @@ public class 用户 extends AVUser {
         requestEmailVerifyInBackground($邮箱, new RequestEmailVerifyCallback() {
                 @Override
                 public void done(后端错误 $错误) {
-                    调用.事件($回调, 返回值.创建(null,$错误));
+                    调用.事件($回调, 返回值.创建($错误));
                 }
             });
     }
@@ -74,7 +74,7 @@ public class 用户 extends AVUser {
         try {
             return 返回值.创建(logIn($账号, $密码, 用户.class),null);
         } catch (后端错误 $错误) {
-            return 返回值.创建(null,$错误);
+            return 返回值.创建($错误);
         }
     }
 

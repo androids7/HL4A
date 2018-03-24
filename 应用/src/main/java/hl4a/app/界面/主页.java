@@ -10,6 +10,9 @@ import 间.安卓.组件.界面;
 import 间.工具.反射;
 import 间.接口.调用;
 import 间.安卓.工具.文件;
+import 间.安卓.工具.图片;
+import 间.接口.返回值;
+import android.graphics.Bitmap;
 
 public class 主页 extends 界面 {
 
@@ -26,7 +29,13 @@ public class 主页 extends 界面 {
         
         检查用户();
         
-        提示.普通(文件.取Uri路径(文件.取Uri("%f.apk")));
+        图片.拍照(此,调用.代理(this,"回调"));
+    }
+    
+    public void 回调(返回值<Bitmap,Exception> $返回值) {
+        if ($返回值.成功()) {
+            提示.普通($返回值.取内容());
+        }
     }
     
     private void 检查用户() {

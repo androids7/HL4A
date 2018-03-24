@@ -34,11 +34,12 @@ import 间.安卓.组件.界面;
 import 间.工具.流;
 import 间.接口.方法;
 import 间.接口.调用;
+import 间.接口.返回值;
 
 public class 图片 {
 
     protected static void 初始化(Application $应用) {
-        new 图片插件().注册($应用);
+        new 图片插件().注册();
     }
 
     public static class 图片插件 extends 应用插件 {
@@ -58,9 +59,9 @@ public class 图片 {
                 if ($返回码 == 界面.返回码_成功) {
                     Uri $图片 = $意图.getData();
                     String $地址 = 文件.取Uri路径($图片);
-                    调用.事件(图片.选图回调, 文件.是文件($地址), $地址);
+                    调用.事件(图片.选图回调, 返回值.创建($地址, 文件.是文件($地址)));
                 } else {
-                    调用.事件(图片.选图回调, false, null);
+                    调用.事件(图片.选图回调, 返回值.创建(null, false));
                 }
                 图片.选图回调 = null;
                 return true;
@@ -69,7 +70,7 @@ public class 图片 {
         }
 
     }
-    
+
     public static class 拍照回调 extends 界面插件 {
 
         @Override
@@ -77,9 +78,9 @@ public class 图片 {
             if ($请求码 == 界面.请求码_相机拍照) {
                 if ($返回码 == 界面.返回码_成功) {
                     Bitmap $图片 = (Bitmap)$意图.getExtras().get("data");
-                    调用.事件(图片.拍照回调, true, $图片);
+                    调用.事件(图片.拍照回调, 返回值.创建($图片, true));
                 } else {
-                    调用.事件(图片.拍照回调, false, null);
+                    调用.事件(图片.拍照回调, 返回值.创建(null, false));
                 }
                 图片.选图回调 = null;
                 return true;
@@ -103,7 +104,7 @@ public class 图片 {
         Intent $意图 = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         $界面.startActivityForResult($意图, 界面.请求码_相机拍照);
     }
-    
+
     public static Bitmap 读取(String $地址) {
         if (!文件.是文件($地址)) return null;
         return BitmapFactory.decodeFile(文件.检查地址($地址));

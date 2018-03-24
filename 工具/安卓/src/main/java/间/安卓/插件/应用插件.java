@@ -5,12 +5,14 @@ import android.app.Application;
 import 间.安卓.组件.基本应用;
 import 间.安卓.组件.基本界面;
 import android.content.Context;
+import 间.安卓.工具.环境;
 
 public class 应用插件 {
 
     public 基本应用 应用;
     
-    public void 注册(Application $应用) {
+    public void 注册() {
+        Application $应用 = 环境.取应用();
         if ($应用 instanceof 基本应用)
         ((基本应用)$应用).注册插件(this);
     }
