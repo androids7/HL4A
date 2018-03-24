@@ -19,5 +19,5 @@ dependencies {
     compile project (':工具/安卓')
     compile project (':工具/网络')
     compile project (':工具/后端/基本')
-    compile project(':工具/二维码')
+    compile project(':工具/PDF')
 }
