@@ -165,8 +165,6 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         界面遮挡事件();
     }
 
-    private long 返回时间 = 时间.时间戳() - 23333;
-
     @Override
     public boolean onKeyDown(int keyCode,KeyEvent event) {
         for (界面插件 $单个 : 所有插件.values()) {
@@ -175,30 +173,16 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
                 return true;
             }
         }
-        Boolean $返回 = 按键按下事件(keyCode, event);
-        if ($返回 != null) {
-            return $返回;
+        if (按键按下事件(keyCode, event)) {
+            return true;
         }
-
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             for (界面插件 $单个 : 所有插件.values()) {
-                $返回 = $单个.返回按下事件();
-                if ($返回 == true) {
+                if ($单个.返回按下事件()) {
                     return true;
                 }
             }
-            $返回 = 返回按下事件();
-            if ($返回 != null) {
-                return $返回;
-            }
-            long 上次 = 返回时间;
-            if ((返回时间 = 时间.时间戳()) - 上次 < 2333) {
-                finish();
-                return true;
-            } else {
-                提示.普通("再按一次返回键退出 ~");
-                return false;
-            }
+            return 返回按下事件();
         }
         return super.onKeyDown(keyCode, event);
     }
@@ -371,8 +355,8 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
     public void 界面销毁事件() {}
     public void 取得焦点事件() {}
     public void 失去焦点事件() {}
-    public Boolean 按键按下事件(int $按键码,KeyEvent $事件) {return null;}
-    public Boolean 返回按下事件() {return null;}
+    public boolean 按键按下事件(int $按键码,KeyEvent $事件) {return false;}
+    public boolean 返回按下事件() {结束界面();return true;}
     public void 收到意图事件(Intent $意图) {}
     public void 保存状态事件(Bundle $输出) {}
 

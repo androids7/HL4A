@@ -3,7 +3,7 @@ package 间.安卓.视图;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v4.widget.CircleImageView;
+import android.widget.CircleImageView;
 import android.view.ViewGroup;
 import 间.安卓.工具.视图;
 import 间.安卓.视图.实现.图片实现;
@@ -13,13 +13,13 @@ import 间.接口.方法;
 
 public class 圆形图 extends CircleImageView implements 基本图片 {
 
-    public 圆形图(Context $上下文,Object $角度) {
-        super($上下文, 视图.检查颜色("白色"), 视图.检查大小($角度));
+    public 圆形图(Context $上下文) {
+        super($上下文);
         视图实现.初始化控件(this);
     }
 
-    public 圆形图(ViewGroup $父视图,Object $角度) {
-        this($父视图.getContext(), $角度);
+    public 圆形图(ViewGroup $父视图) {
+        this($父视图.getContext());
         加入到($父视图);
     }
 

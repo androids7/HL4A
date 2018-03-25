@@ -50,12 +50,12 @@ public class 代理界面 extends 基本界面 {
     }
 
     @Override
-    public Boolean 按键按下事件(int $按键码,KeyEvent $事件) {
+    public boolean 按键按下事件(int $按键码,KeyEvent $事件) {
         return 内容.按键按下事件($按键码, $事件);
     }
 
     @Override
-    public Boolean 返回按下事件() {
+    public boolean 返回按下事件() {
         return 内容.返回按下事件();
     }
     

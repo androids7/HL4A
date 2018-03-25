@@ -10,6 +10,7 @@ import 间.接口.调用;
 import 间.接口.返回值;
 import android.content.Context;
 import 间.安卓.工具.环境;
+import android.graphics.Bitmap;
 
 public class 用户 extends AVUser {
     
@@ -35,6 +36,14 @@ public class 用户 extends AVUser {
 
     public String 取邮箱() {
         return getEmail();
+    }
+    
+    public void 置头像(Bitmap $头像) {
+        设置("icon",$头像);
+    }
+    
+    public Bitmap 取头像() {
+        return 读取("icon");
     }
 
     public 返回值<Void> 同步注册() {

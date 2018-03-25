@@ -15,24 +15,24 @@ public class 界面 {
     public static final int 请求码_相机拍照 = 19134;
     public static final int 请求码_权限请求 = 13135;
     public static final int 请求码_注册用户 = 19136;
-    
+
     public static final int 返回码_成功 = Activity.RESULT_OK;
     public static final int 返回码_失败 = Activity.RESULT_CANCELED;
-    
-    
+
+
     public 基本界面 此;
     public Object[] 传入参数;
 
     public void 结束界面() {
         此.结束界面();
     }
-    
+
     public void 打开布局(String $地址) {
         此.打开布局($地址);
     }
 
     public void 注册插件(String $标识,界面插件 $插件) {
-        此.注册插件($标识,$插件);
+        此.注册插件($标识, $插件);
     }
 
     public void 请求权限() {
@@ -66,7 +66,7 @@ public class 界面 {
     public void 解析布局(String $内容) {
         此.解析布局($内容);
     }
-    
+
     public <类型 extends View> 类型 取视图() {
         return 此.取视图();
     }
@@ -90,7 +90,7 @@ public class 界面 {
     public void 跳转脚本(Integer $请求码,String $类,Object... $数据) {
         此.跳转脚本($请求码, $类, $数据);
     }
-    
+
     public void 跳转脚本(String $类) {
         此.跳转脚本($类);
     }
@@ -108,8 +108,8 @@ public class 界面 {
     public void 界面销毁事件() {}
     public void 取得焦点事件() {}
     public void 失去焦点事件() {}
-    public Boolean 按键按下事件(int $按键码,KeyEvent $事件) {return null;}
-    public Boolean 返回按下事件() {return null;}
+    public boolean 按键按下事件(int $按键码,KeyEvent $事件) {return false;}
+    public boolean 返回按下事件() {结束界面();return true;}
     public void 收到意图事件(Intent $意图) {}
     public void 保存状态事件(Bundle $输出) {}
     public void 权限回调事件() {}
