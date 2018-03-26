@@ -15,12 +15,12 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
     <application 
-        android:theme="@android:style/Theme.Holo.Light.NoActionBar" >
+        android:theme="@style/HL4A.Indigo" >
 		<activity android:name=".ErrorActivity" />
         <activity android:name=".ProxyActivity" />
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="${applicationId}.fileprovider"
+            android:authorities="hl4a.fileprovider.${applicationId}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data

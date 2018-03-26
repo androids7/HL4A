@@ -59,7 +59,7 @@ public class 文件 extends 间.工具.文件 {
         if (设备.取SDK() < 23 || 设备.取目标SDK() < 23) {
             return Uri.fromFile(文件.取文件对象($地址));
         } else {
-            return FileProvider.getUriForFile(环境.取应用(), 应用.取信息().包名 + ".fileprovider", 文件.取文件对象($地址));
+            return FileProvider.getUriForFile(环境.取应用(), "hl4a.fileprovider." + 应用.取信息().包名, 文件.取文件对象($地址));
         }
     }
 

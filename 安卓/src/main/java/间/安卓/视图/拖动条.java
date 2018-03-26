@@ -14,8 +14,6 @@ public class 拖动条 extends SeekBar implements 基本视图 {
     
     public 拖动条(Context $上下文) {
         super($上下文);
-        视图.绘画选择器着色(getThumb());
-        视图.绘画选择器着色(getProgressDrawable());
     }
     
     public 拖动条(ViewGroup $父视图) {

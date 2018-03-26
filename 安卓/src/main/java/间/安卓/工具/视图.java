@@ -16,22 +16,12 @@ import 间.工具.错误;
 
 public class 视图 {
 
-    public static void 绘画选择器着色(Drawable $绘画) {
-        if ($绘画 == null) return;
-        $绘画.setColorFilter(new PorterDuffColorFilter(视图.检查颜色("控件"),PorterDuff.Mode.MULTIPLY));
-    }
-    
-    public static void 选中着色(Drawable $绘画) {
-        if ($绘画 == null) return;
-        绘画选择器着色($绘画);
-        DrawableCompat.setTintList($绘画,创建选中列表());
-    }
-    
+
     public static void 绘画着色(Drawable $绘画) {
         if ($绘画 == null) return;
-        DrawableCompat.setTint($绘画,视图.检查颜色("控件"));
+        DrawableCompat.setTint($绘画, 视图.检查颜色("控件"));
     }
-    
+
     public static ColorStateList 创建颜色列表(Object $普通颜色,Object $按下颜色) {
         int $普通 = 检查颜色($普通颜色);
         int $按下 = 检查颜色($按下颜色);
@@ -40,7 +30,7 @@ public class 视图 {
         $状态[1] = new int[] {}; 
         return new ColorStateList($状态, $颜色);
     }
-    
+
     private static ColorStateList 创建选中列表() {
         int $普通 = 检查颜色("白色");
         int[] $颜色 = new int[] {检查颜色("控件"),$普通};
@@ -109,20 +99,21 @@ public class 视图 {
 
     public static Integer 检查颜色(Object $颜色) {
         if ($颜色 == null) 错误.内容("传入颜色值为空");
-        if ($颜色 instanceof Number)
-            return ((Number) $颜色).intValue();
+        if ($颜色 instanceof Integer) {
+            return (Integer) $颜色;
+        }
         if ($颜色 instanceof String) {
             if (字符.以开始((String)$颜色, "#")) {
                 return 颜色.转换((String)$颜色);
             } else {
                 switch (字符.取出现次数((String)$颜色, "#")) {
                     case 0:switch ((String)$颜色) {
-                            case "透明":case "through":$颜色 =  颜色.透明;break;
-                            case "白色":case "white":$颜色 = 颜色.白色;break;
-                            case "黑色":case "black":$颜色 = 颜色.黑色;break;
+                            case "透明":return 颜色.透明;
+                            case "白色":return 颜色.白色;
+                            case "白烟":return 颜色.白烟;
+                            case "黑色":return 颜色.黑色;
                             default:return 取指定颜色(主题.取颜色(), $颜色);
                         }
-                        return 颜色.转换((String)$颜色);
                     case 1:
                         String $类型 = 字符.截取开始((String)$颜色, null, "#");
                         颜色 $对象 = (颜色)反射.取变量(颜色.class, $类型);
@@ -130,7 +121,6 @@ public class 视图 {
                         return 取指定颜色($对象, 字符.截取开始((String)$颜色, "#", null));
                     default:错误.内容("这个颜色里不只一个# 所以不是一个颜色");
                 }
-                return null;
             }
         }
         错误.内容("未知的颜色 : " + $颜色);
@@ -142,9 +132,8 @@ public class 视图 {
             case "基本":return $颜色.取基本色();
             case "深色":return $颜色.取基本深色();
             case "控件":return $颜色.取控件色();
-            case "淡色":return $颜色.取淡色();
         }
-        颜色 $对象 = (颜色)反射.取变量(颜色.class,(String)$内容);
+        颜色 $对象 = (颜色)反射.取变量(颜色.class, (String)$内容);
         if ($对象 != null) return $对象.取基本色();
         错误.内容("没有那样的颜色类型 :" + $内容);
         return null;

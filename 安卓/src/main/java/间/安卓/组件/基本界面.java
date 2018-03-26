@@ -28,6 +28,7 @@ import 间.收集.哈希表;
 import 间.收集.集合;
 import 间.收集.无序表;
 import android.content.res.Resources;
+import 间.安卓.工具.主题;
 
 public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
@@ -263,6 +264,7 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
         for (界面插件 $单个 : 所有插件.values()) {
             $单个.打开布局事件($视图);
         }
+        setTheme(主题.取颜色().取主题());
         当前视图 = $视图;
         间.安卓.工具.布局.打开(this, $视图);
     }

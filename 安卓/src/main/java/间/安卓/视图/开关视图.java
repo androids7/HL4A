@@ -12,6 +12,7 @@ import 间.安卓.工具.视图;
 import android.content.res.Resources;
 import 间.安卓.工具.颜色;
 import hl4a.runtime.R;
+import 间.安卓.工具.主题;
 
 public class 开关视图 extends Switch implements 基本视图 {
 

@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Red">
+    <style name="HL4A" parent="@android:style/Theme.Holo.Light.NoActionBar" />
+
+    <style name="HL4A.Red">
         <item name="android:colorPrimary">@color/primary_color_red</item>
         <item name="android:colorPrimaryDark">@color/primary_color_red_dark</item>
         <item name="android:colorAccent">@color/accent_color_red</item>
@@ -9,7 +11,7 @@
         <item name="android:colorButtonNormal">@color/accent_color_red</item>
     </style>
 
-    <style name="Pink">
+    <style name="HL4A.Pink">
         <item name="android:colorPrimary">@color/primary_color_pink</item>
         <item name="android:colorPrimaryDark">@color/primary_color_pink_dark</item>
         <item name="android:colorAccent">@color/accent_color_pink</item>
@@ -19,7 +21,7 @@
 
     
 
-    <style name="Purple">
+    <style name="HL4A.Purple">
         <item name="android:colorPrimary">@color/primary_color_purple</item>
         <item name="android:colorPrimaryDark">@color/primary_color_purple_dark</item>
         <item name="android:colorAccent">@color/accent_color_purple</item>
@@ -29,7 +31,7 @@
 
     
 
-    <style name="DeepPurple">
+    <style name="HL4A.DeepPurple">
         <item name="android:colorPrimary">@color/primary_color_deep_purple</item>
         <item name="android:colorPrimaryDark">@color/primary_color_deep_purple_dark</item>
         <item name="android:colorAccent">@color/accent_color_deep_purple</item>
@@ -39,7 +41,7 @@
 
     
 
-    <style name="Indigo">
+    <style name="HL4A.Indigo">
         <item name="android:colorPrimary">@color/primary_color_indigo</item>
         <item name="android:colorPrimaryDark">@color/primary_color_indigo_dark</item>
         <item name="android:colorAccent">@color/accent_color_indigo</item>
@@ -49,7 +51,7 @@
 
     
 
-    <style name="Blue">
+    <style name="HL4A.Blue">
         <item name="android:colorPrimary">@color/primary_color_blue</item>
         <item name="android:colorPrimaryDark">@color/primary_color_blue_dark</item>
         <item name="android:colorAccent">@color/accent_color_blue</item>
@@ -59,7 +61,7 @@
 
     
 
-    <style name="LightBlue">
+    <style name="HL4A.LightBlue">
         <item name="android:colorPrimary">@color/primary_color_light_blue</item>
         <item name="android:colorPrimaryDark">@color/primary_color_light_blue_dark</item>
         <item name="android:colorAccent">@color/accent_color_light_blue</item>
@@ -69,7 +71,7 @@
 
     
 
-    <style name="Cyan">
+    <style name="HL4A.Cyan">
         <item name="android:colorPrimary">@color/primary_color_cyan</item>
         <item name="android:colorPrimaryDark">@color/primary_color_cyan_dark</item>
         <item name="android:colorAccent">@color/accent_color_cyan</item>
@@ -79,7 +81,7 @@
 
     
 
-    <style name="Teal">
+    <style name="HL4A.Teal">
         <item name="android:colorPrimary">@color/primary_color_teal</item>
         <item name="android:colorPrimaryDark">@color/primary_color_teal_dark</item>
         <item name="android:colorAccent">@color/accent_color_teal</item>
@@ -89,7 +91,7 @@
 
     
 
-    <style name="Green">
+    <style name="HL4A.Green">
         <item name="android:colorPrimary">@color/primary_color_green</item>
         <item name="android:colorPrimaryDark">@color/primary_color_green_dark</item>
         <item name="android:colorAccent">@color/accent_color_green</item>
@@ -99,7 +101,7 @@
 
     
 
-    <style name="LightGreen">
+    <style name="HL4A.LightGreen">
         <item name="android:colorPrimary">@color/primary_color_light_green</item>
         <item name="android:colorPrimaryDark">@color/primary_color_light_green_dark</item>
         <item name="android:colorAccent">@color/accent_color_light_green</item>
@@ -109,7 +111,7 @@
 
     
 
-    <style name="Lime">
+    <style name="HL4A.Lime">
         <item name="android:colorPrimary">@color/primary_color_lime</item>
         <item name="android:colorPrimaryDark">@color/primary_color_lime_dark</item>
         <item name="android:colorAccent">@color/accent_color_lime</item>
@@ -119,7 +121,7 @@
 
     
 
-    <style name="Yellow">
+    <style name="HL4A.Yellow">
         <item name="android:colorPrimary">@color/primary_color_yellow</item>
         <item name="android:colorPrimaryDark">@color/primary_color_yellow_dark</item>
         <item name="android:colorAccent">@color/accent_color_yellow</item>
@@ -129,14 +131,14 @@
 
     
 
-    <style name="Amber">
+    <style name="HL4A.Amber">
         <item name="android:colorPrimary">@color/primary_color_amber</item>
         <item name="android:colorPrimaryDark">@color/primary_color_amber_dark</item>
         <item name="android:colorAccent">@color/accent_color_amber</item>
         <item name="android:navigationBarColor">@color/primary_color_amber_dark</item>
         <item name="android:colorButtonNormal">@color/accent_color_amber</item>
     </style>
-    <style name="Orange">
+    <style name="HL4A.Orange">
         <item name="android:colorPrimary">@color/primary_color_orange</item>
         <item name="android:colorPrimaryDark">@color/primary_color_orange_dark</item>
         <item name="android:colorAccent">@color/accent_color_orange</item>
@@ -146,7 +148,7 @@
 
     
 
-    <style name="DeepOrange">
+    <style name="HL4A.DeepOrange">
         <item name="android:colorPrimary">@color/primary_color_deep_orange</item>
         <item name="android:colorPrimaryDark">@color/primary_color_deep_orange_dark</item>
         <item name="android:colorAccent">@color/accent_color_deep_orange</item>
@@ -156,7 +158,7 @@
 
     
 
-    <style name="Brown">
+    <style name="HL4A.Brown">
         <item name="android:colorPrimary">@color/primary_color_brown</item>
         <item name="android:colorPrimaryDark">@color/primary_color_brown_dark</item>
         <item name="android:colorAccent">@color/accent_color_brown</item>
@@ -164,7 +166,7 @@
         <item name="android:colorButtonNormal">@color/accent_color_brown</item>
     </style>
 
-    <style name="Grey">
+    <style name="HL4A.Grey">
         <item name="android:colorPrimary">@color/primary_color_grey</item>
         <item name="android:colorPrimaryDark">@color/primary_color_grey_dark</item>
         <item name="android:colorAccent">@color/accent_color_grey</item>
@@ -174,7 +176,7 @@
 
     
 
-    <style name="BlueGrey">
+    <style name="HL4A.BlueGrey">
         <item name="android:colorPrimary">@color/primary_color_blue_grey</item>
         <item name="android:colorPrimaryDark">@color/primary_color_blue_grey_dark</item>
         <item name="android:colorAccent">@color/accent_color_blue_grey</item>

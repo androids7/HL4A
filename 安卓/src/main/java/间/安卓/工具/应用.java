@@ -62,11 +62,6 @@ public class 应用 {
 
     public static void 初始化界面(Activity $界面) {
         新建界面($界面);
-        if (设备.取SDK() >= 21) {
-            $界面.setTheme(android.R.style.Theme_Material_Light_NoActionBar);
-        } else {
-            $界面.setTheme(android.R.style.Theme_Holo_Light_NoActionBar);
-        }
     }
 
     private static void 新建界面(Activity $界面) {

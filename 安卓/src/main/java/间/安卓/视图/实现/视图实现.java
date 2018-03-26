@@ -233,18 +233,14 @@ public final class 视图实现 {
     // BackgroundColor
 
     public static void 置背景颜色(View $视图,Object $颜色) {
-        if ($颜色 instanceof Integer) {
-            $视图.setBackgroundColor((Integer)$颜色);
-            return;
-        }
         if ($视图 instanceof CompoundButton) {
             Drawable $背景 = CompoundButtonCompat.getButtonDrawable((CompoundButton)$视图);
             if ($背景 != null) {
-                视图.绘画选择器着色($背景);
+                视图.绘画着色($背景);
                 return;
             }
         } else if ($视图 instanceof Button) {
-            视图.绘画选择器着色($视图.getBackground());
+            视图.绘画着色($视图.getBackground());
             return;
         }
         $视图.setBackgroundColor(视图.检查颜色($颜色));
