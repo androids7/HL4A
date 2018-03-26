@@ -27,6 +27,7 @@ import 间.接口.方法;
 import 间.收集.哈希表;
 import 间.收集.集合;
 import 间.收集.无序表;
+import android.content.res.Resources;
 
 public class 基本界面 extends Activity implements SwipeBackActivityBase {
 
@@ -44,6 +45,11 @@ public class 基本界面 extends Activity implements SwipeBackActivityBase {
             所有插件.设置($标识, $插件);
             $插件.当前界面 = this;
         }
+    }
+
+    @Override
+    public Resources getResources() {
+        return 环境.取应用().getResources();
     }
 
     @Override

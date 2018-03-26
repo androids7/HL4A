@@ -10,12 +10,16 @@ import 间.安卓.视图.实现.*;
 import 间.安卓.工具.提示;
 import 间.安卓.工具.视图;
 import android.content.res.Resources;
+import 间.安卓.工具.颜色;
+import hl4a.runtime.R;
 
 public class 开关视图 extends Switch implements 基本视图 {
 
     public 开关视图(Context $上下文) {
         super($上下文);
         视图实现.初始化控件(this);
+        //视图.绘画选择器着色(getThumbDrawable());
+        //视图.选中着色(getTrackDrawable());
     }
 
     public 开关视图(ViewGroup $父视图) {
@@ -31,6 +35,15 @@ public class 开关视图 extends Switch implements 基本视图 {
     @Override
     public void 置布局权重(float $权重) {
         视图实现.置布局权重(this, $权重);
+    }
+    
+    public void 置切换事件(final 方法 $方法) {
+        setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton $按钮,boolean $状态) {
+                    调用.事件($方法,$按钮,$状态);
+                }
+            });
     }
 
     public void 置打开状态(boolean $是否打开) {

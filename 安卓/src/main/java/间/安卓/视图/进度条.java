@@ -28,21 +28,14 @@ public class 进度条 extends ProgressBar implements 基本视图 {
     public 进度条(Context $上下文,int $主题) {
         super($上下文, null, $主题);
         视图实现.初始化控件(this);
-        置颜色(主题.取颜色().取控件色());
+        Drawable $绘画 = getIndeterminateDrawable();
+        视图.绘画着色($绘画);
+        Drawable $背景 = getProgressDrawable();
+        视图.绘画着色($背景);
     }
 
     public void 置自动(boolean $状态) {
         setIndeterminate($状态);
-    }
-
-    public void 置颜色(Object $颜色) {
-        if (设备.取SDK() >= 21) {
-            int $内容 = 视图.检查颜色($颜色);
-            Drawable $绘画 = getIndeterminateDrawable();
-            if ($绘画 != null) $绘画.setTint($内容);
-            Drawable $背景 = getProgressDrawable();
-            if ($背景 != null) $背景.setTint($内容);
-       }
     }
 
     @Override
@@ -226,24 +219,24 @@ public class 进度条 extends ProgressBar implements 基本视图 {
 
     @Override
     public void 置上下边距(Object $边距) {
-        视图实现.置上下边距(this,$边距);
+        视图实现.置上下边距(this, $边距);
     }
 
     @Override
     public void 置左右边距(Object $边距) {
-        视图实现.置左右边距(this,$边距);
+        视图实现.置左右边距(this, $边距);
     }
 
     @Override
     public void 置上下填充(Object $填充) {
-        视图实现.置上下填充(this,$填充);
+        视图实现.置上下填充(this, $填充);
     }
 
     @Override
     public void 置左右填充(Object $填充) {
-        视图实现.置左右填充(this,$填充);
+        视图实现.置左右填充(this, $填充);
     }
-    
+
     @Override
     public void 置阴影(Object $阴影) {
         视图实现.置阴影(this, $阴影);

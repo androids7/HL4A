@@ -5,10 +5,12 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import 间.安卓.视图.实现.基本视图;
 import 间.安卓.视图.实现.文本实现;
 import 间.安卓.视图.实现.视图实现;
 import 间.接口.方法;
+import 间.接口.调用;
 
 public class 复选框 extends CheckBox implements 基本视图 {
 
@@ -33,19 +35,32 @@ public class 复选框 extends CheckBox implements 基本视图 {
         视图实现.置布局权重(this, $权重);
     }
 
-    public void 置选中状态(boolean $是否打开) {
+    public void 置切换事件(final 方法 $方法) {
+        setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton $按钮,boolean $状态) {
+                    调用.事件($方法,$按钮,$状态);
+                }
+            });
+    }
+
+    public void 置打开状态(boolean $是否打开) {
         setSelected($是否打开);
     }
 
-    public void 选中() {
-        置选中状态(true);
+    public void 打开() {
+        置打开状态(true);
     }
 
-    public void 取消() {
-        置选中状态(false);
+    public void 关闭() {
+        置打开状态(false);
     }
 
-    public boolean 取选中状态() {
+    public void 切换() {
+        置打开状态(!取打开状态());
+    }
+
+    public boolean 取打开状态() {
         return isSelected();
     }
 

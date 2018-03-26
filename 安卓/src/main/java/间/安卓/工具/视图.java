@@ -1,21 +1,50 @@
 package 间.安卓.工具;
 
-import android.content.res.*;
-import android.graphics.*;
-import android.text.*;
-import android.view.*;
-import 间.工具.*;
-import java.io.*;
-import android.graphics.drawable.*;
+import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.text.InputType;
+import android.view.Gravity;
+import java.io.InputStream;
+import 间.工具.反射;
+import 间.工具.字符;
+import 间.工具.错误;
 
 public class 视图 {
 
+    public static void 绘画选择器着色(Drawable $绘画) {
+        if ($绘画 == null) return;
+        $绘画.setColorFilter(new PorterDuffColorFilter(视图.检查颜色("控件"),PorterDuff.Mode.MULTIPLY));
+    }
+    
+    public static void 选中着色(Drawable $绘画) {
+        if ($绘画 == null) return;
+        绘画选择器着色($绘画);
+        DrawableCompat.setTintList($绘画,创建选中列表());
+    }
+    
+    public static void 绘画着色(Drawable $绘画) {
+        if ($绘画 == null) return;
+        DrawableCompat.setTint($绘画,视图.检查颜色("控件"));
+    }
+    
     public static ColorStateList 创建颜色列表(Object $普通颜色,Object $按下颜色) {
         int $普通 = 检查颜色($普通颜色);
         int $按下 = 检查颜色($按下颜色);
         int[] $颜色 = new int[] {$按下,$普通};int[][] $状态 = new int[2][];
-        $状态[0] = new int[] { android.R.attr.state_pressed};
+        $状态[0] = new int[] { };
         $状态[1] = new int[] {}; 
+        return new ColorStateList($状态, $颜色);
+    }
+    
+    private static ColorStateList 创建选中列表() {
+        int $普通 = 检查颜色("白色");
+        int[] $颜色 = new int[] {检查颜色("控件"),$普通};
+        int[][] $状态 = new int[][] {{android.R.attr.state_enabled},{}};
         return new ColorStateList($状态, $颜色);
     }
 
@@ -126,12 +155,16 @@ public class 视图 {
         if ($大小 instanceof Number) return ((Number)$大小).intValue();
         if ($大小 instanceof String) {
             switch ((String)$大小) {
-                case "最大":case "填充":case "-1":return -1;
-                case "最小":case "自动":case "-2":return -2;
-                case "默认填充":return 主题.取默认填充();
+                case "最大":case "-1":return -1;
+                case "自动":case "-2":return -2;
+                case "填充":return 主题.取默认填充();
                 case "中等填充":return 主题.取中等填充();
-                case "默认阴影":return 主题.取默认阴影();
-                case "默认圆角":return 主题.取默认圆角();
+                case "阴影":return 主题.取默认阴影();
+                case "圆角":return 主题.取默认圆角();
+                case "小文本":return 主题.取小文本大小();
+                case "文本":return 主题.取文本大小();
+                case "中文本":return 主题.取中文本大小();
+                case "大文本":return 主题.取大文本大小();
             }
             if ("".equals(((String)$大小).replaceAll("[0-9]", ""))) {
                 return new Integer((String)$大小);

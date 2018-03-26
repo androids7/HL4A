@@ -23,7 +23,7 @@ public class 高级滑动 extends 线性布局 {
     public 高级滑动(Context $上下文) {
         super($上下文);
         标签 = new 标签视图(this);
-        标签.置阴影("默认阴影");
+        标签.置阴影("阴影");
         滑动 = new 滑动视图(this);
         界面 = new 界面适配器();
         滑动.置适配器(界面);

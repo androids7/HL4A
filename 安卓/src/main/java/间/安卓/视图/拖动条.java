@@ -7,11 +7,15 @@ import android.widget.SeekBar;
 import 间.安卓.视图.实现.基本视图;
 import 间.安卓.视图.实现.视图实现;
 import 间.接口.方法;
+import 间.安卓.工具.绘画;
+import 间.安卓.工具.视图;
 
 public class 拖动条 extends SeekBar implements 基本视图 {
     
     public 拖动条(Context $上下文) {
         super($上下文);
+        视图.绘画选择器着色(getThumb());
+        视图.绘画选择器着色(getProgressDrawable());
     }
     
     public 拖动条(ViewGroup $父视图) {

@@ -98,6 +98,9 @@ public class 用户 extends AVUser {
             }, 用户.class);
     }
 
+    public static boolean 已登录() {
+        return 取当前用户() != null;
+    }
 
     public static 用户 取当前用户() {
         return getCurrentUser(用户.class);

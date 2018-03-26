@@ -5,9 +5,28 @@ import java.io.OutputStream;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import 间.收集.集合;
+import java.io.Serializable;
 
 public class 字符 {
 
+    public static String 序列化(Serializable $对象) {
+        return 编码.Base64.编码(字节.序列化($对象));
+    }
+    
+    public static <类型> 类型 反序列化(String $字符) {
+        return 字节.反序列化(编码.Base64.解码($字符));
+    }
+    
+    public static boolean 比较(String $字符,String $比较) {
+        if ($字符 == null && $比较 == null) {
+            return true;
+        } else if($字符 == null) {
+            return $比较.equals($字符);
+        } else {
+            return $字符.equals($比较);
+        }
+    }
+    
     public static String 读取(String... $地址) {
         if (!文件.是文件($地址))
             return null;

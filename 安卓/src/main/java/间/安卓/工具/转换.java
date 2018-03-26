@@ -56,7 +56,7 @@ public class 转换 {
         return Double.parseDouble($值);
     }
     
-    private static float 倍数 = 3 / 设备.取屏幕密度();
+    private static float 倍数 = 1 / 设备.取屏幕密度();
     
     private static Float 转换大小(int $类型,float $值) {
         return TypedValue.applyDimension($类型, $值, rdm);

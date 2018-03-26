@@ -12,8 +12,73 @@ import android.app.Application;
 import java.lang.reflect.InvocationTargetException;
 import 间.接口.方法;
 import java.io.ObjectInput;
+import java.lang.reflect.Member;
+import java.lang.reflect.Modifier;
 
 public class 反射 {
+    
+    private static 哈希表<Class,集合<String>> 转换缓存 = new 哈希表<>();
+    
+    public static <类型> 集合<String> 取可缓存参数(Class $类) {
+        if ($类 == null) return null;
+        if (!转换缓存.检查键值($类)){
+            集合<String> $返回 = new 集合<>();
+            Field[] $变量 = $类.getDeclaredFields();
+            for (Field $单个 : $变量) {
+                if (是公开($单个) && !是静态($单个) && !是不建议缓存($单个)) {
+                    $返回.添加($单个.getName());
+                }
+            }
+            转换缓存.设置($类,$返回);
+            return $返回;
+        }
+        return 转换缓存.读取($类);
+    }
+    
+    public static boolean 是公开(Member $对象) {
+        return Modifier.isPublic($对象.getModifiers());
+    }
+    
+    public static boolean 是静态(Member $对象) {
+        return Modifier.isStatic($对象.getModifiers());
+    }
+    
+    public static boolean 是最终(Member $对象) {
+        return Modifier.isFinal($对象.getModifiers());
+    }
+    
+    public static boolean 是抽象(Member $对象) {
+        return Modifier.isAbstract($对象.getModifiers());
+    }
+    
+    public static boolean 是接口(Member $对象) {
+        return Modifier.isInterface($对象.getModifiers());
+    }
+    
+    public static boolean 是原生(Member $对象) {
+        return Modifier.isNative($对象.getModifiers());
+    }
+    
+    public static boolean 是私有(Member $对象) {
+        return Modifier.isPrivate($对象.getModifiers());
+    }
+    
+    public static boolean 是保护(Member $对象) {
+        return Modifier.isProtected($对象.getModifiers());
+    }
+    
+    public static boolean 是同步(Member $对象) {
+        return Modifier.isSynchronized($对象.getModifiers());
+    }
+    
+    public static boolean 是不建议缓存(Member $对象) {
+        return Modifier.isTransient($对象.getModifiers());
+    }
+    
+    public static boolean 是线程安全更新(Member $对象) {
+        return Modifier.isVolatile($对象.getModifiers());
+    }
+    
     
     public static <类型 extends Enum> 类型 取枚举(Class<类型> $类,String $名称) {
         类型[] $所有 = 取所有枚举($类);

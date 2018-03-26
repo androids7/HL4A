@@ -47,7 +47,7 @@ public class 绘画 {
             $内容.setShape($内容形状);
             $内容.getPaint().setColor(视图.检查颜色($普通));
             $内容.getPaint().setStyle(Paint.Style.FILL);
-            RippleDrawable $涟漪 = new RippleDrawable(ColorStateList.valueOf(主题.取颜色().取淡色()), $内容, $绘画);
+            RippleDrawable $涟漪 = new RippleDrawable(视图.创建单颜色列表($按下), $内容, $绘画);
             return $涟漪;
         } else {
             return new 按下变色绘画($普通, $按下);

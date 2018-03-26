@@ -11,6 +11,7 @@ public class 主题 {
     private static int 中等填充;
     private static int 默认阴影;
     private static int 默认圆角;
+    private static int 中文本大小;
     
     public static void 置默认圆角(Object $阴影) {
         默认圆角 = 视图.检查大小($阴影);
@@ -42,6 +43,14 @@ public class 主题 {
 
     public static int 取小文本大小() {
         return 小文本大小;
+    }
+    
+    public static void 置中文本大小(Object $大小) {
+        中文本大小 = 视图.检查大小($大小);
+    }
+
+    public static int 取中文本大小() {
+        return 中文本大小;
     }
 
     public static void 置大文本大小(Object $大小) {

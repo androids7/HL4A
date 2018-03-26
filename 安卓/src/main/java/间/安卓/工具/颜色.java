@@ -1,5 +1,6 @@
 package 间.安卓.工具;
 
+import hl4a.runtime.R.style;
 import android.graphics.*;
 
 public class 颜色 {
@@ -34,6 +35,8 @@ public class 颜色 {
     public static final String[] 灰色字符组 = {"#FAFAFA","#F5F5F5","#EEEEEE","#E0E0E0","#BDBDBD","#9E9E9E","#757575","#616161","#424242","#212121"};
     public static final String[] 蓝灰字符组 = {"#ECEFF1","#CFD8DC","#B0BEC5","#90A4AE","#78909C","#607D8B","#546E7A","#455A64","#37474F","#263238"};
     
+    public static final int[] 资源 = {style.Red};
+   
     public static final 颜色 红色 = new 颜色(红色字符组);
     public static final 颜色 粉色 = new 颜色(粉色字符组);
     public static final 颜色 紫色 = new 颜色(紫色字符组);
@@ -59,6 +62,7 @@ public class 颜色 {
     private int[] 颜色组;
     
     public 颜色(String[] $颜色) {
+        //资源 = new int[] {style.Red,style.Pink,style.Purple,style.DeepPurple,style.Indigo,style.Blue,style.LightBlue,style.Cyan,style.Teal,style.Green,style.LightGreen,style.Lime,style.Yellow,style.};
         字符组 = $颜色;
         颜色组 = new int[字符组.length];
         for (int $键值 = 0;$键值 < 字符组.length;$键值 ++) {

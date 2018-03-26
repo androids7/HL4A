@@ -33,6 +33,7 @@ import 间.收集.集合;
 import android.content.pm.PackageManager.NameNotFoundException;
 import 间.收集.哈希表;
 import org.json.JSONArray;
+import hl4a.runtime.R;
 
 public class 应用 {
 
@@ -115,9 +116,10 @@ public class 应用 {
         锁屏.初始化();
         线程.置错误处理(调用.代理(应用.class, "错误处理"));
         主题.置圆角大小("3dp");
-        主题.置大文本大小("8sp");
-        主题.置文本大小("5sp");
-        主题.置小文本大小("4sp");
+        主题.置大文本大小("24sp");
+        主题.置中文本大小("18sp");
+        主题.置文本大小("15sp");
+        主题.置小文本大小("12sp");
         主题.置默认填充("16dp");
         主题.置中等填充("56dp");
         主题.置默认圆角("2dp");

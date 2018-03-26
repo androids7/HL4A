@@ -3,15 +3,22 @@ package 间.安卓.组件;
 import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetManager;
 import android.content.res.Configuration;
+import android.content.res.Resources;
+import android.util.DisplayMetrics;
 import hl4a.runtime.ProxyActivity;
+import hl4a.runtime.R;
 import java.io.Serializable;
+import 间.安卓.工具.主题;
 import 间.安卓.工具.应用;
 import 间.安卓.工具.线程;
 import 间.安卓.插件.应用插件;
 import 间.工具.反射;
 import 间.工具.错误;
 import 间.收集.集合;
+import android.content.res.Resources.Theme;
+import android.util.TypedValue;
 
 public class 基本应用 extends Application {
 
@@ -25,6 +32,7 @@ public class 基本应用 extends Application {
         for (应用插件 $单个 : 所有插件) {
             $单个.初始化();
         }
+       
     }
 
     public void 注册插件(应用插件 $插件) {

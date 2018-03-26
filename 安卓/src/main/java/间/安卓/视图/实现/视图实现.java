@@ -1,27 +1,26 @@
 package 间.安卓.视图.实现;
 
 import android.app.Activity;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v4.view.ViewCompat;
+import android.support.v4.widget.CompoundButtonCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.LayoutParams;
 import android.view.ViewGroup.MarginLayoutParams;
-import 间.安卓.工具.主题;
+import android.widget.Button;
+import android.widget.CompoundButton;
 import 间.安卓.工具.处理;
 import 间.安卓.工具.布局;
 import 间.安卓.工具.绘画;
 import 间.安卓.工具.视图;
-import 间.安卓.工具.颜色;
 import 间.安卓.视图.事件.单击;
 import 间.安卓.视图.事件.触摸;
 import 间.安卓.视图.事件.长按;
 import 间.工具.反射;
 import 间.接口.方法;
-import android.widget.Button;
-import android.support.v4.graphics.drawable.DrawableCompat;
-import android.widget.CompoundButton;
-import android.support.v4.widget.CompoundButtonCompat;
 
 public final class 视图实现 {
 
@@ -241,11 +240,11 @@ public final class 视图实现 {
         if ($视图 instanceof CompoundButton) {
             Drawable $背景 = CompoundButtonCompat.getButtonDrawable((CompoundButton)$视图);
             if ($背景 != null) {
-                DrawableCompat.setTint($背景, 视图.检查颜色($颜色));
+                视图.绘画选择器着色($背景);
                 return;
             }
         } else if ($视图 instanceof Button) {
-            DrawableCompat.setTint(((Button)$视图).getBackground(), 视图.检查颜色($颜色));
+            视图.绘画选择器着色($视图.getBackground());
             return;
         }
         $视图.setBackgroundColor(视图.检查颜色($颜色));
@@ -291,6 +290,7 @@ public final class 视图实现 {
     }
 
     public static void 初始化控件(View $视图) {
+        if ($视图.getLayoutParams() == null)
         $视图.setLayoutParams(new LayoutParams(-2, -2));
     }
 

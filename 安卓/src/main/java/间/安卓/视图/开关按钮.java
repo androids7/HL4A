@@ -21,18 +21,31 @@ public class 开关按钮 extends ToggleButton implements 基本文本 {
         加入到($父视图);
     }
     
+    public void 置切换事件(final 方法 $方法) {
+        setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton $按钮,boolean $状态) {
+                    调用.事件($方法,$按钮,$状态);
+                }
+            });
+    }
+
     public void 置打开状态(boolean $是否打开) {
         setSelected($是否打开);
     }
-    
+
     public void 打开() {
         置打开状态(true);
     }
-    
+
     public void 关闭() {
         置打开状态(false);
     }
-    
+
+    public void 切换() {
+        置打开状态(!取打开状态());
+    }
+
     public boolean 取打开状态() {
         return isSelected();
     }
