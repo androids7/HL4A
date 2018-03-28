@@ -73,7 +73,7 @@ public class 设置视图 extends 线性布局 {
         return $分隔;
     }
 
-    public class 开关设置项 extends 设置项<Boolean> {
+    public class 开关设置项 extends 设置项 {
 
         public 开关视图 开关;
         public 方法 事件;
@@ -81,7 +81,7 @@ public class 设置视图 extends 线性布局 {
         public 开关设置项(方法 $事件,boolean $默认) {
             super();
             事件 = $事件;
-            开关 = new 开关视图(this);
+            开关 = new 开关视图(右布局);
             开关.置打开状态($默认);
             开关.setClickable(false);
             开关.置切换事件(调用.代理(this, "切换事件"));
@@ -94,11 +94,12 @@ public class 设置视图 extends 线性布局 {
 
     }
 
-    public class 设置项<类型> extends 线性布局 {
+    public class 设置项 extends 线性布局 {
 
         protected 线性布局 左布局;
         protected 文本视图 标题;
         protected 文本视图 副标题;
+        protected 线性布局 右布局;
 
         public 设置项() {
             super(设置视图.this);
@@ -109,12 +110,17 @@ public class 设置视图 extends 线性布局 {
             置填充("填充");
             左布局 = new 线性布局(this);
             左布局.置布局权重(1);
-            //左布局.置重力("中间垂直");
+            左布局.置重力("中间垂直");
+            左布局.置方向("垂直");
             标题 = new 文本视图(左布局);
             标题.置文本大小("中文本");
             副标题 = new 文本视图(左布局);
             副标题.置文本大小("小文本");
             副标题.隐藏();
+            右布局 = new 线性布局(this);
+            右布局.置宽度("自动");
+            右布局.置方向("水平");
+            右布局.置重力("中间垂直");
         }
 
         public String 取标题() {
