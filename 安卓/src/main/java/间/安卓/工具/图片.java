@@ -61,7 +61,7 @@ public class 图片 {
                     String $地址 = 文件.取Uri路径($图片);
                     调用.事件(图片.选图回调, 返回值.创建($地址));
                 } else {
-                    调用.事件(图片.选图回调, 返回值.创建(false));
+                    调用.事件(图片.选图回调, 返回值.失败);
                 }
                 图片.选图回调 = null;
                 return true;
@@ -78,11 +78,11 @@ public class 图片 {
             if ($请求码 == 界面.请求码_相机拍照) {
                 if ($返回码 == 界面.返回码_成功) {
                     Bitmap $图片 = (Bitmap)$意图.getExtras().get("data");
-                    调用.事件(图片.拍照回调, 返回值.创建($图片, true));
+                    调用.事件(图片.拍照回调, 返回值.创建($图片));
                 } else {
-                    调用.事件(图片.拍照回调, 返回值.创建(null, false));
+                    调用.事件(图片.拍照回调, 返回值.失败);
                 }
-                图片.选图回调 = null;
+                图片.拍照回调 = null;
                 return true;
             }
             return false;
@@ -121,13 +121,21 @@ public class 图片 {
     public static Bitmap 读取(BitmapDrawable $绘画) {
         return $绘画.getBitmap();
     }
+    
+    public static byte[] 转换(Bitmap $图片) {
+        ByteArrayOutputStream $输出流 = 流.输出.字节();
+        $图片.compress(Bitmap.CompressFormat.PNG, 流.中, $输出流);
+        byte[] $字节 = $输出流.toByteArray();
+        流.关闭($输出流);
+        return $字节;
+    }
 
     public static void 保存(String $输出,Bitmap $图片) {
         FileOutputStream $输出流 = 流.输出.文件($输出);
-        $图片.compress(Bitmap.CompressFormat.PNG, 100, $输出流);
+        $图片.compress(Bitmap.CompressFormat.PNG, 流.中, $输出流);
         流.关闭($输出流);
     }
-
+    
     public static Bitmap 合成(Bitmap $背景,Bitmap $前景) {
         Bitmap bmp;
         int width = $背景.getWidth() < $前景.getWidth() ? $背景.getWidth() : $前景

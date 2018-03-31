@@ -13,6 +13,10 @@ public class 返回值<内容> {
         return new 返回值<内容>().置状态($状态);
     }
     
+    public static <内容> 返回值<内容> 创建(内容 $内容,boolean $状态,Exception $错误) {
+        return new 返回值<内容>().置状态($状态).置错误($错误);
+    }
+    
     public static <内容> 返回值<内容> 创建(内容 $内容) {
         return new 返回值<内容>().置内容($内容);
     }

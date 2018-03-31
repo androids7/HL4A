@@ -255,6 +255,11 @@ public class 后端错误 extends Exception {
     super(theMessage);
     this.code = theCode;
   }
+  
+    public 后端错误(int theCode) {
+        super();
+        this.code = theCode;
+    }
 
   /**
    * Construct a new AVException with an external cause.
